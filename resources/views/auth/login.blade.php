@@ -9,9 +9,9 @@
     <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Login Page - Vuexy - Bootstrap HTML admin template</title>
+    <title>Login Page - Tazweed </title>
     <link rel="apple-touch-icon" href="{{asset('app-assets/images/ico/apple-icon-120.png')}}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('app-assets/images/ico/favicon.ico')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('app-assets/images/ico/icon.svg')}}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
@@ -58,56 +58,52 @@
                         <div class="card mb-0">
                             <div class="card-body">
                                 <a href="javascript:void(0);" class="brand-logo">
-                                    <svg viewbox="0 0 139 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="28">
-                                        <defs>
-                                            <lineargradient id="linearGradient-1" x1="100%" y1="10.5120544%" x2="50%" y2="89.4879456%">
-                                                <stop stop-color="#000000" offset="0%"></stop>
-                                                <stop stop-color="#FFFFFF" offset="100%"></stop>
-                                            </lineargradient>
-                                            <lineargradient id="linearGradient-2" x1="64.0437835%" y1="46.3276743%" x2="37.373316%" y2="100%">
-                                                <stop stop-color="#EEEEEE" stop-opacity="0" offset="0%"></stop>
-                                                <stop stop-color="#FFFFFF" offset="100%"></stop>
-                                            </lineargradient>
-                                        </defs>
-                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <g id="Artboard" transform="translate(-400.000000, -178.000000)">
-                                                <g id="Group" transform="translate(400.000000, 178.000000)">
-                                                    <path class="text-primary" id="Path" d="M-5.68434189e-14,2.84217094e-14 L39.1816085,2.84217094e-14 L69.3453773,32.2519224 L101.428699,2.84217094e-14 L138.784583,2.84217094e-14 L138.784199,29.8015838 C137.958931,37.3510206 135.784352,42.5567762 132.260463,45.4188507 C128.736573,48.2809251 112.33867,64.5239941 83.0667527,94.1480575 L56.2750821,94.1480575 L6.71554594,44.4188507 C2.46876683,39.9813776 0.345377275,35.1089553 0.345377275,29.8015838 C0.345377275,24.4942122 0.230251516,14.560351 -5.68434189e-14,2.84217094e-14 Z" style="fill: currentColor"></path>
-                                                    <path id="Path1" d="M69.3453773,32.2519224 L101.428699,1.42108547e-14 L138.784583,1.42108547e-14 L138.784199,29.8015838 C137.958931,37.3510206 135.784352,42.5567762 132.260463,45.4188507 C128.736573,48.2809251 112.33867,64.5239941 83.0667527,94.1480575 L56.2750821,94.1480575 L32.8435758,70.5039241 L69.3453773,32.2519224 Z" fill="url(#linearGradient-1)" opacity="0.2"></path>
-                                                    <polygon id="Path-2" fill="#000000" opacity="0.049999997" points="69.3922914 32.4202615 32.8435758 70.5039241 54.0490008 16.1851325"></polygon>
-                                                    <polygon id="Path-21" fill="#000000" opacity="0.099999994" points="69.3922914 32.4202615 32.8435758 70.5039241 58.3683556 20.7402338"></polygon>
-                                                    <polygon id="Path-3" fill="url(#linearGradient-2)" opacity="0.099999994" points="101.428699 0 83.0667527 94.1480575 130.378721 47.0740288"></polygon>
-                                                </g>
+                                    <svg id="svgexport-6_-_2022-07-22T211411.842" data-name="svgexport-6 - 2022-07-22T211411.842" xmlns="http://www.w3.org/2000/svg" width="130.914" height="131.229" viewBox="0 0 130.914 131.229">
+                                        <g id="Group_6192" data-name="Group 6192" transform="translate(0 0)">
+                                            <g id="Group_6190" data-name="Group 6190" transform="translate(8.446 10.57)">
+                                            <path id="Path_990" data-name="Path 990" d="M105.353,85.387a18.942,18.942,0,0,1,4.223.488V24.8L56.788,5.006,4,24.8V95.3l52.788,19.8L86.368,104a19,19,0,0,1,18.985-18.613Z" transform="translate(-4 -5.006)" fill="#ffa64d"/>
+                                            </g>
+                                            <g id="Group_6191" data-name="Group 6191">
+                                            <path id="Path_991" data-name="Path 991" d="M52.889,60.474l-2.61-2.612-2.986,2.986,5.836,5.836L67.281,50.172l-3.205-2.749Z" transform="translate(52.567 52.712)"/>
+                                            <path id="Path_992" data-name="Path 992" d="M122.468,93.1V24.057L61.234,0,0,24.057v83.116l61.234,24.057L91,119.533A21.1,21.1,0,1,0,122.468,93.1ZM61.234,126.691l-57.011-22.4V26.935l57.011-22.4,57.011,22.4V90.614a20.96,20.96,0,0,0-21.06,2.447H93.448c.068-.19.146-.376.2-.574l.912-3.649H97.13a8.455,8.455,0,0,0,8.446-8.446V67.723a8.458,8.458,0,0,0-6.7-8.26l-.04-.186h2.517a4.227,4.227,0,0,0,4.223-4.223V50.831a4.227,4.227,0,0,0-4.223-4.223H96.121L94.647,39.73A12.735,12.735,0,0,0,82.261,29.715H40.208A12.733,12.733,0,0,0,27.821,39.73l-1.474,6.877H21.115a4.227,4.227,0,0,0-4.223,4.223v4.223a4.227,4.227,0,0,0,4.223,4.223h2.517l-.04.186a8.462,8.462,0,0,0-6.7,8.262V80.394a8.455,8.455,0,0,0,8.446,8.446h2.576l.912,3.649c.051.2.129.384.2.574H16.892v4.223H92.949A20.853,20.853,0,0,0,89.474,115.6ZM32.921,91.463l-.655-2.623H43.751L43.1,91.463a2.112,2.112,0,0,1-2.05,1.6H34.971a2.11,2.11,0,0,1-2.05-1.6Zm64.106-40.63h4.327v4.223H97.932Zm-2.508,8.446h-4.1L87.21,43.257A6.349,6.349,0,0,0,81,38.164H41.47a6.347,6.347,0,0,0-6.21,5.093L32.055,59.279h-4.1l4-18.662a8.492,8.492,0,0,1,8.258-6.677H82.261a8.49,8.49,0,0,1,8.258,6.677ZM84.208,71.948h8.7v4.223H79.457ZM73.1,76.171H49.367L35.115,63.5H87.354Zm-30.089,0H29.561V71.948h8.7ZM54.9,55.056V50.833H42.23v4.223h4.223v4.223H36.36L39.4,44.084a2.115,2.115,0,0,1,2.069-1.7H81a2.112,2.112,0,0,1,2.069,1.7l3.038,15.195H50.677V55.056Zm-30.364,0H21.115V50.833h4.327Zm.8,8.446h3.421l4.751,4.223H29.561a4.227,4.227,0,0,0-4.223,4.223v4.223a4.227,4.227,0,0,0,4.223,4.223H92.907a4.227,4.227,0,0,0,4.223-4.223V71.948a4.227,4.227,0,0,0-4.223-4.223H88.958L93.709,63.5H97.13a4.227,4.227,0,0,1,4.223,4.223V80.394a4.227,4.227,0,0,1-4.223,4.223H25.338a4.227,4.227,0,0,1-4.223-4.223V67.725A4.227,4.227,0,0,1,25.338,63.5ZM47.19,92.489,48.1,88.84H74.368l.912,3.649c.051.2.129.384.2.574H46.994c.068-.19.146-.376.2-.574Zm32.184-1.026L78.72,88.84H90.2l-.655,2.623a2.112,2.112,0,0,1-2.05,1.6H81.425a2.11,2.11,0,0,1-2.05-1.6ZM109.8,126.848a16.892,16.892,0,1,1,16.892-16.892A16.912,16.912,0,0,1,109.8,126.848Z" transform="translate(0 0)"/>
                                             </g>
                                         </g>
                                     </svg>
-                                    <h2 class="brand-text text-primary ml-1">Vuexy</h2>
                                 </a>
 
-                                <h4 class="card-title mb-1">Welcome to Vuexy! 👋</h4>
-                                <p class="card-text mb-2">Please sign-in to your account and start the adventure</p>
+                                <h4 class="card-title mb-1 text-center">مرحباً بك في تطبيق تزويد</h4>
 
-                                <form class="auth-login-form mt-2" action="index.html" method="POST">
+                                <form class="auth-login-form mt-2" action="{{ route('login') }}" method="POST">
+                                    @csrf
                                     <div class="form-group">
-                                        <label for="login-email" class="form-label">Email</label>
-                                        <input type="text" class="form-control" id="login-email" name="login-email" placeholder="john@example.com" aria-describedby="login-email" tabindex="1" autofocus />
+                                        <label for="email" class="form-label">البريد الالكتروني</label>
+                                        <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="john@example.com" aria-describedby="email" tabindex="1" autofocus />
+                                                                        
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">
                                         <div class="d-flex justify-content-between">
-                                            <label for="login-password">Password</label>
-                                            <a href="page-auth-forgot-password-v1.html">
-                                                <small>Forgot Password?</small>
-                                            </a>
+                                            <label for="login-password">كلمة المرور</label>
                                         </div>
                                         <div class="input-group input-group-merge form-password-toggle">
-                                            <input type="password" class="form-control form-control-merge" id="login-password" name="login-password" tabindex="2" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="login-password" />
+                                            <input type="password" class="form-control form-control-merge @error('password') is-invalid @enderror" id="password" name="password" tabindex="2" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
                                             <div class="input-group-append">
                                                 <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                                             </div>
+                                                                            
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary btn-block" tabindex="4">Sign in</button>
+                                    <button class="btn btn-primary btn-block" tabindex="4"> تسجيل الدخول </button>
                                 </form>
 
                             </div>

@@ -13,9 +13,9 @@ return [
 
     'roles_structure' => [
         'superadmin' => [
-            'roles'                 => 'c,r,u,d',
-            'admins'                => 'c,r,u,d',
-            'users'                 => 'c,r,u,d'
+            'roles'         => 'c,r,u,d',
+            'admins'        => 'c,r,u,d',
+            'users'         => 'c,r,u,d'
         ],
         'admin' => [],
         'user' => []
@@ -27,5 +27,22 @@ return [
         'r' => 'read',
         'u' => 'update',
         'd' => 'delete'
-    ]
+    ],
+
+    //translate
+
+    'models_arabic' => [
+        'roles' => 'الصلاحيات',
+        'admins' => 'المشرفين',
+        'users'  => 'العملاء'
+    ],
+
+    'permissions_map_arabic' => [
+        'c' => 'إنشاء',
+        'r' => 'قراءة',
+        'u' => 'تحديث',
+        'd' => 'حذف'
+    ],
+
+
 ];

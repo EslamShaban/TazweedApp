@@ -165,3 +165,31 @@ a {
 #preview img {
 	max-width: 100%;
 }
+
+.edit-btn {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	border-radius: 50%;
+	background-color: #17a2b8;
+	color: #FFF;
+	margin-bottom: 5px;
+}
+
+.delete-btn {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	border-radius: 50%;
+	background-color: #dc3545;
+	color: #FFF;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+	color: #FFF;
+}

@@ -14,10 +14,11 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         $user = \App\Models\User::create([
-            'name' => 'admin',
-            'email' => 'admin@realstate.com',
+            'f_name' => 'super',
+            'l_name' => 'admin',
+            'email' => 'admin@tazweed.com',
             'password' => bcrypt('123456'),
-            'phone'    => '01145451231'
+            'city_id'  => 1
         ]);
 
         $user->attachRole('superadmin');

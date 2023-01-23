@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call(LaratrustSeeder::class);
+        $this->call(CityTableSeeder::class);
         $this->call(UserTableSeeder::class);
 
     }

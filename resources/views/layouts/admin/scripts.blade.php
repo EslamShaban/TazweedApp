@@ -1,5 +1,11 @@
 <script type="text/javascript">
 
+    $('#dataTable').DataTable({
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/ar.json"
+        }
+    });
+
     var elements = CKEDITOR.document.find( '.editor' ),
         i = 0,
         element;
@@ -18,21 +24,38 @@
         });
     }
     function deleteItem(attr){
-        swal({
-            title: "{{ __('admin.sure')}}",
-            //text: "You will not be able to recover this imaginary file!",
-            type: "warning",
+   
+        Swal.fire({
+            title: 'هل تريد الحذف ؟',
+            icon: 'question',
             showCancelButton: true,
-            confirmButtonText: "{{ __('admin.yes')}}",
-            cancelButtonText: "{{ __('admin.no')}}",
-            closeOnConfirm: false,
-            closeOnCancel: true
-        }, function(isConfirm) {
-            if (isConfirm) {
-                swal("{{ __('admin.deleted')}}", "", "success");
-            $(attr).submit();
-            } else {
-                swal("{{ __('admin.cancelled')}}", "", "error");
+            confirmButtonText: 'حذف',
+            cancelButtonText: 'لا',
+            customClass: {
+                confirmButton: 'btn btn-danger',
+                cancelButton: 'btn btn-outline-danger ml-1'
+            },
+            buttonsStyling: false
+        }).then(function (result) {
+            if (result.value) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'تم الحذف بنجاح',
+                    showConfirmButton: false,
+                    // confirmButtonText: 'تم',
+                    // customClass: {
+                    //     confirmButton: 'btn btn-success'
+                    // }
+                });
+                $(attr).submit();
+            }else{
+                                
+                Swal.fire({
+                    icon: 'success',
+                    title: 'تم الإلغاء',
+                    showConfirmButton: false,
+                    timer:1000
+                });
             }
         });
     }

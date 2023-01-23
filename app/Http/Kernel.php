@@ -73,10 +73,8 @@ class Kernel extends HttpKernel
         'localeViewPath'          => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
 
                 
-        'Lang'                          => \App\Http\Middleware\Lang::class,
         'JwtApiAuth'                    => \App\Http\Middleware\JwtApiAuth::class,
         'APIAuth'                       => \App\Http\Middleware\APIAuth::class,
-        'MakeAuthIfExistToken'          => \App\Http\Middleware\MakeAuthIfExistToken::class,
 
     ];
 }

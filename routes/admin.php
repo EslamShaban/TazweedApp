@@ -2,21 +2,20 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\RoleController;
 
 Route::group(
     [
-        'prefix'        => LaravelLocalization::setLocale(),
-        'middleware'    => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth']
+        'prefix'        => 'admin',
+        'as'            => 'admin.',
+        'middleware'    => ['auth']
     ], function(){
 
-
-        Route::name('admin.')->prefix('admin')->group(function(){
-
-            //home
-            Route::get('/', [HomeController::class,'index'])->name('index');
-
-
-        });
+        //home
+        Route::get('/', [HomeController::class,'index'])->name('index');
+        
+        //roles
+        Route::resource('roles', RoleController::class)->name('*','roles');
 
 });
 
