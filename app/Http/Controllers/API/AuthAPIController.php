@@ -13,6 +13,7 @@ use App\Repositories\UserRepository;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\API\RegisterAPIRequest;
 use App\Http\Requests\API\LoginAPIRequest;
+use App\Http\Requests\API\SocialAPIRequest;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuthExceptions\JWTException;
 use Tymon\JWTAuth\Contracts\JWTSubject as JWTSubject;
@@ -97,7 +98,59 @@ class AuthAPIController extends Controller
         
     }
 
-  
+    public function social_login(SocialAPIRequest $request)
+    {
+         
+        $user = $this->userRepository->findBy('email', $request->email);
+
+        if($user){
+                        
+            $token  = JWTAuth ::fromUser( $user );
+
+            $data = [
+                'user'  => new UserResource($user),
+                'token' => $token
+            ];
+        
+            return response()->withData('تم تسجيل الدخول بنجاح', $data);
+
+        }else{
+
+                            
+            $user =  $this->userRepository->create([
+                'f_name'    => $request->f_name ?? 'new',
+                'l_name'    => $request->l_name ?? 'user',
+                'email'     => $request->email,
+                'password'  => Hash ::make( '123456' ),
+                'city_id'   => \App\Models\City::first()->id, //default city
+                'account_type' => 'client'
+            ]);
+
+            $user->attachRoles(['client']);
+
+            if($request->has('image')){
+
+                $this->UploadAsset(['asset'=>$request->image, 'path_to_save'=>'assets/uploads/users'], $user);
+            }
+
+            $token  = JWTAuth ::fromUser( $user );
+        
+            $user = $this->userRepository->find($user->id);
+
+            $data = [
+
+                'user'  => new UserResource($user),
+                'token' => $token
+
+            ];
+                            
+            return response()->withData('تم التسجيل بنجاح', $data);
+
+        }
+    
+    }
+
+        
         
     public function logout()
     {        

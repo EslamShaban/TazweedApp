@@ -21,6 +21,7 @@ Route::middleware(['APIAuth','api'])->group(function(){
     Route::prefix('auth')->group(function () {
         Route::post('login', [AuthAPIController::class, 'login']);
         Route::post('register', [AuthAPIController::class, 'register']);
+        Route::post('social_login', [AuthAPIController::class, 'social_login']);
         Route::post('logout', [AuthAPIController::class, 'logout'])->middleware('JwtApiAuth');
 
     });
