@@ -21,15 +21,8 @@ class JwtApiAuth
                 
         try {
 
-            if($access_token = $request->cookie('access_token')){
-                $request->headers->set('Authorization', 'Bearer ' . $access_token);
-            }
-
             $token = JWTAuth::parseToken()->toUser();
 
-            // return $request->cookie('access_token') 
-            //                 ? ('Bearer '.$request->cookie('access_token') ? $next( $request ) : response()->withError(__('api.unauthorize'),5000))
-            //                 : response()->withError(__('api.unauthorize'),5000);
             return $token ? $next( $request ) : response()->withError(__('api.unauthorize'),5000);
         }
         catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
