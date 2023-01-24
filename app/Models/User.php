@@ -77,8 +77,13 @@ class User extends Authenticatable implements JWTSubject
 
     public function getImagePathAttribute(){
          
-        return asset(($this->file->url ?? 'assets/images/default.png'));
+        return asset(($this->asset->url ?? 'assets/images/default.png'));
         
+    }
+
+    public function asset()
+    {
+        return $this->morphOne(Asset::class, 'assetable');
     }
 }
 

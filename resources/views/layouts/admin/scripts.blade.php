@@ -1,5 +1,8 @@
 <script type="text/javascript">
+    
+    $("a[href='" + window.location.href + "']").parent().addClass('active');
 
+    
     $('#dataTable').DataTable({
         "language": {
             "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/ar.json"
@@ -74,8 +77,9 @@
     function drop() {
         document.getElementById('uploadFile').parentNode.className = 'dragBox';
     }
-$("a[href='" + window.location.href + "']").addClass('active');
-$("a[href='" + window.location.href + "']").closest('.expanded').addClass('is-expanded');
+
+    //$("a[href='" + window.location.href + "']").closest('.expanded').addClass('is-expanded');
+
 </script>
 
 @yield('js')

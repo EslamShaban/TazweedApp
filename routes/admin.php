@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\AdminController;
 
 Route::group(
     [
@@ -17,6 +18,8 @@ Route::group(
         //roles
         Route::resource('roles', RoleController::class)->name('*','roles');
 
+        //admins
+        Route::resource('admins', AdminController::class)->name('*','admins');
 });
 
 // Auth admins
