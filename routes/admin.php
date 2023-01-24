@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ClientController;
 
 Route::group(
     [
@@ -20,6 +21,9 @@ Route::group(
 
         //admins
         Route::resource('admins', AdminController::class)->name('*','admins');
+        
+        //clients
+        Route::resource('clients', ClientController::class)->name('*','clients');
 });
 
 // Auth admins

@@ -11,6 +11,6 @@ class Role extends LaratrustRole
         
     public function scopeRoles($q) 
     {
-        return $q->whereNotIn('name', ['superadmin', 'admin', 'user']);
+        return $q->whereNotIn('name', ['superadmin', 'admin', 'client', 'captain']);
     }
 }

@@ -15,11 +15,11 @@ return [
         'superadmin' => [
             'roles'         => 'c,r,u,d',
             'admins'        => 'c,r,u,d',
-            'users'         => 'c,r,u,d'
+            'clients'       => 'c,r,u,d'
         ],
         'admin' => [],
-        'user' => []
-        
+        'client' => [],
+        'captain' => []
     ],
 
     'permissions_map' => [
@@ -32,9 +32,9 @@ return [
     //translate
 
     'models_arabic' => [
-        'roles' => 'الصلاحيات',
-        'admins' => 'المشرفين',
-        'users'  => 'العملاء'
+        'roles'   => 'الصلاحيات',
+        'admins'  => 'المشرفين',
+        'clients' => 'العملاء'
     ],
 
     'permissions_map_arabic' => [

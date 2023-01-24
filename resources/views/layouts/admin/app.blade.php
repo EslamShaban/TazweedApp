@@ -166,7 +166,6 @@
         })
     </script>
     @notifyJs
-    
     @include('layouts.admin.scripts')
   </body>
 </html>
