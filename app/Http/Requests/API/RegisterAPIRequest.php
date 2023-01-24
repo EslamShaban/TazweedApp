@@ -36,7 +36,7 @@ class RegisterAPIRequest extends FormRequest
             'l_name'        => 'الإسم الاخير',
             'email'         => 'البريد الإلكتروني',
             'city_id'       => 'المحافظة', 
-            'password'      => 'كلمة المرور', 
+            'password'      => 'كلمة السر', 
             'image'         => 'الصورة'    
         ];
         
