@@ -14,6 +14,7 @@ return [
     'roles_structure' => [
         'superadmin' => [
             'roles'         => 'c,r,u,d',
+            'cities'        => 'c,r,u,d',
             'admins'        => 'c,r,u,d',
             'clients'       => 'c,r,u,d'
         ],
@@ -33,6 +34,7 @@ return [
 
     'models_arabic' => [
         'roles'   => 'الصلاحيات',
+        'cities'  => 'المحافظات',
         'admins'  => 'المشرفين',
         'clients' => 'العملاء'
     ],

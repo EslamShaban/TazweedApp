@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\CityController;
 
 Route::group(
     [
@@ -18,6 +19,9 @@ Route::group(
         
         //roles
         Route::resource('roles', RoleController::class)->name('*','roles');
+        
+        //cities
+        Route::resource('cities', CityController::class)->name('*','cities');
 
         //admins
         Route::resource('admins', AdminController::class)->name('*','admins');

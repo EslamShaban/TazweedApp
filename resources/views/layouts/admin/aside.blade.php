@@ -32,6 +32,11 @@
                 <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.roles.index') }}"><i data-feather="lock"></i><span class="menu-title text-truncate" data-i18n="user">الصلاحيات</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{ \App\Models\Role::Roles()->count() }})</span></a></li>
             @endif
 
+            {{-- cities --}}
+            @if(auth()->user()->hasPermission('cities-read'))
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.cities.index') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="user">المحافظات</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{ \App\Models\City::count() }})</span></a></li>
+            @endif
+
             {{-- admins --}}
             @if(auth()->user()->hasPermission('admins-read'))
                 <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.admins.index') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="user">المشرفين</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\User::whereRoleIs(['admin'])->count()}})</span></a></li>
