@@ -46,6 +46,7 @@ class ClientController extends Controller
             $data = $request->except('_token', '_method');
 
             $data['password'] = bcrypt($request->password);
+            $data['account_type'] = 'client';
 
             $client = $this->userRepository->create($data);
 

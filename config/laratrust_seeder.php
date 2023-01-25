@@ -16,7 +16,8 @@ return [
             'roles'         => 'c,r,u,d',
             'cities'        => 'c,r,u,d',
             'admins'        => 'c,r,u,d',
-            'clients'       => 'c,r,u,d'
+            'clients'       => 'c,r,u,d',
+            'captains'      => 'c,r,u,d'
         ],
         'admin' => [],
         'client' => [],
@@ -36,7 +37,8 @@ return [
         'roles'   => 'الصلاحيات',
         'cities'  => 'المحافظات',
         'admins'  => 'المشرفين',
-        'clients' => 'العملاء'
+        'clients' => 'العملاء',
+        'captains' => 'الكابتن'
     ],
 
     'permissions_map_arabic' => [
