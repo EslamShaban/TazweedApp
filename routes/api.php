@@ -22,6 +22,9 @@ Route::middleware(['APIAuth','api'])->group(function(){
         Route::post('login', [AuthAPIController::class, 'login']);
         Route::post('register', [AuthAPIController::class, 'register']);
         Route::post('social_login', [AuthAPIController::class, 'social_login']);
+        Route::post('forget_password', [AuthAPIController::class, 'forget_password']);
+        Route::post('code_check', [AuthAPIController::class, 'code_check']);
+        Route::post('reset_password', [AuthAPIController::class, 'reset_password']);
         Route::post('logout', [AuthAPIController::class, 'logout'])->middleware('JwtApiAuth');
 
     });

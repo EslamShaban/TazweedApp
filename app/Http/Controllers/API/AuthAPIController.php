@@ -14,9 +14,14 @@ use App\Http\Resources\UserResource;
 use App\Http\Requests\API\RegisterAPIRequest;
 use App\Http\Requests\API\LoginAPIRequest;
 use App\Http\Requests\API\SocialAPIRequest;
+use App\Http\Requests\API\ForgetPasswordAPIRequest;
+use App\Http\Requests\API\CodeCheckAPIRequest;
+use App\Http\Requests\API\ResetPasswordAPIRequest;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuthExceptions\JWTException;
 use Tymon\JWTAuth\Contracts\JWTSubject as JWTSubject;
+use App\Mail\SendVerificationCode;
+use Illuminate\Support\Facades\Mail;
 
 class AuthAPIController extends Controller
 {
@@ -151,7 +156,57 @@ class AuthAPIController extends Controller
     }
 
         
+    public function forget_password(ForgetPasswordAPIRequest $request)
+    {
+                
+        $user = $this->userRepository->findBy('email', $request->email);
+
+        $code = generate_code();
+        $user->code = $code;
+        $user->save();
+
+        try{      
+            //send mail
+            Mail::to($user->email)->send(new SendVerificationCode($user));
+
+            $data = [
+                'code' => $code
+            ];
+
+            return response()->withSuccess('تم إرسال كود التحقق الي البريد الالكتروني', 200, $data);
         
+        }  catch (\Throwable $th) {
+
+            return response()->withError($th->getMessage(), $th->getCode());
+        }
+
+
+    }
+
+    public function code_check(CodeCheckAPIRequest $request)
+    {      
+
+        $user = $this->userRepository->findBy('email', $request->email);
+
+        if($user->code !== $request->code)
+            return response()->withError('كود التحقق غير صحيح', 5003, 'code');
+
+        return response()->withSuccess('تم بنجاح', 200);
+
+    }
+            
+    public function reset_password(ResetPasswordAPIRequest $request)
+    {
+                 
+        $user = $this->userRepository->findBy('email', $request->email);
+
+        $user->password = bcrypt($request->password);
+        $user->code = null;
+        $user->save();
+                    
+        return response()->withSuccess('تم تغيير كلمة السر بنجاح', 200);
+
+    }
     public function logout()
     {        
         auth('api')->logout();  
