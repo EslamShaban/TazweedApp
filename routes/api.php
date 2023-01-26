@@ -3,8 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthAPIController;
-
-
+use App\Http\Controllers\API\CityAPIController;
+use App\Http\Controllers\API\UserAPIController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,10 +28,15 @@ Route::middleware(['APIAuth','api'])->group(function(){
         Route::post('logout', [AuthAPIController::class, 'logout'])->middleware('JwtApiAuth');
 
     });
+        
+    Route::get('cities', [CityAPIController::class, 'get_cities']);
 
     Route::middleware(['JwtApiAuth'])->group(function () {
-             
- 
+                     
+        Route::get('my_profile', [UserAPIController::class, 'my_profile']);
+        Route::post('update_profile', [UserAPIController::class, 'update_profile']);
+        Route::post('change_password', [UserAPIController::class, 'change_password']);
+
     });
 
 });
