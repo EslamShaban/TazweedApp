@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\CaptainController;
-
+use App\Http\Controllers\Admin\CategoryController;
 Route::group(
     [
         'prefix'        => 'admin',
@@ -32,6 +32,9 @@ Route::group(
 
         //captains
         Route::resource('captains', CaptainController::class)->name('*','captains');
+
+        //categories
+        Route::resource('categories', CategoryController::class)->name('*','categories');
 });
 
 // Auth admins

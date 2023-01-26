@@ -17,7 +17,8 @@ return [
             'cities'        => 'c,r,u,d',
             'admins'        => 'c,r,u,d',
             'clients'       => 'c,r,u,d',
-            'captains'      => 'c,r,u,d'
+            'captains'      => 'c,r,u,d',
+            'categories'    => 'c,r,u,d',
         ],
         'admin' => [],
         'client' => [],
@@ -38,7 +39,8 @@ return [
         'cities'  => 'المحافظات',
         'admins'  => 'المشرفين',
         'clients' => 'العملاء',
-        'captains' => 'الكابتن'
+        'captains' => 'الكابتن',
+        'categories' => 'الأقسام',
     ],
 
     'permissions_map_arabic' => [

@@ -65,15 +65,15 @@ class AdminController extends Controller
 
             return redirect(aurl('admins'))->with('success', 'تم إضافة الحقل بنجاح');
 
-    } catch (\Throwable $th) {
+        } catch (\Throwable $th) {
            
-        DB::rollBack();
+            DB::rollBack();
 
-        throw $th;
+            throw $th;
 
-        return redirect(aurl('admins'))->with('error', 'حدث خطأ ما');
+            return redirect(aurl('admins'))->with('error', 'حدث خطأ ما');
 
-    }
+        }
     
 }
 
