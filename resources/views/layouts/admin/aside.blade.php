@@ -56,6 +56,11 @@
             @if(auth()->user()->hasPermission('categories-read'))
                 <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.categories.index') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="user">الأقسام</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Category::count()}})</span></a></li>
             @endif
+
+            {{-- services --}}
+            @if(auth()->user()->hasPermission('services-read'))
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.services.index') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="user">الخدمات</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Service::count()}})</span></a></li>
+            @endif
         </ul>
     </div>
 </div>

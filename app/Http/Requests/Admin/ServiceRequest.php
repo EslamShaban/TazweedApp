@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class ServiceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class CategoryRequest extends FormRequest
     protected function onCreate(){
 
         return [
-            'name'        => ['required', 'string', 'unique:categories,name'],
+            'name'        => ['required', 'string', 'unique:services,name'],
             'image'       => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif']
         ];
 
@@ -40,7 +40,7 @@ class CategoryRequest extends FormRequest
     protected function onUpdate(){
 
         return [
-            'name'        => ['required', 'string', 'unique:categories,name,' . $this->category->id],
+            'name'        => ['required', 'string', 'unique:services,name,' . $this->service->id],
             'image'       => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif']
         ];
 
@@ -60,7 +60,7 @@ class CategoryRequest extends FormRequest
      public function attributes()
     {
         return[
-            'name'        => 'إسم القسم',
+            'name'        => 'إسم الخدمة',
             'image'       => 'الصورة'
         ];
         

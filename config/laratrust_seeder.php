@@ -19,6 +19,8 @@ return [
             'clients'       => 'c,r,u,d',
             'captains'      => 'c,r,u,d',
             'categories'    => 'c,r,u,d',
+            'services'      => 'c,r,u,d',
+
         ],
         'admin' => [],
         'client' => [],
@@ -41,6 +43,8 @@ return [
         'clients' => 'العملاء',
         'captains' => 'الكابتن',
         'categories' => 'الأقسام',
+        'services' => 'الخدمات',
+
     ],
 
     'permissions_map_arabic' => [
