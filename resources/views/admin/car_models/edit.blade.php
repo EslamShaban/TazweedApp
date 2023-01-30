@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title' , 'تعديل نوع السيارة')
+@section('title' , 'تعديل موديل السيارة')
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -14,9 +14,9 @@
                         <div class="col-12">
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('admin.categories.index') }}">أنواع السيارات</a>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.categories.index') }}">موديلات السيارات</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="#">تعديل نوع السيارة</a>
+                                    <li class="breadcrumb-item"><a href="#">تعديل موديل السيارة</a>
                                     </li>
                                 </ol>
                             </div>
@@ -31,19 +31,19 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h2 class="card-title">تعديل نوع السيارة</h2>
+                                    <h2 class="card-title">تعديل موديل السيارة</h2>
                                 </div>
                                 <div class="card-body">
-                                    <form class="form form-vertical needs-validation" action="{{ route('admin.car_types.update' , $car_type->id) }}" method="POST">                                    
+                                    <form class="form form-vertical needs-validation" action="{{ route('admin.car_models.update' , $car_model->id) }}" method="POST">                                    
                                         @method('PUT')
                                         @csrf
                                         <div class="row">
                                             <div class="col-md-12 mb-3">
-                                                <label for="type">نوع السيارة</label>
-                                                    <input type="text" id="type" class="form-control" name="type"
-                                                        value="{{ old('type' , $car_type->type) }}" required/>
+                                                <label for="model">موديل السيارة</label>
+                                                    <input type="text" id="model" class="form-control" name="model"
+                                                        value="{{ old('model' , $car_model->model) }}" required/>
 
-                                                    @error('type')
+                                                    @error('model')
                                                         <span class="text-danger">
                                                             <small class="errorTxt">{{ $message }}</small>
                                                         </span>

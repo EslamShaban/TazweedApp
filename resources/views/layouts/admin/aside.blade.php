@@ -66,6 +66,11 @@
             @if(auth()->user()->hasPermission('car_types-read'))
                 <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.car_types.index') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="user">أنواع السيارات</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\CarType::count()}})</span></a></li>
             @endif
+            
+            {{-- car models --}}
+            @if(auth()->user()->hasPermission('car_models-read'))
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.car_models.index') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="user">موديلات السيارات</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\CarModel::count()}})</span></a></li>
+            @endif
         </ul>
     </div>
 </div>

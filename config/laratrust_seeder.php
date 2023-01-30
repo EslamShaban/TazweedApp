@@ -21,6 +21,8 @@ return [
             'categories'    => 'c,r,u,d',
             'services'      => 'c,r,u,d',
             'car_types'     => 'c,r,u,d',
+            'car_models'    => 'c,r,u,d',
+
         ],
         'admin' => [],
         'client' => [],
@@ -45,6 +47,7 @@ return [
         'categories' => 'الأقسام',
         'services' => 'الخدمات',
         'car_types' => 'أنواع السيارات',
+        'car_models' => 'موديلات السيارات',
     ],
 
     'permissions_map_arabic' => [
