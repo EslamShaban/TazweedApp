@@ -104,8 +104,8 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                                <div class="col-md-12">
-                                                    <h2 class="card-title">بيانات السيارة</h2>
+                                            <div class="col-md-12">
+                                                <h2 class="card-title">بيانات السيارة</h2>
                                                 <hr>
                                                                                             
                                                 <div class="col-md-6 col-12 mb-3 mt-2">
@@ -117,6 +117,19 @@
                                                         </span>
                                                     @enderror
                                                 </div>
+                                            </div>
+                           
+                                            <div class="col-md-6 col-12 mb-3">
+                                                <label for="phone">بحث</label>
+                                                <input type="text" class="form-control" name="icon" id="searchInput" value="{{ old('location') }}"/>
+                                            </div>
+
+                                                                                 
+                                            <div class="col-12 mb-3" style="height:100vh">
+                                                <input type="hidden" name="location" class="form-control" id="location"  value="{{ old('location') }}">
+                                                <input type="hidden" name="lat" class="form-control" id="lat"  value="{{ old('lat') }}">
+                                                <input type="hidden" name="lng" class="form-control" id="lng"  value="{{ old('lng') }}">
+                                                <div id="map" style="height: 100%;width: 100%;">
                                             </div>
 
                                             <div class="col-12">
@@ -140,4 +153,104 @@
     <script src="{{ asset('dashboard/app-assets/js/custom/preview-image.js') }}"></script>
 
     @endpush
+@endsection
+@section('js')
+    
+    <script>
+        var captain = <?php echo $captain; ?>;
+        function initMap() {
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 30.0444196, lng: 31.2357116},
+                zoom: 13
+            });
+
+                    
+            var input = document.getElementById('searchInput');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.bindTo('bounds', map);
+
+
+            // Create markers.
+            var infowindow = new google.maps.InfoWindow();
+            const marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                icon:"{{ asset('assets/images/icon2.png')}}",
+                position: new google.maps.LatLng(captain.lat, captain.lng),
+            });
+                        
+            var content = `
+                <div style="display:flex">
+                    <div class="img">
+                        <img src="`+captain.image_path+`" height="50" width="50" style="border-radius:50%">
+                    </div>
+                    <div class="info">
+                        <h2 style="line-height: 50px;margin-right: 5px;">`+captain.f_name + ' ' + captain.l_name +`</h2>
+                    </div>
+                    
+                </div>
+            `;
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
+
+                    
+            google.maps.event.addListener(map, 'click', function (event) {
+                console.log('Lat: ' + event.latLng.lat() + ' Lng:' + event.latLng.lng() + ' from click event');
+                marker.setPosition(event.latLng);
+            });
+
+                
+            marker.addListener('position_changed', printMarkerLocation);
+
+            function printMarkerLocation() {
+
+                document.getElementById('lat').value = marker.position.lat();
+                document.getElementById('lng').value = marker.position.lng();
+
+                console.log('Lat: ' + marker.position.lat() + ' Lng:' + marker.position.lng() + ' from marker event' );
+            }
+            autocomplete.addListener('place_changed', function () {
+
+                infowindow.close();
+                marker.setVisible(false);
+                var place = autocomplete.getPlace();
+
+                if (!place.geometry) {
+                    window.alert("Autocomplete's returned place contains no geometry");
+                    return;
+                }
+
+                // If the place has a geometry, then present it on a map.
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(17);
+                }
+
+
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+
+                var address = '';
+                if (place.address_components) {
+                    address = [
+                        (place.address_components[0] && place.address_components[0].short_name || ''),
+                        (place.address_components[1] && place.address_components[1].short_name || ''),
+                        (place.address_components[2] && place.address_components[2].short_name || '')
+                    ].join(' ');
+                }
+
+                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+                infowindow.open(map, marker);
+
+                Location
+                document.getElementById('location').value = place.formatted_address;
+            });
+            
+        }
+
+    </script>
+
 @endsection

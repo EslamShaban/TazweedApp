@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('code')->nullable();
             $table->string('account_type')->nullable();
-            $table->decimal('lat', 10, 8)->nullable();
-            $table->decimal('long', 11, 8)->nullable();
+            $table->double('lat')->nullable();
+            $table->double('lng')->nullable();
             $table->enum('status', ['0', '1'])->default(0);
             $table->enum('available', ['0', '1'])->default(1);
             $table->bigInteger('city_id')->unsigned()->nullable();

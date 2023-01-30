@@ -83,3 +83,4 @@
 </script>
 
 @yield('js')
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap&key=AIzaSyDWZCkmkzES9K2-Ci3AhwEmoOdrth04zKs" ></script>

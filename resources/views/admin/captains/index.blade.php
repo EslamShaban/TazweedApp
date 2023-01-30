@@ -36,6 +36,10 @@
                 </div>
             </div>
             <div class="content-body">
+                                
+                <div class="col-lg-12 col-12" style="height:80vh">
+                    <div id="map" style="height: 100%;width: 100%;">
+                </div>
                 <!-- Basic table -->
                 <section id="basic-datatable">
 
@@ -101,4 +105,48 @@
             </div>
         </div>
     </div>
+@endsection
+
+
+@section('js')
+    
+    <script>
+        var captains = <?php echo $captains; ?>;
+        function initMap() {
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 30.0444196, lng: 31.2357116},
+                zoom: 13
+            });
+
+            
+
+            // Create markers.
+            for (let i = 0; i < captains.length; i++) {
+                var infowindow = new google.maps.InfoWindow();
+                const marker = new google.maps.Marker({
+                    map: map,
+                    draggable: false,
+                    icon:"{{ asset('assets/images/icon2.png')}}",
+                    position: new google.maps.LatLng(captains[i].lat, captains[i].lng),
+                });
+                            
+                var content = `
+                    <div style="display:flex">
+                        <div class="img">
+                            <img src="`+captains[i].image_path+`" height="50" width="50" style="border-radius:50%">
+                        </div>
+                        <div class="info">
+                            <h2 style="line-height: 50px;margin-right: 5px;">`+captains[i].f_name + ' ' + captains[i].l_name +`</h2>
+                        </div>
+                        
+                    </div>
+                `;
+                infowindow.setContent(content);
+                infowindow.open(map, marker);
+            }
+        }
+
+    </script>
+
 @endsection
