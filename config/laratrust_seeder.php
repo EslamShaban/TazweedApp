@@ -20,7 +20,7 @@ return [
             'captains'      => 'c,r,u,d',
             'categories'    => 'c,r,u,d',
             'services'      => 'c,r,u,d',
-
+            'car_types'     => 'c,r,u,d',
         ],
         'admin' => [],
         'client' => [],
@@ -44,7 +44,7 @@ return [
         'captains' => 'الكابتن',
         'categories' => 'الأقسام',
         'services' => 'الخدمات',
-
+        'car_types' => 'أنواع السيارات',
     ],
 
     'permissions_map_arabic' => [

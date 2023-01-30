@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\CaptainController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ServiceController;
-
+use App\Http\Controllers\Admin\CarTypeController;
 Route::group(
     [
         'prefix'        => 'admin',
@@ -40,6 +40,9 @@ Route::group(
 
         //services
         Route::resource('services', ServiceController::class)->name('*','services');
+
+        //car types
+        Route::resource('car_types', CarTypeController::class)->name('*','car_types');
 });
 
 // Auth admins
