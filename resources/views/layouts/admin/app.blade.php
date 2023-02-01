@@ -27,7 +27,7 @@
       <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/tables/datatable/rowGroup.bootstrap4.min.css') }}">
       <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/vendors-rtl.min.css') }}">
       <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/charts/apexcharts.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/extensions/sweetalert2.min.css')}}">
+      <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/extensions/sweetalert2.min.css')}}">
       <!-- END: Vendor CSS-->
 
       <!-- BEGIN: Theme CSS-->
@@ -50,8 +50,8 @@
       <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/custom-rtl.css')}}">
       <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style-rtl.css')}}">
       <!-- END: Custom CSS-->
-        
-      @notifyCss
+      <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/forms/select/select2.min.css')}}">
+
   </head>
   <!-- END: Head-->
   <body class="vertical-layout vertical-menu-modern  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="">
@@ -61,8 +61,6 @@
 
     @include('layouts.admin.message')
     @yield('content')
-
-    <x:notify-messages />
 
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
@@ -111,6 +109,9 @@
     <script src="{{ asset('app-assets/vendors/js/tables/datatable/buttons.print.min.js') }}"></script>
     <script src="{{ asset('app-assets/vendors/js/tables/datatable/dataTables.rowGroup.min.js') }}"></script>
     <!-- END: DataTable JS-->
+        <script src="{{asset('app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
+
+    <script src="{{asset('app-assets/js/scripts/forms/form-select2.js')}}"></script>
 
     @if (session()->has('success'))
         <script>
@@ -165,7 +166,6 @@
             }
         })
     </script>
-    @notifyJs
     @include('layouts.admin.scripts')
   </body>
 </html>

@@ -193,3 +193,26 @@ a {
 .delete-btn:hover {
 	color: #FFF;
 }
+
+.parent-feature {
+	position: relative;
+}
+
+.remove-input-feature {
+	position: absolute;
+	top: 4px;
+	left: -26px;
+}
+
+#output {
+	padding: 20px;
+	background: #dadada;
+}
+
+form {
+	margin-top: 20px;
+}
+
+select {
+	width: 300px;
+}

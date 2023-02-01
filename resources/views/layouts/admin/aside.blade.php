@@ -5,7 +5,7 @@
             <li class="nav-item mr-auto">
                 <a class="navbar-brand" href="../../../html/rtl/vertical-menu-template/index.html">
                     <span class="brand-logo text-center">
-                        <svg id="svgexport-6_-_2022-07-22T211411.842" data-name="svgexport-6 - 2022-07-22T211411.842" xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 130.914 131.229">
+                        <svg id="svgexport-6_-_2022-07-22T211411.842" data-name="svgexport-6 - 2022-07-22T211411.842" xmlns="http://www.w3.org/2000/svg" width="55" height="55" viewBox="0 0 130.914 131.229">
                             <g id="Group_6192" data-name="Group 6192" transform="translate(0 0)">
                                 <g id="Group_6190" data-name="Group 6190" transform="translate(8.446 10.57)">
                                 <path id="Path_990" data-name="Path 990" d="M105.353,85.387a18.942,18.942,0,0,1,4.223.488V24.8L56.788,5.006,4,24.8V95.3l52.788,19.8L86.368,104a19,19,0,0,1,18.985-18.613Z" transform="translate(-4 -5.006)" fill="#ffa64d"/>
@@ -17,6 +17,10 @@
                             </g>
                         </svg>
                     </span>
+                    <h2 class="brand-text">تزويد
+                        <br>
+                        <span style="font-size:10px;color:#9da0aa">لقطع غيار السيارات</span>
+                    </h2>
                 </a>
             </li>
             <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc" data-ticon="disc"></i></a></li>
@@ -34,7 +38,7 @@
 
             {{-- cities --}}
             @if(auth()->user()->hasPermission('cities-read'))
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.cities.index') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="user">المحافظات</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{ \App\Models\City::count() }})</span></a></li>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.cities.index') }}"><i data-feather="flag"></i><span class="menu-title text-truncate" data-i18n="user">المحافظات</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{ \App\Models\City::count() }})</span></a></li>
             @endif
 
             {{-- admins --}}
@@ -54,22 +58,27 @@
 
             {{-- categories --}}
             @if(auth()->user()->hasPermission('categories-read'))
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.categories.index') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="user">الأقسام</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Category::count()}})</span></a></li>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.categories.index') }}"><i data-feather="list"></i><span class="menu-title text-truncate" data-i18n="user">الأقسام</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Category::count()}})</span></a></li>
             @endif
 
             {{-- services --}}
             @if(auth()->user()->hasPermission('services-read'))
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.services.index') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="user">الخدمات</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Service::count()}})</span></a></li>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.services.index') }}"><i data-feather="crop"></i><span class="menu-title text-truncate" data-i18n="user">الخدمات</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Service::count()}})</span></a></li>
             @endif
 
             {{-- car types --}}
             @if(auth()->user()->hasPermission('car_types-read'))
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.car_types.index') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="user">أنواع السيارات</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\CarType::count()}})</span></a></li>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.car_types.index') }}"><i class="fas fa-car"></i><span class="menu-title text-truncate" data-i18n="cars">أنواع السيارات</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\CarType::count()}})</span></a></li>
             @endif
             
             {{-- car models --}}
             @if(auth()->user()->hasPermission('car_models-read'))
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.car_models.index') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="user">موديلات السيارات</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\CarModel::count()}})</span></a></li>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.car_models.index') }}"><i class="fas fa-car"></i><span class="menu-title text-truncate" data-i18n="user">موديلات السيارات</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\CarModel::count()}})</span></a></li>
+            @endif
+
+            {{-- products --}}
+            @if(auth()->user()->hasPermission('products-read'))
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.products.index') }}"><i data-feather="tag"></i><span class="menu-title text-truncate" data-i18n="user">المنتجات</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Product::count()}})</span></a></li>
             @endif
         </ul>
     </div>

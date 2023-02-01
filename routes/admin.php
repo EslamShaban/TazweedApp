@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\CarTypeController;
 use App\Http\Controllers\Admin\CarModelController;
+use App\Http\Controllers\Admin\ProductController;
 
 Route::group(
     [
@@ -48,6 +49,9 @@ Route::group(
 
         //car models
         Route::resource('car_models', CarModelController::class)->name('*','car_models');
+                
+        //products
+        Route::resource('products', ProductController::class)->name('*','products');
 });
 
 // Auth admins

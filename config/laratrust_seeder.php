@@ -22,7 +22,7 @@ return [
             'services'      => 'c,r,u,d',
             'car_types'     => 'c,r,u,d',
             'car_models'    => 'c,r,u,d',
-
+            'products'      => 'c,r,u,d',
         ],
         'admin' => [],
         'client' => [],
@@ -48,6 +48,7 @@ return [
         'services' => 'الخدمات',
         'car_types' => 'أنواع السيارات',
         'car_models' => 'موديلات السيارات',
+        'products'   => 'المنتجات'
     ],
 
     'permissions_map_arabic' => [

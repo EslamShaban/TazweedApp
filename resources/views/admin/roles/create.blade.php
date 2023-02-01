@@ -37,7 +37,7 @@
                                     <form class="form form-vertical needs-validation" action="{{ route('admin.roles.store') }}" method="POST">
                                         @csrf
                                         <div class="row">
-                                            <div class="col-md-6 col-12 mb-3">
+                                            <div class="col-12 mb-3">
                                                 <label for="name">إسم الصلاحية</label>
                                                     <input type="text" id="name" class="form-control" name="name"
                                                         value="{{ old('name') }}" required/>
@@ -48,43 +48,52 @@
                                                     @enderror
                                             </div>
                                                                                         
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
+                                            <div class="table-responsive border rounded mt-1">
+                                                                                                    
+                                                <h6 class="py-1 mx-1 mb-0 font-medium-2">
+                                                        <i data-feather="lock" class="font-medium-3 mr-25"></i>
+                                                        <span class="align-middle">الصلاحيات</span>
+                                                    </h6>
+                                                <table class="table table-striped table-borderless">
+                                                    <thead class="thead-light">
                                                         <tr>
-                                                            <th>الموديل</th>
-                                                            <th>الصلاحيات</th>
+                                                            <tr>
+                                                                <th>الموديل</th>
+                                                                <th>الكل</th>
+                                                                <th>إنشاء</th>
+                                                                <th>قراءة</th>
+                                                                <th>تحديث</th>
+                                                                <th>حذف</th>
+                                                            </tr>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         @php
                                                             $models = config('laratrust_seeder.models_arabic');
-                                                            $permissions_map = config('laratrust_seeder.permissions_map_arabic');
+                                                            $permissions_map = config('laratrust_seeder.permissions_map');
                                                         @endphp
-                                                        @foreach (config('laratrust_seeder.roles_structure.superadmin') as $model=>$permissions)
+                                                                                                                
                                                         
-                                                        <tr>
-                                                            <td>{{ $models[$model] }}</td>
-                                                            <td>
-                                                                <div class="permissions">
-                                                                <input type="checkbox" value="" name="" class="checkall_{{$model}}" onclick="check_all_perm('{{$model}}')">
+                                                            @foreach (config('laratrust_seeder.roles_structure.superadmin') as $model=>$permissions)
+                                                            <tr>
+                                                                <td>{{ $models[$model] }}</td>
+                                                                <td>
+                                                                    <input type="checkbox" value="" name="" class="checkall_{{$model}}" onclick="check_all_perm('{{$model}}')">
+                                                                </td>
 
-                                                                <label class="">الكل</label>
+                                                                @foreach ($permissions_map as $key => $permission)
+                                                                    @if (in_array($key, explode(',' ,$permissions)))                                                                      
+                                                                        <td>  
+                                                                            <input type="checkbox" value="{{$model}}-{{$permission}}" name="permissions[]"  class="{{$model}}" >
+                                                                        </td>
+                                                                    @else
+                                                                        <td> <i class="fa-solid fa-minus"></i></td>
+                                                                    @endif
 
-                                                                    @foreach (explode(',' ,$permissions) as $permission)
-                                                                            
-                                                                        <input type="checkbox" value="{{$model}}-{{config('laratrust_seeder.permissions_map')[$permission]}}" name="permissions[]"  class="{{$model}}" >
-                                                                        <label>{{ $permissions_map[$permission] }}</label>
-                                                                        
-                                                                    @endforeach
-
-                                                                </div>
-                                                            </td>
-
-                                                        </tr>
-
-                                                        @endforeach
-                                                            
+                                                                @endforeach
+                                                            </tr>
+                                                            @endforeach
+                                                        
                                                     </tbody>
                                                 </table>
                                             </div>
