@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthAPIController;
 use App\Http\Controllers\API\CityAPIController;
 use App\Http\Controllers\API\UserAPIController;
+use App\Http\Controllers\API\HomeAPIController;
+use App\Http\Controllers\API\ProductAPIController;
+use App\Http\Controllers\API\SearchAPIController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,6 +40,13 @@ Route::middleware(['APIAuth','api'])->group(function(){
         Route::get('my_profile', [UserAPIController::class, 'my_profile']);
         Route::post('update_profile', [UserAPIController::class, 'update_profile']);
         Route::post('change_password', [UserAPIController::class, 'change_password']);
+
+        Route::get('home', [HomeAPIController::class, 'home']);
+        Route::get('products', [ProductAPIController::class, 'get_all_products']);
+        Route::get('products/{id}/details', [ProductAPIController::class, 'product_details']);
+        Route::get('offers', [ProductAPIController::class, 'get_all_offers']);
+        Route::get('search_filters', [SearchAPIController::class, 'search_filters']);
+        Route::get('search', [SearchAPIController::class, 'search']);
 
     });
 

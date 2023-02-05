@@ -39,6 +39,12 @@ class Product extends Model
         
     }
 
+        
+    public function scopeOffers($q) 
+    {
+        return $q->where('discount_price', '>', 0);
+    }
+
     public function asset()
     {
         return $this->morphOne(Asset::class, 'assetable');
