@@ -93,10 +93,10 @@ class AuthAPIController extends Controller
             return response()->withError('كلمة السر غير صحيحه', 5003, 'password');
         }
 
+        $user = $this->userRepository->findBy('email', $request->email);
+
         $user->fcm = $request->fcm ?? $user->fcm;
         $user->save();
-
-        $user = $this->userRepository->findBy('email', $request->email);
 
         $data = [
             'user'  => new UserResource($user),
