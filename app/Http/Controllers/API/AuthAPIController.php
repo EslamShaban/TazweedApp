@@ -48,6 +48,7 @@ class AuthAPIController extends Controller
                 'email'     => $request->email,
                 'password'  => bcrypt($request->password),
                 'city_id'   => $request->city_id,
+                'fcm'       => $request->fcm,
                 'account_type' => 'client'
             ]);
 
@@ -91,6 +92,9 @@ class AuthAPIController extends Controller
         if(!$token = JWTAuth ::attempt( $credentail ) ){
             return response()->withError('كلمة السر غير صحيحه', 5003, 'password');
         }
+
+        $user->fcm = $request->fcm ?? $user->fcm;
+        $user->save();
 
         $user = $this->userRepository->findBy('email', $request->email);
 

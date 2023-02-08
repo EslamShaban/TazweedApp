@@ -8,6 +8,7 @@ use App\Http\Controllers\API\UserAPIController;
 use App\Http\Controllers\API\HomeAPIController;
 use App\Http\Controllers\API\ProductAPIController;
 use App\Http\Controllers\API\SearchAPIController;
+use App\Http\Controllers\API\WashRequestAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,9 @@ Route::middleware(['APIAuth','api'])->group(function(){
         Route::get('offers', [ProductAPIController::class, 'get_all_offers']);
         Route::get('search_filters', [SearchAPIController::class, 'search_filters']);
         Route::get('search', [SearchAPIController::class, 'search']);
+
+                
+        Route::post('make_request', [WashRequestAPIController::class, 'make_request']);
 
     });
 

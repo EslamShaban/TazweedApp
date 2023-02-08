@@ -26,6 +26,7 @@ return new class extends Migration
             $table->double('lng')->nullable();
             $table->enum('status', ['0', '1'])->default(0);
             $table->enum('available', ['0', '1'])->default(1);
+            $table->string('fcm')->nullable();
             $table->bigInteger('city_id')->unsigned()->nullable();
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade')->onUpdate('cascade');
             $table->rememberToken();

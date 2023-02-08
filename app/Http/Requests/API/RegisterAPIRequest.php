@@ -22,7 +22,8 @@ class RegisterAPIRequest extends FormRequest
             'email'         => ['required', 'email', 'unique:users'],
             'city_id'       => ['required', 'exists:cities,id'],
             'password'      => ['required', Password::min(6)->mixedCase()->numbers()->symbols()->uncompromised(), 'confirmed'],
-            'image'         => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif']
+            'image'         => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif'],
+            'fcm'           => ['nullable']
         ];
     }
 
