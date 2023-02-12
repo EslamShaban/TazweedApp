@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title' , 'أضف منتج')
+@section('title' , __('admin.add_product'))
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -14,9 +14,9 @@
                         <div class="col-12">
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('admin.products.index') }}">المنتجات</a>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.products.index') }}">{{ __('admin.products') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="#">أضف منتج</a>
+                                    <li class="breadcrumb-item"><a href="#">{{ __('admin.add_product') }}</a>
                                     </li>
                                 </ol>
                             </div>
@@ -31,14 +31,23 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h2 class="card-title">أضف منتج</h2>
+                                    <h2 class="card-title">{{ __('admin.add_product') }}</h2>
                                 </div>
                                 <div class="card-body">
+                                    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
                                     <form class="form form-vertical needs-validation" action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row"> 
                                             <div class="col-md-12">           
-                                                <label for="image">الصورة</label>
+                                                <label for="image">{{__('admin.image')}}</label>
                                                 <div class="uploadOuter">
                                                     <span class="dragBox" >
                                                         <i class="fa fa-cloud-upload-alt fa-2x"></i>
@@ -46,36 +55,41 @@
                                                     </span>
                                                 </div>
                                                 <div id="preview"></div>
-                                            </div>
+                                            </div>                                    
+                                            @foreach (config('translatable.locales') as $locale)                                   
+                                                <div class="col-md-6 col-12 mb-3">
+                                                    <label for="{{$locale}}.name">{{ __('admin.'. $locale . '.product_name')}}</label>
+                                                    <input type="text" id="{{$locale}}.name" class="form-control" name="{{$locale}}[name]" value="{{old($locale . '.name')}}" required/>
+                                                    @error($locale . '.name')
+                                                        <span class="text-danger">
+                                                            <small class="errorTxt">{{ $message }}</small>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            @endforeach   
+                                                                                                                             
+                                            @foreach (config('translatable.locales') as $locale)                                   
+                                                <div class="col-md-6 col-12 mb-3">
+                                                    <label for="{{$locale}}.desc">{{ __('admin.'. $locale . '.product_desc')}}</label>
+                                                    <textarea  id="{{$locale}}.desc" class="form-control" name="{{$locale}}[desc]" required>{{old($locale . '.desc')}}</textarea>
+                                                    @error($locale . '.desc')
+                                                        <span class="text-danger">
+                                                            <small class="errorTxt">{{ $message }}</small>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            @endforeach   
                                             <div class="col-md-6 col-12 mb-3">
-                                                <label for="name">إسم المنتج</label>
-                                                <input type="text" id="name" class="form-control" name="name" value="{{ old('name') }}" required/>
-                                                @error('name')
-                                                    <span class="text-danger">
-                                                        <small class="errorTxt">{{ $message }}</small>
-                                                    </span>
-                                                @enderror
-                                            </div>                          
-                                            <div class="col-md-6 col-12 mb-3">
-                                                <label for="category_id">القسم</label>
+                                                <label for="category_id">{{ __('admin.category') }}</label>
                                                 <select name="category_id" class="form-control" required>
-                                                    <option value="">أختر القسم</option>
+                                                    <option value="">{{ __('admin.choose_category') }}</option>
                                                     @foreach ($categories as $category)
                                                         <option value="{{ $category->id }}" @selected($category->id == old('category_id'))>{{ $category->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-12 mb-3">
-                                                <label for="name">وصف المنتج</label>
-                                                <textarea  id="desc" class="form-control" name="desc" required>{{ old('desc') }}</textarea>
-                                                @error('desc')
-                                                    <span class="text-danger">
-                                                        <small class="errorTxt">{{ $message }}</small>
-                                                    </span>
-                                                @enderror
-                                            </div>  
                                             <div class="col-md-6 col-12 mb-3">
-                                                <label for="price">السعر</label>
+                                                <label for="price">{{ __('admin.price') }}</label>
                                                 <input type="number" id="price" class="form-control" name="price" value="{{ old('price') }}" required/>
                                                 @error('price')
                                                     <span class="text-danger">
@@ -84,7 +98,7 @@
                                                 @enderror
                                             </div>                          
                                             <div class="col-md-6 col-12 mb-3">
-                                                <label for="discount_price">سعر الخصم</label>
+                                                <label for="discount_price">{{ __('admin.discount_price') }}</label>
                                                 <input type="number" id="discount_price" class="form-control" name="discount_price" value="{{ old('discount_price') }}" />
                                                 @error('discount_price')
                                                     <span class="text-danger">
@@ -94,46 +108,52 @@
                                             </div>                                     
 
                                             <div class="col-md-6 col-12 mb-3">
-                                                <label for="car_type_id">نوع السيارة</label>
+                                                <label for="car_type_id">{{ __('admin.car_type') }}</label>
                                                 <select name="car_type_id" class="form-control" required>
-                                                    <option value="">أختر نوع السيارة</option>
+                                                    <option value="">{{ __('admin.choose_car_type') }}</option>
                                                     @foreach ($car_types as $car_type)
                                                         <option value="{{ $car_type->id }}" @selected($car_type->id == old('car_type_id'))>{{ $car_type->type }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="col-md-6 col-12 mb-3">
-                                                <label for="car_model_ids[]">الموديلات</label>                                 
+                                                <label for="car_model_ids[]">{{ __('admin.car_models') }}</label>                                 
                                                 <select name="car_model_ids[]" class="select2 form-control" multiple required>
-                                                    <option value="" disabled>أختر الموديلات </option>
+                                                    <option value="" disabled>{{ __('admin.choose_car_models') }}</option>
                                                     @foreach ($car_models as $car_model)
                                                         <option value="{{ $car_model->id }}">{{ $car_model->model }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                                                                            
-                                            <div class="col-md-4 col-12 mb-3">
-                                                <label for="manufacture_country">بلد المصنع</label>
-                                                <input type="text" id="manufacture_country" class="form-control" name="manufacture_country" value="{{ old('manufacture_country') }}" />
+                                            <div class="col-md-6 col-12 mb-3">
+                                                <label for="manufacture_country">{{ __('admin.manufacture_country') }}</label>                                         
+                                                <select name="manufacture_country" class="select2 form-control" required>
+                                                    <option value="">{{ __('admin.choose_manufacture_country') }}</option>
+                                                    @foreach (\App\Models\Country::all() as $country)
+                                                        <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                                    @endforeach
+                                                </select>
                                                 @error('manufacture_country')
                                                     <span class="text-danger">
                                                         <small class="errorTxt">{{ $message }}</small>
                                                     </span>
                                                 @enderror
-                                            </div> 
-                                            <div class="col-md-4 col-12 mb-3">
-                                                <label for="type">الصنع</label>
+                                            </div>
+                                             
+                                            <div class="col-md-6 col-12 mb-3">
+                                                <label for="type">{{ __('admin.made_type') }}</label>
                                                 <select name="type" class="form-control" required>
-                                                    <option value="">أختر نوع الصنع</option>
-                                                    <option value="original" >أصلي</option>
-                                                    <option value="high-copy">تقليد بجوده عالية</option>
-                                                    <option value="copy">تقليد</option>
+                                                    <option value="">{{ __('admin.choose_made_type') }}</option>
+                                                    <option value="original" >{{ __('admin.original')}}</option>
+                                                    <option value="high-copy">{{ __('admin.high_copy') }}</option>
+                                                    <option value="copy">{{ __('admin.copy') }}</option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-4 col-12 mb-3">
-                                                <label for="manufacturing_year">سنة الصنع</label>
+                                            <div class="col-md-6 col-12 mb-3">
+                                                <label for="manufacturing_year">{{ __('admin.manufacturing_year') }}</label>
                                                 <select name="manufacturing_year" class="form-control" required>
-                                                    <option value="">أختر سنة الصنع</option>
+                                                    <option value="">{{ __('admin.choose_manufacturing_year') }}</option>
                                                     @for ($i = now()->year-20; $i <= now()->year; $i++)
                                                         <option value="{{$i}}">{{ $i}}</option>
                                                     @endfor
@@ -143,11 +163,11 @@
                                             <div class="features col-12 mb-3">
                                                 <button type="button" class="btn btn-secondary add-feature">
                                                     <span><i class="fa fa-plus"></i></span>
-                                                    <span> أضف مميزات للمنتج </span>
+                                                    <span>{{ __('admin.add_product_features') }}</span>
                                                 </button>
                                             </div>
                                             <div class="col-12">
-                                                <button type="submit" class="btn btn-primary mr-1">حفظ البيانات</button>
+                                                <button type="submit" class="btn btn-primary mr-1">{{ __('admin.save') }}</button>
                                             </div>
                                         </div>
                                     </form>
@@ -171,16 +191,21 @@
             $(document).on("click" , ".add-feature", function(){
                 $(".features").append(
                     `
+                                                                
+                    @foreach (config('translatable.locales') as $locale)                                   
+
                         <div class="col-md-11 col-12 parent-feature">
 
                             <div class="sub-main-feature mt-1">
-                                <input type="text" id="features" class="form-control" name="features[]"
+                                <lable>{{ __('admin.'. $locale . '.product_feature')}}</label>
+                                <input type="text" id="features" class="form-control" name="{{$locale}}[features][]"
                                         value="{{ old('features') }}" required/>
                             </div>
                             <div class="remove-input-feature delete-btn" style="cursor:pointer">
                                 <span> <i class="fa fa-trash fa-sm"></i> </span>
                             </div>
                         </div>
+                    @endforeach
                     `
                 )
 

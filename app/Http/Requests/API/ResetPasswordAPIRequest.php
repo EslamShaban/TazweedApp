@@ -27,8 +27,8 @@ class ResetPasswordAPIRequest extends FormRequest
     public function attributes()
     {
         return[
-            'email'         => 'البريد الالكتروني',
-            'password'      => 'كلمة السر',   
+            'email'         => __('api.email'),
+            'password'      => __('api.password'),   
         ];
         
     }

@@ -13,41 +13,30 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-                        
-        \App\Models\Category::insert([
+                    
+        $categories = [
+            'Engines'       => 'محركات',
+            'Oils'          => 'زيوت',
+            'Tires'         => 'اطارات',
+            'Brakes'        => 'مكابح',
+            'Chairs'        => 'كراسي',
+            'Conditioning'  => 'تكييف',
+        ];
 
-           [
-            'name' => 'محركات' ,
-            'created_at' => now() ,
-           ] ,
-
-           [
-            'name' => 'زيوت' ,
-            'created_at' => now() ,
-           ] ,
-           [
-            'name' => ' اطارات' ,
-            'created_at' => now() ,
-           ] ,
-
-           [
-            'name' => 'مكابح' ,
-            'created_at' => now() ,
-           ] ,
-           [
-            'name' => 'كراسي' ,
-            'created_at' => now() ,
-           ] ,
-
-           [
-            'name' => 'تكييف' ,
-            'created_at' => now() ,
-           ] 
-
-        ]);
-
-                
-        for ($i=1; $i <= 6 ; $i++) {
+        foreach ($categories as $category_en => $category_ar) {
+                    
+            \App\Models\Category::create([
+                "ar" => [
+                    "name" => $category_ar
+                ],
+                "en" => [
+                    "name" => $category_en
+                ],
+            
+            ]);
+        } 
+           
+        for ($i=1; $i <= count($categories) ; $i++) {
 
             $category = \App\Models\Category::find($i);
 

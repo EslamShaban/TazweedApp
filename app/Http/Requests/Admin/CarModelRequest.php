@@ -23,10 +23,14 @@ class CarModelRequest extends FormRequest
      */
 
     protected function onCreate(){
+   
+        $rules = [];
 
-        return [
-            'model'        => ['required', 'string', 'unique:car_models,model']
-        ];
+        foreach(config('translatable.locales') as $locale){
+            $rules+=[$locale . '.model' => ['required', 'string', 'unique:car_model_translations,model']];
+        }
+
+        return $rules;
 
      }
          
@@ -37,11 +41,14 @@ class CarModelRequest extends FormRequest
      */
 
     protected function onUpdate(){
+     
+        $rules = [];
 
-        return [
-            'model'        => ['required', 'string', 'unique:car_models,model,' . $this->car_model->id]
-        ];
-
+        foreach(config('translatable.locales') as $locale){
+            $rules+=[$locale . '.model' => ['required', 'string', 'unique:car_model_translations,model,' . $this->car_model->id . ',car_model_id']];
+        }
+        
+        return $rules;
     }
     /**
      * Get the validation rules that apply to the request.
@@ -58,7 +65,8 @@ class CarModelRequest extends FormRequest
      public function attributes()
     {
         return[
-            'model'        => 'موديل السيارة'
+            'ar.model'          => __('admin.ar.car_model'),
+            'en.model'          => __('admin.en.car_model'),
         ];
         
     }

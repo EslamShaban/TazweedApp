@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title' , 'تعديل المشرف')
+@section('title' , __('admin.edit_admin'))
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -14,9 +14,9 @@
                         <div class="col-12">
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('admin.admins.index') }}">المشرفين</a>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.admins.index') }}">{{ __('admin.admins') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="#">تعديل المشرف</a>
+                                    <li class="breadcrumb-item"><a href="#">{{ __('admin.edit_admin')}}</a>
                                     </li>
                                 </ol>
                             </div>
@@ -31,7 +31,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h2 class="card-title">تعديل المشرف</h2>
+                                    <h2 class="card-title">{{ __('admin.edit_admin') }}</h2>
                                 </div>
                                 <div class="card-body">
                                     <form class="form form-vertical needs-validation" action="{{ route('admin.admins.update' , $admin->id) }}" method="POST" enctype="multipart/form-data">                                    
@@ -39,7 +39,7 @@
                                         @csrf
                                         <div class="row">
                                             <div class="col-md-12">           
-                                                <label for="image">الصورة</label>
+                                                <label for="image">{{ __('admin.image') }}</label>
                                                 <div class="uploadOuter">
                                                     <span class="dragBox" >
                                                         <i class="fa fa-cloud-upload-alt fa-2x"></i>
@@ -51,7 +51,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12 mb-3">
-                                                <label for="f_name">الإسم الاول</label>
+                                                <label for="f_name">{{ __('admin.f_name')}}</label>
                                                 <input type="text" id="f_name" class="form-control" name="f_name" value="{{ old('f_name', $admin->f_name) }}" required/>
                                                 @error('f_name')
                                                     <span class="text-danger">
@@ -60,7 +60,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-6 col-12 mb-3">
-                                                <label for="l_name">الإسم الاخير</label>
+                                                <label for="l_name"> {{ __('admin.l_name') }} </label>
                                                 <input type="text" id="l_name" class="form-control" name="l_name" value="{{ old('l_name', $admin->l_name) }}" required/>
                                                 @error('l_name')
                                                     <span class="text-danger">
@@ -69,7 +69,7 @@
                                                 @enderror
                                             </div>                          
                                             <div class="col-md-6 col-12 mb-3">
-                                                <label for="email">البريد الإلكتروني</label>
+                                                <label for="email">{{ __('admin.email') }}</label>
                                                 <input type="email" id="email" class="form-control" name="email" value="{{ old('email', $admin->email) }}" required/>
                                                 @error('email')
                                                     <span class="text-danger">
@@ -78,7 +78,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-6 col-12 mb-3">
-                                                <label for="password">كلمة المرور</label>
+                                                <label for="password">{{ __('admin.password')}}</label>
                                                 <input type="password" id="password" class="form-control" name="password" value="{{ old('password') }}"/>
                                                 @error('password')
                                                     <span class="text-danger">
@@ -87,9 +87,9 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-6 col-12 mb-3">
-                                                <label for="role_id">الصلاحية</label>
+                                                <label for="role_id">{{ __('admin.role')}}</label>
                                                 <select name="role_id" class="form-control" required>
-                                                    <option value="">أختر الصلاحية</option>
+                                                    <option value="">{{ __('admin.choose_role') }}</option>
                                                     @foreach ($roles as $role)
                                                         <option value="{{ $role->id }}" {{ ($admin->roles->contains('name',$role->name)) ? 'selected' : ''}}>{{ $role->name }}</option>
                                                     @endforeach
@@ -97,7 +97,7 @@
                                             </div>
                     
                                             <div class="col-12">
-                                                <button type="submit" class="btn btn-primary mr-1">حفظ البيانات</button>
+                                                <button type="submit" class="btn btn-primary mr-1"> {{ __('admin.save')}}</button>
                                             </div>
                                         </div>
                                     </form>

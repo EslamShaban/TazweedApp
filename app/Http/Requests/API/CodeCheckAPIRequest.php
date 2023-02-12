@@ -26,8 +26,8 @@ class CodeCheckAPIRequest extends FormRequest
     {
         return[
                         
-            'email'     => 'البريد الإلكتروني',
-            'code'      => 'كود التحقق',
+            'email'     => __('api.email'),
+            'code'      => x__('api.code'),
         ];
         
     }

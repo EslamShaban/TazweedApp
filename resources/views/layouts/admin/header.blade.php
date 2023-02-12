@@ -8,6 +8,18 @@
             </div>
             <ul class="nav navbar-nav align-items-center ml-auto">
 
+                <li class="nav-item dropdown dropdown-language">
+
+                    @if (App::getLocale() == 'ar')
+                        <a class="dropdown-item" href="{{ route('language', 'en') }}" data-language="en"><i
+                                class="flag-icon flag-icon-us"></i></a>
+                    @else
+
+                    <a class="dropdown-item" href="{{ route('language', 'ar') }}" data-language="ar"><i
+                        class="flag-icon flag-icon-sa"></i></a>
+                    @endif
+
+                </li>
                 <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-style"><i class="ficon" data-feather="moon"></i></a></li>
 
                 <li class="nav-item dropdown dropdown-notification mr-25"><a class="nav-link" href="javascript:void(0);" data-toggle="dropdown"><i class="ficon" data-feather="bell"></i><span class="badge badge-pill badge-danger badge-up">5</span></a>

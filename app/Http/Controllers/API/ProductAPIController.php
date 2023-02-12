@@ -24,7 +24,7 @@ class ProductAPIController extends Controller
     {
         $products = $this->productRepository->all();
 
-        return response()->withData('كافة المنتجات', ['products' => ProductResource::collection($products)]);
+        return response()->withData(__('api.all_products'), ['products' => ProductResource::collection($products)]);
     }
 
     // get product details
@@ -33,10 +33,10 @@ class ProductAPIController extends Controller
         $product = $this->productRepository->find($id);
                 
         if(!$product){
-            return response()->withError('المنتج غير موجود', 5001, 'product_id');
+            return response()->withError(__('api.product_not_found'), 5001, 'product_id');
         }
 
-        return response()->withData('تفاصيل المنتج', ['product' => new ProductDetailsResource($product)]);
+        return response()->withData(__('api.product_detail'), ['product' => new ProductDetailsResource($product)]);
 
     }
 
@@ -45,7 +45,7 @@ class ProductAPIController extends Controller
     {
         $offers = Product::Offers()->latest()->get();
 
-        return response()->withData('كافة العروض ', ['offers' => ProductResource::collection($offers)]);
+        return response()->withData(__('api.all_offers'), ['offers' => ProductResource::collection($offers)]);
     }
 
 }

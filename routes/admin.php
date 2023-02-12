@@ -12,12 +12,21 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\CarTypeController;
 use App\Http\Controllers\Admin\CarModelController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\AddressTypeController;
+use App\Http\Controllers\Admin\CouponController;
+
+Route::get('language/{locale}', function ($locale) {
+
+    session()->put('locale', $locale);
+
+    return redirect()->back();
+})->name('language');
 
 Route::group(
     [
         'prefix'        => 'admin',
         'as'            => 'admin.',
-        'middleware'    => ['auth']
+        'middleware'    => ['localization', 'auth']
     ], function(){
 
         //home
@@ -52,6 +61,12 @@ Route::group(
                 
         //products
         Route::resource('products', ProductController::class)->name('*','products');
+                
+        //address types
+        Route::resource('address_types', AddressTypeController::class)->name('*','address_types');
+
+        //coupons
+        Route::resource('coupons', CouponController::class)->name('*','coupons');
 });
 
 // Auth admins

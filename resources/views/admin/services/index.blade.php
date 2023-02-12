@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title', 'الخدمات')
+@section('title', __('admin.services'))
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -14,7 +14,7 @@
                         <div class="col-12">
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">الخدمات</a>
+                                    <li class="breadcrumb-item"><a href="#">{{__('admin.services')}}</a>
                                     </li>
                                 </ol>
                             </div>
@@ -27,7 +27,7 @@
                             <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a service">
                                 <a href="{{ route('admin.services.create') }}" class="btn btn-primary">
                                     <span><i class="fa fa-plus"></i></span>
-                                    <span> أضف خدمة </span>
+                                    <span> {{__('admin.add_service')}} </span>
                                 </a>
 
                             </div>
@@ -48,10 +48,10 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>صورة الخدمة</th>
-                                                <th>إسم الخدمة</th>
-                                                <th>تاريخ الإضافة</th>
-                                                <th>تحكم</th>
+                                                <th>{{ __('admin.image')}}</th>
+                                                <th>{{ __('admin.service_name')}}</th>
+                                                <th>{{__('admin.created_at')}}</th>
+                                                <th>{{__('admin.action')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>

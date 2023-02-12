@@ -26,7 +26,7 @@ class ForgetPasswordAPIRequest extends FormRequest
     public function attributes()
     {
         return[
-            'email'     => 'البريد الإلكتروني',
+            'email'     => __('api.email'),
         ];
         
     }

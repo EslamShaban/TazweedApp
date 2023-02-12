@@ -38,7 +38,7 @@ class UserAPIController extends Controller
             'cities'  => CityResource::collection($cities),   
         ];
 
-        return response()->withData('بيانات الحساب', $data);
+        return response()->withData(__('api.profile_data'), $data);
     }
 
     public function update_profile(UpdateProfileAPIRequest $request)
@@ -71,7 +71,7 @@ class UserAPIController extends Controller
             
             DB::commit();
 
-            return response()->withData('تم تحديث بيانات الحساب بنجاح', $data);
+            return response()->withData(__('api.profile_updated_successfully'), $data);
 
 
         } catch (\Throwable $th) {
@@ -87,12 +87,12 @@ class UserAPIController extends Controller
         $user = auth()->user();
 
         if(! Hash::check($request->old_password, $user->password))
-            return response()->withError('كلمة السر القديمة غير صحيحة', 5003);
+            return response()->withError(__('api.old_password_wrong'), 5003);
 
         $user->password = bcrypt($request->new_password);
         $user->save();
 
-        return response()->withSuccess('تم تغيير كلمة السر بنجاح', 200);
+        return response()->withSuccess(__('api.password_changed_successfully'), 200);
 
     }
 }

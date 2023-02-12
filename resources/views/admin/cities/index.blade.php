@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title', 'المحافظات')
+@section('title', __('admin.cities'))
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -14,7 +14,7 @@
                         <div class="col-12">
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">المحافظات</a>
+                                    <li class="breadcrumb-item"><a href="#">{{  __('admin.cities') }}</a>
                                     </li>
                                 </ol>
                             </div>
@@ -27,7 +27,7 @@
                             <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a City">
                                 <a href="{{ route('admin.cities.create') }}" class="btn btn-primary">
                                     <span><i class="fa fa-plus"></i></span>
-                                    <span> أضف محافظة </span>
+                                    <span> {{  __('admin.add_city') }} </span>
                                 </a>
 
                             </div>
@@ -48,9 +48,9 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>إسم المحافظة</th>
-                                                <th>تاريخ الإضافة</th>
-                                                <th>تحكم</th>
+                                                <th>{{ __('admin.city_name') }}</th>
+                                                <th>{{ __('admin.created_at') }}</th>
+                                                <th>{{ __('admin.action') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>

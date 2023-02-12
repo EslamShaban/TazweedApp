@@ -96,5 +96,11 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasOne(Car::class);
     }
+
+
+    public function shipping_addresses()
+    {
+        return $this->hasMany(ShippingAddress::class);
+    }
 }
 

@@ -27,6 +27,6 @@ class CityAPIController extends Controller
             'cities'  => CityResource::collection($cities),   
         ];
 
-        return response()->withData('كل المحافظات', $data);
+        return response()->withData(__('api.all_cities') , $data);
     }
 }

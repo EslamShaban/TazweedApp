@@ -41,13 +41,13 @@ class SearchAPIController extends Controller
             'categories' => CategoryResource::collection($categories)
         ];
 
-        return response()->withData('مرشحات البحث', $data);
+        return response()->withData(__('api.search_filters'), $data);
     }
 
     public function search(Request $request)
     {
         $search_result = ProductSearch::apply($request);
                 
-       return response()->withData('نتائج البحث', ['products'  => ProductResource::collection($search_result)]);
+       return response()->withData(__('api.search_result'), ['products'  => ProductResource::collection($search_result)]);
     }
 }

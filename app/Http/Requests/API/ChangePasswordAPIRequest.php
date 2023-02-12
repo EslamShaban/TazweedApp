@@ -28,8 +28,8 @@ class ChangePasswordAPIRequest extends FormRequest
     {
         return[
 
-            'old_password'      => 'كلمة السر القديمة',
-            'new_password'      => 'كلمة السر الجديده',  
+            'old_password'      => __('api.old_password'),
+            'new_password'      => __('api.new_password'),  
         ];
         
     }

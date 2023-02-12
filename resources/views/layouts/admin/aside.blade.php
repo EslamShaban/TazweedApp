@@ -17,9 +17,9 @@
                             </g>
                         </svg>
                     </span>
-                    <h2 class="brand-text">تزويد
+                    <h2 class="brand-text">{{__('admin.app_name')}}
                         <br>
-                        <span style="font-size:10px;color:#9da0aa">لقطع غيار السيارات</span>
+                        <span style="font-size:10px;color:#9da0aa">{{ __('admin.app_info') }}</span>
                     </h2>
                 </a>
             </li>
@@ -29,56 +29,66 @@
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('admin.index') }}"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboards">الصفحة الرئيسية</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('admin.index') }}"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboards">{{ __('admin.dashboard') }}</span></a>
                                 
             {{-- roles --}}
             @if(auth()->user()->hasPermission('roles-read'))
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.roles.index') }}"><i data-feather="lock"></i><span class="menu-title text-truncate" data-i18n="user">الصلاحيات</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{ \App\Models\Role::Roles()->count() }})</span></a></li>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.roles.index') }}"><i data-feather="lock"></i><span class="menu-title text-truncate" data-i18n="user">{{ __('admin.roles') }}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{ \App\Models\Role::Roles()->count() }})</span></a></li>
             @endif
 
             {{-- cities --}}
             @if(auth()->user()->hasPermission('cities-read'))
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.cities.index') }}"><i data-feather="flag"></i><span class="menu-title text-truncate" data-i18n="user">المحافظات</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{ \App\Models\City::count() }})</span></a></li>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.cities.index') }}"><i data-feather="flag"></i><span class="menu-title text-truncate" data-i18n="user">{{ __('admin.cities') }}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{ \App\Models\City::count() }})</span></a></li>
             @endif
 
             {{-- admins --}}
             @if(auth()->user()->hasPermission('admins-read'))
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.admins.index') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="user">المشرفين</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\User::whereRoleIs(['admin'])->count()}})</span></a></li>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.admins.index') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="user">{{ __('admin.admins') }}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\User::whereRoleIs(['admin'])->count()}})</span></a></li>
             @endif
 
             {{-- clients --}}
             @if(auth()->user()->hasPermission('clients-read'))
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.clients.index') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="user">العملاء</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\User::whereRoleIs(['client'])->count()}})</span></a></li>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.clients.index') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="user">{{__('admin.clients')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\User::whereRoleIs(['client'])->count()}})</span></a></li>
             @endif
 
             {{-- captains --}}
             @if(auth()->user()->hasPermission('captains-read'))
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.captains.index') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="user">الكابتن</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\User::whereRoleIs(['captain'])->count()}})</span></a></li>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.captains.index') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="user">{{__('admin.captains')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\User::whereRoleIs(['captain'])->count()}})</span></a></li>
             @endif
 
             {{-- categories --}}
             @if(auth()->user()->hasPermission('categories-read'))
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.categories.index') }}"><i data-feather="list"></i><span class="menu-title text-truncate" data-i18n="user">الأقسام</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Category::count()}})</span></a></li>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.categories.index') }}"><i data-feather="list"></i><span class="menu-title text-truncate" data-i18n="user">{{__('admin.categories')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Category::count()}})</span></a></li>
             @endif
 
             {{-- services --}}
             @if(auth()->user()->hasPermission('services-read'))
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.services.index') }}"><i data-feather="crop"></i><span class="menu-title text-truncate" data-i18n="user">الخدمات</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Service::count()}})</span></a></li>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.services.index') }}"><i data-feather="crop"></i><span class="menu-title text-truncate" data-i18n="user">{{__('admin.services')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Service::count()}})</span></a></li>
             @endif
 
             {{-- car types --}}
             @if(auth()->user()->hasPermission('car_types-read'))
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.car_types.index') }}"><i class="fas fa-car"></i><span class="menu-title text-truncate" data-i18n="cars">أنواع السيارات</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\CarType::count()}})</span></a></li>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.car_types.index') }}"><i class="fas fa-car"></i><span class="menu-title text-truncate" data-i18n="cars">{{ __('admin.car_types') }}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\CarType::count()}})</span></a></li>
             @endif
             
             {{-- car models --}}
             @if(auth()->user()->hasPermission('car_models-read'))
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.car_models.index') }}"><i class="fas fa-car"></i><span class="menu-title text-truncate" data-i18n="user">موديلات السيارات</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\CarModel::count()}})</span></a></li>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.car_models.index') }}"><i class="fas fa-car"></i><span class="menu-title text-truncate" data-i18n="user">{{ __('admin.car_models')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\CarModel::count()}})</span></a></li>
             @endif
 
             {{-- products --}}
             @if(auth()->user()->hasPermission('products-read'))
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.products.index') }}"><i data-feather="tag"></i><span class="menu-title text-truncate" data-i18n="user">المنتجات</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Product::count()}})</span></a></li>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.products.index') }}"><i data-feather="tag"></i><span class="menu-title text-truncate" data-i18n="user">{{__('admin.products')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Product::count()}})</span></a></li>
+            @endif
+     
+            {{-- address types --}}
+            @if(auth()->user()->hasPermission('address_types-read'))
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.address_types.index') }}"><i data-feather="tag"></i><span class="menu-title text-truncate" data-i18n="user">{{__('admin.address_types')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\AddressType::count()}})</span></a></li>
+            @endif
+
+            {{-- coupons --}}
+            @if(auth()->user()->hasPermission('coupons-read'))
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.coupons.index') }}"><i data-feather="tag"></i><span class="menu-title text-truncate" data-i18n="user">{{__('admin.coupons')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Coupon::count()}})</span></a></li>
             @endif
         </ul>
     </div>

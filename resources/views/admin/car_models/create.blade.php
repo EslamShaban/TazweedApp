@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title' , 'أضف موديل سيارة')
+@section('title' ,  __('admin.add_car_model'))
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -14,9 +14,9 @@
                         <div class="col-12">
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('admin.car_models.index') }}">موديلات السيارات</a>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.car_models.index') }}">{{ __('admin.car_models') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="#">أضف موديل سيارة</a>
+                                    <li class="breadcrumb-item"><a href="#">{{ __('admin.add_car_model') }}</a>
                                     </li>
                                 </ol>
                             </div>
@@ -31,24 +31,25 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h2 class="card-title">أضف موديل سيارة</h2>
+                                    <h2 class="card-title">{{ __('admin.add_car_model') }}</h2>
                                 </div>
                                 <div class="card-body">
                                     <form class="form form-vertical needs-validation" action="{{ route('admin.car_models.store') }}" method="POST" >
                                         @csrf
-                                        <div class="row"> 
-                                            <div class="col-md-12 mb-3">
-                                                <label for="model">موديل السيارة</label>
-                                                    <input type="text" id="model" class="form-control" name="model" value="{{ old('model') }}" required/>
-                                                    @error('model')
+                                        <div class="row">                        
+                                            @foreach (config('translatable.locales') as $locale)                                   
+                                                <div class="col-md-6 col-12 mb-3">
+                                                    <label for="{{$locale}}.model">{{ __('admin.'. $locale . '.car_model')}}</label>
+                                                    <input type="text" id="{{$locale}}.model" class="form-control" name="{{$locale}}[model]" value="{{old($locale . '.model')}}" required/>
+                                                    @error($locale . '.model')
                                                         <span class="text-danger">
                                                             <small class="errorTxt">{{ $message }}</small>
                                                         </span>
                                                     @enderror
-                                            </div>                          
-
+                                                </div>
+                                            @endforeach 
                                             <div class="col-12">
-                                                <button type="submit" class="btn btn-primary mr-1">حفظ البيانات</button>
+                                                <button type="submit" class="btn btn-primary mr-1">{{ __('admin.save') }}</button>
                                             </div>
                                         </div>
                                     </form>

@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title', 'المشرفين')
+@section('title', __('admin.admins'))
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -14,7 +14,7 @@
                         <div class="col-12">
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">المشرفين</a>
+                                    <li class="breadcrumb-item"><a href="#">{{ __('admin.admins') }}</a>
                                     </li>
                                 </ol>
                             </div>
@@ -27,7 +27,7 @@
                             <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a Admin">
                                 <a href="{{ route('admin.admins.create') }}" class="btn btn-primary">
                                     <span><i class="fa fa-plus"></i></span>
-                                    <span> أضف مشرف </span>
+                                    <span>  {{ __('admin.add_admin')}} </span>
                                 </a>
 
                             </div>
@@ -48,13 +48,13 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>الصورة</th>
-                                                <th>الإسم الاول</th>
-                                                <th>الإسم الاخير</th>
-                                                <th>البريد الإلكتروني</th>
-                                                <th>الصلاحيات</th>
-                                                <th>تاريخ الإضافة</th>
-                                                <th>تحكم</th>
+                                                <th>{{ __('admin.image') }}</th>
+                                                <th>{{ __('admin.f_name') }}</th>
+                                                <th>{{ __('admin.l_name') }}</th>
+                                                <th>{{ __('admin.email') }}</th>
+                                                <th>{{ __('admin.roles')}} </th>
+                                                <th>{{ __('admin.created_at')}}</th>
+                                                <th>{{ __('admin.action')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>

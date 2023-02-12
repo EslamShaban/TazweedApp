@@ -30,11 +30,11 @@ class UpdateProfileAPIRequest extends FormRequest
     {
         return[
 
-            'f_name'        => 'الإسم الاول',
-            'l_name'        => 'الإسم الاخير',
-            'email'         => 'البريد الإلكتروني',
-            'city_id'       => 'المحافظة', 
-            'image'         => 'الصورة'    
+            'f_name'        => __('api.f_name'),
+            'l_name'        => __('api.l_name'),
+            'email'         => __('api.email'),
+            'city_id'       => __('api.city'), 
+            'image'         => __('api.image')   
         ];
         
     }

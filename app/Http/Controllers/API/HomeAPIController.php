@@ -44,7 +44,7 @@ class HomeAPIController extends Controller
             'services'    => ServiceResource::collection($services)  
         ];
 
-        return response()->withData('الصفحة الرئيسية', $data);
+        return response()->withData(__('api.home'), $data);
 
     }
 

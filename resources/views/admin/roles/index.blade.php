@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title', 'الصلاحيات')
+@section('title', __('admin.roles'))
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -14,7 +14,7 @@
                         <div class="col-12">
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">الصلاحيات</a>
+                                    <li class="breadcrumb-item"><a href="#">{{ __('admin.roles') }}</a>
                                     </li>
                                 </ol>
                             </div>
@@ -24,10 +24,10 @@
                 <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                     <div class="form-group breadcrumb-right">
                         <div class="dropdown">
-                            <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a Admin">
+                            <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a Role">
                                 <a href="{{ route('admin.roles.create') }}" class="btn btn-primary">
                                     <span><i class="fa fa-plus"></i></span>
-                                    <span> أضف صلاحية </span>
+                                    <span> {{ __('admin.add_role') }} </span>
                                 </a>
 
                             </div>
@@ -48,9 +48,9 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>إسم الصلاحية</th>
-                                                <th>تاريخ الإضافة</th>
-                                                <th>تحكم</th>
+                                                <th>{{ __('admin.role_name') }}</th>
+                                                <th>{{ __('admin.created_at') }}</th>
+                                                <th>{{ __('admin.action') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>

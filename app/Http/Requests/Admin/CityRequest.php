@@ -24,9 +24,13 @@ class CityRequest extends FormRequest
 
     protected function onCreate(){
 
-        return [
-            'name'          => ['required', 'unique:cities,name'],
-        ];
+        $rules = [];
+
+        foreach(config('translatable.locales') as $locale){
+            $rules+=[$locale . '.name' => ['required', 'string', 'unique:city_translations,name']];
+        }
+
+        return $rules;
 
      }
          
@@ -38,10 +42,13 @@ class CityRequest extends FormRequest
 
     protected function onUpdate(){
 
-        return[
-            'name'  => ['required','unique:cities,name,' . $this->city->id],
-        ];
+        $rules = [];
 
+        foreach(config('translatable.locales') as $locale){
+            $rules+=[$locale . '.name' => ['required', 'string', 'unique:city_translations,name,' . $this->city->id . ',city_id']];
+        }
+        
+        return $rules;
      }
     /**
      * Get the validation rules that apply to the request.
@@ -58,8 +65,8 @@ class CityRequest extends FormRequest
      public function attributes()
     {
         return[
-            'name'          => 'إسم المحافظة'
+            'ar.name'          => __('admin.ar.city_name'),
+            'en.name'          => __('admin.en.city_name'),
         ];
-        
     }
 }

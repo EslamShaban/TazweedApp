@@ -14,41 +14,30 @@ class ServiceTableSeeder extends Seeder
     public function run()
     {
 
-                
-        \App\Models\Service::insert([
-
-           [
-            'name' => 'فلم حماية سيراميك شيلد حماية الصدام',
-            'created_at' => now() ,
-           ] ,
-
-           [
-            'name' => 'تظليل النانو سيراميك للزجاج' ,
-            'created_at' => now() ,
-           ] ,
-           [
-            'name' => ' فحص المركبات ما قبل الشراء' ,
-            'created_at' => now() ,
-           ] ,
-
-           [
-            'name' => 'حمايا كاملة لمقدمة السيارات' ,
-            'created_at' => now() ,
-           ] ,
-           [
-            'name' => 'فحص أداء السيارة' ,
-            'created_at' => now() ,
-           ] ,
-
-           [
-            'name' => 'خدمة تغيير الزيت الجيبوكسي' ,
-            'created_at' => now() ,
-           ] 
-
-        ]);
+        $services = [
+            'Ceramic shield protection film for collision protection' => 'فلم حماية سيراميك شيلد حماية الصدام',
+            'Nano ceramic tinting for glass' => 'تظليل النانو سيراميك للزجاج' ,
+            'Pre-purchase vehicle inspection' => ' فحص المركبات ما قبل الشراء' ,
+            'Complete protection for the front of the car' => 'حماية كاملة لمقدمة السيارات' ,
+            'Vehicle performance check' => 'فحص أداء السيارة' ,
+            'Gypoxy oil change service' => 'خدمة تغيير الزيت الجيبوكسي' ,
+        ];
 
                 
-        for ($i=1; $i <= 6 ; $i++) {
+        foreach ($services as $service_en => $service_ar) {
+                    
+            \App\Models\Service::create([
+                "ar" => [
+                    "name" => $service_ar
+                ],
+                "en" => [
+                    "name" => $service_en
+                ],
+            
+            ]);
+        } 
+                
+        for ($i=1; $i <= count($services) ; $i++) {
 
             $service = \App\Models\Service::find($i);
 

@@ -23,6 +23,9 @@ return [
             'car_types'     => 'c,r,u,d',
             'car_models'    => 'c,r,u,d',
             'products'      => 'c,r,u,d',
+            'address_types' => 'c,r,u,d',
+            'coupons'       => 'c,r,u,d',
+
         ],
         'admin' => [],
         'client' => [],
@@ -34,29 +37,7 @@ return [
         'r' => 'read',
         'u' => 'update',
         'd' => 'delete'
-    ],
-
-    //translate
-
-    'models_arabic' => [
-        'roles'   => 'الصلاحيات',
-        'cities'  => 'المحافظات',
-        'admins'  => 'المشرفين',
-        'clients' => 'العملاء',
-        'captains' => 'الكابتن',
-        'categories' => 'الأقسام',
-        'services' => 'الخدمات',
-        'car_types' => 'أنواع السيارات',
-        'car_models' => 'موديلات السيارات',
-        'products'   => 'المنتجات'
-    ],
-
-    'permissions_map_arabic' => [
-        'c' => 'إنشاء',
-        'r' => 'قراءة',
-        'u' => 'تحديث',
-        'd' => 'حذف'
-    ],
+    ]
 
 
 ];

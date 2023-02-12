@@ -69,7 +69,7 @@ class AuthAPIController extends Controller
             
             DB::commit();
 
-            return response()->withData('تم التسجيل بنجاح', $data);
+            return response()->withData(__('api.register_successfully'), $data);
 
 
         } catch (\Throwable $th) {
@@ -90,7 +90,7 @@ class AuthAPIController extends Controller
         ];
                     
         if(!$token = JWTAuth ::attempt( $credentail ) ){
-            return response()->withError('كلمة السر غير صحيحه', 5003, 'password');
+            return response()->withError(__('api.wrong_password'), 5003, 'password');
         }
 
         $user = $this->userRepository->findBy('email', $request->email);
@@ -103,7 +103,7 @@ class AuthAPIController extends Controller
             'token' => $token
         ];
             
-        return response()->withData('تم تسجيل الدخول بنجاح', $data);
+        return response()->withData(__('api.login_successfully'), $data);
         
     }
 
@@ -121,7 +121,7 @@ class AuthAPIController extends Controller
                 'token' => $token
             ];
         
-            return response()->withData('تم تسجيل الدخول بنجاح', $data);
+            return response()->withData(__('api.login_successfully'), $data);
 
         }else{
 
@@ -153,7 +153,7 @@ class AuthAPIController extends Controller
 
             ];
                             
-            return response()->withData('تم التسجيل بنجاح', $data);
+            return response()->withData(__('api.register_successfully'), $data);
 
         }
     
@@ -177,7 +177,7 @@ class AuthAPIController extends Controller
                 'code' => $code
             ];
 
-            return response()->withSuccess('تم إرسال كود التحقق الي البريد الالكتروني', 200, $data);
+            return response()->withSuccess(__('api.code_send'), 200, $data);
         
         }  catch (\Throwable $th) {
 
@@ -193,9 +193,9 @@ class AuthAPIController extends Controller
         $user = $this->userRepository->findBy('email', $request->email);
 
         if($user->code !== $request->code)
-            return response()->withError('كود التحقق غير صحيح', 5003, 'code');
+            return response()->withError(__('api.wrong_code'), 5003, 'code');
 
-        return response()->withSuccess('تم بنجاح', 200);
+        return response()->withSuccess(__('api.success'), 200);
 
     }
             
@@ -208,13 +208,13 @@ class AuthAPIController extends Controller
         $user->code = null;
         $user->save();
                     
-        return response()->withSuccess('تم تغيير كلمة السر بنجاح', 200);
+        return response()->withSuccess(__('api.password_changed_successfully'), 200);
 
     }
     public function logout()
     {        
         auth('api')->logout();  
-        return response()->withSuccess('تم تسجيل الخروج بنجاح', 200);
+        return response()->withSuccess(__('api.logout_successfully'), 200);
 
     }
 }

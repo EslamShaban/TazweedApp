@@ -71,10 +71,12 @@ class Kernel extends HttpKernel
         'localeSessionRedirect'   => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
         'localeCookieRedirect'    => \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
         'localeViewPath'          => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
+        'localization'            => \App\Http\Middleware\Localization::class,
 
                 
-        'JwtApiAuth'                    => \App\Http\Middleware\JwtApiAuth::class,
-        'APIAuth'                       => \App\Http\Middleware\APIAuth::class,
+        'JwtApiAuth'               => \App\Http\Middleware\JwtApiAuth::class,
+        'APIAuth'                  => \App\Http\Middleware\APIAuth::class,
+        'Lang'                     => \App\Http\Middleware\Lang::class,
 
     ];
 }

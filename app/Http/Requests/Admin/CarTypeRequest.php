@@ -23,11 +23,14 @@ class CarTypeRequest extends FormRequest
      */
 
     protected function onCreate(){
+  
+        $rules = [];
 
-        return [
-            'type'        => ['required', 'string', 'unique:car_types,type']
-        ];
+        foreach(config('translatable.locales') as $locale){
+            $rules+=[$locale . '.type' => ['required', 'string', 'unique:car_type_translations,type']];
+        }
 
+        return $rules;
      }
          
      /**
@@ -37,10 +40,14 @@ class CarTypeRequest extends FormRequest
      */
 
     protected function onUpdate(){
+    
+        $rules = [];
 
-        return [
-            'type'        => ['required', 'string', 'unique:car_types,type,' . $this->car_type->id]
-        ];
+        foreach(config('translatable.locales') as $locale){
+            $rules+=[$locale . '.type' => ['required', 'string', 'unique:car_type_translations,type,' . $this->car_type->id . ',car_type_id']];
+        }
+        
+        return $rules;
 
     }
     /**
@@ -58,7 +65,8 @@ class CarTypeRequest extends FormRequest
      public function attributes()
     {
         return[
-            'type'        => 'نوع السيارة'
+            'ar.type'          => __('admin.ar.car_type'),
+            'en.type'          => __('admin.en.car_type'),
         ];
         
     }

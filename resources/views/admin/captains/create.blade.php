@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title' , 'أضف كابتن')
+@section('title' , __('admin.add_captain'))
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -14,9 +14,9 @@
                         <div class="col-12">
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('admin.captains.index') }}">الكابتن</a>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.captains.index') }}">{{ __('admin.captains')}}</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="#">أضف كابتن</a>
+                                    <li class="breadcrumb-item"><a href="#">{{ __('admin.add_captain')}}</a>
                                     </li>
                                 </ol>
                             </div>
@@ -31,14 +31,14 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h2 class="card-title">أضف كابتن</h2>
+                                    <h2 class="card-title">{{ __('admin.add_captain')}}</h2>
                                 </div>
                                 <div class="card-body">
                                     <form class="form form-vertical needs-validation" action="{{ route('admin.captains.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
                                             <div class="col-md-12">           
-                                                <label for="image">الصورة</label>
+                                                <label for="image">{{ __('admin.image')}}</label>
                                                 <div class="uploadOuter">
                                                     <span class="dragBox" >
                                                         <i class="fa fa-cloud-upload-alt fa-2x"></i>
@@ -48,7 +48,7 @@
                                                 <div id="preview"></div>
                                             </div>
                                             <div class="col-md-6 col-12 mb-3">
-                                                <label for="f_name">الإسم الاول</label>
+                                                <label for="f_name">{{ __('admin.f_name')}}</label>
                                                 <input type="text" id="f_name" class="form-control" name="f_name" value="{{ old('f_name') }}" required/>
                                                 @error('f_name')
                                                     <span class="text-danger">
@@ -57,7 +57,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-6 col-12 mb-3">
-                                                <label for="l_name">الإسم الاخير</label>
+                                                <label for="l_name">{{ __('admin.l_name')}}</label>
                                                 <input type="text" id="l_name" class="form-control" name="l_name" value="{{ old('l_name') }}" required/>
                                                 @error('l_name')
                                                     <span class="text-danger">
@@ -66,7 +66,7 @@
                                                 @enderror
                                             </div>                          
                                             <div class="col-md-6 col-12 mb-3">
-                                                <label for="email">البريد الإلكتروني</label>
+                                                <label for="email">{{ __('admin.email')}}</label>
                                                 <input type="email" id="email" class="form-control" name="email" value="{{ old('email') }}" required/>
                                                 @error('email')
                                                     <span class="text-danger">
@@ -75,7 +75,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-6 col-12 mb-3">
-                                                <label for="phone">رقم الهاتف</label>
+                                                <label for="phone">{{ __('admin.phone')}}</label>
                                                 <input type="text" id="phone" class="form-control" name="phone" value="{{ old('phone') }}" required/>
                                                 @error('phone')
                                                     <span class="text-danger">
@@ -84,7 +84,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-6 col-12 mb-3">
-                                                <label for="password">كلمة المرور</label>
+                                                <label for="password">{{ __('admin.password')}}</label>
                                                 <input type="password" id="password" class="form-control" name="password" value="{{ old('password') }}" required/>
                                                 @error('password')
                                                     <span class="text-danger">
@@ -93,20 +93,20 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-6 col-12 mb-3">
-                                                <label for="city_id">المحافظة</label>
+                                                <label for="city_id">{{ __('admin.city')}}</label>
                                                 <select name="city_id" class="form-control" required>
-                                                    <option value="">أختر المحافظة</option>
+                                                    <option value="">{{ __('admin.choose_city')}}</option>
                                                     @foreach (\App\Models\City::all() as $city)
                                                         <option value="{{ $city->id }}" {{ $city->id == old('city_id') ? 'selected' : ''}}>{{ $city->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="col-md-12">
-                                                <h2 class="card-title">بيانات السيارة</h2>
+                                                <h2 class="card-title">{{ __('admin.car_data')}}</h2>
                                                 <hr>
                                                                                             
                                                 <div class="col-md-6 col-12 mb-3 mt-2">
-                                                    <label for="plate_number" class="form-label">رقم اللوحة </label>
+                                                    <label for="plate_number" class="form-label">{{ __('admin.plate_number')}}</label>
                                                     <input type="text" id="plate_number" class="form-control" name="plate_number" value="{{ old('plate_number') }}" required/>
                                                     @error('plate_number')
                                                         <span class="text-danger">
@@ -116,7 +116,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12 mb-3">
-                                                <label for="phone">بحث</label>
+                                                <label for="phone">{{ __('admin.search')}}</label>
                                                 <input type="text" class="form-control" name="icon" id="searchInput" value="{{ old('location') }}"/>
                                             </div>
 
@@ -128,7 +128,7 @@
                                                 <div id="map" style="height: 100%;width: 100%;">
                                             </div>
                                             <div class="col-12">
-                                                <button type="submit" class="btn btn-primary mr-1">حفظ البيانات</button>
+                                                <button type="submit" class="btn btn-primary mr-1 mt-1"> {{ __('admin.save')}}</button>
                                             </div>
                                         </div>
                                     </form>

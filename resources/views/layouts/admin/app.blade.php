@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="loading" lang="en" data-textdirection="rtl">
+<html class="loading" lang="{{App::getLocale()}}" data-textdirection="rtl">
 <!-- BEGIN: Head-->
 
   <head>
@@ -29,28 +29,49 @@
       <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/charts/apexcharts.css')}}">
       <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/extensions/sweetalert2.min.css')}}">
       <!-- END: Vendor CSS-->
+    @if (App::getLocale() == 'ar')
+        <!-- BEGIN: Theme CSS-->
+        <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/bootstrap.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/bootstrap-extended.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/colors.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/components.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/themes/dark-layout.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/themes/bordered-layout.css') }}">
+        <link rel="stylesheet" type="text/css" href="asset('app-assets/css-rtl/themes/semi-dark-layout.css')">
 
-      <!-- BEGIN: Theme CSS-->
-      <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/bootstrap.css')}}">
-      <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/bootstrap-extended.css')}}">
-      <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/colors.css')}}">
-      <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/components.css')}}">
-      <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/themes/dark-layout.css') }}">
-      <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/themes/bordered-layout.css') }}">
-      <link rel="stylesheet" type="text/css" href="asset('app-assets/css-rtl/themes/semi-dark-layout.css')">
-
-      <!-- BEGIN: Page CSS-->
-      <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/core/menu/menu-types/vertical-menu.css')}}">
-      <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/plugins/charts/chart-apex.css')}}">
-      <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/plugins/extensions/ext-component-sweet-alerts.css')}}">
-      <!-- END: Page CSS-->
+        <!-- BEGIN: Page CSS-->
+        <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/core/menu/menu-types/vertical-menu.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/plugins/charts/chart-apex.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/plugins/extensions/ext-component-sweet-alerts.css')}}">
+        <!-- END: Page CSS-->
 
 
-      <!-- BEGIN: Custom CSS-->
-      <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/custom-rtl.css')}}">
-      <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style-rtl.css')}}">
-      <!-- END: Custom CSS-->
-      <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/forms/select/select2.min.css')}}">
+        <!-- BEGIN: Custom CSS-->
+        <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/custom-rtl.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style-rtl.css')}}">
+        <!-- END: Custom CSS-->
+    @else
+        <!-- BEGIN: Theme CSS-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/bootstrap-extended.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/colors.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/components.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/themes/dark-layout.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/themes/bordered-layout.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/themes/semi-dark-layout.css') }}">
+                
+        <!-- BEGIN: Page CSS-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/plugins/charts/chart-apex.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/plugins/extensions/ext-component-sweet-alerts.css')}}">
+        <!-- END: Page CSS-->
+
+        <!-- BEGIN: Custom CSS-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+        <!-- END: Custom CSS-->
+    @endif
+      
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/forms/select/select2.min.css')}}">
 
   </head>
   <!-- END: Head-->

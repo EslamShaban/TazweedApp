@@ -23,22 +23,28 @@ class ProductRequest extends FormRequest
      */
 
     protected function onCreate(){
+                
+        $rules = [
+            'image'                 => ['required', 'image', 'mimes:jpg,jpeg,png,gif'],
+            'category_id'           => ['required', 'exists:categories,id'],
+            'price'                 => ['required'],
+            'discount_price'        => ['nullable'],
+            'car_type_id'           => ['required', 'exists:car_types,id'],
+            'car_model_ids'         => ['required', 'array'],
+            'car_model_ids.*'       => ['exists:car_models,id'],
+            'type'                  => ['required', 'in:original,high-copy,copy'],
+            'manufacturing_year'    => ['required'],
+            'manufacture_country'   => ['required', 'exists:countries,id'],
 
-        return [
-            'image'       => ['required', 'image', 'mimes:jpg,jpeg,png,gif'],
-            'name'        => ['required', 'string'],
-            'category_id' => ['required', 'exists:categories,id'],
-            'desc'        => ['required', 'string'],
-            'price'       => ['required'],
-            'discount_price' => ['nullable'],
-            'car_type_id' => ['required', 'exists:car_types,id'],
-            'car_model_ids' => ['required', 'array'],
-            'car_model_ids.*' => ['exists:car_models,id'],
-            'manufacture_country' => ['required', 'string'],
-            'type'  => ['required', 'in:original,high-copy,copy'],
-            'manufacturing_year' => ['required'],
-            'features'  => ['nullable', 'array']
         ];
+
+        foreach(config('translatable.locales') as $locale){
+            $rules+=[$locale . '.name' => ['required', 'string']];
+            $rules+=[$locale . '.desc' => ['required', 'string']];
+            $rules+=[$locale . '.features' => ['nullable', 'array']];
+        }
+
+        return $rules;
 
      }
          
@@ -50,21 +56,26 @@ class ProductRequest extends FormRequest
 
     protected function onUpdate(){
 
-        return [
-            'image'       => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif'],
-            'name'        => ['required', 'string'],
-            'category_id' => ['required', 'exists:categories,id'],
-            'desc'        => ['required', 'string'],
-            'price'       => ['required'],
-            'discount_price' => ['nullable'],
-            'car_type_id' => ['required', 'exists:car_types,id'],
-            'car_model_ids' => ['required', 'array'],
-            'car_model_ids.*' => ['exists:car_models,id'],
-            'manufacture_country' => ['required', 'string'],
-            'type'  => ['required', 'in:original,high-copy,copy'],
-            'manufacturing_year' => ['required'],
-            'features'  => ['nullable', 'array']
+        $rules = [
+            'image'                 => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif'],
+            'category_id'           => ['required', 'exists:categories,id'],
+            'price'                 => ['required'],
+            'discount_price'        => ['nullable'],
+            'car_type_id'           => ['required', 'exists:car_types,id'],
+            'car_model_ids'         => ['required', 'array'],
+            'car_model_ids.*'       => ['exists:car_models,id'],
+            'type'                  => ['required', 'in:original,high-copy,copy'],
+            'manufacturing_year'    => ['required'],
+            'manufacture_country'   => ['required', 'exists:countries,id'],
         ];
+
+        foreach(config('translatable.locales') as $locale){
+            $rules+=[$locale . '.name' => ['required', 'string']];
+            $rules+=[$locale . '.desc' => ['required', 'string']];
+            $rules+=[$locale . '.features' => ['nullable', 'array']];
+        }
+
+        return $rules;
 
     }
     /**
@@ -82,18 +93,21 @@ class ProductRequest extends FormRequest
      public function attributes()
     {
         return[
-            'image'     => 'الصورة',
-            'name'      => 'إسم المنتج',
-            'category_id' => 'القسم',
-            'desc'  => 'وصف المنتج',
-            'price' => 'السعر',
-            'discount_price' => 'سعر الخصم',
-            'car_type_id' => 'نوع السيارة',
-            'car_model_ids' => 'موديلات السيارة',
-            'manufacture_country' => 'بلد المصنع',
-            'type'  => 'الصنع',
-            'manufacturing_year' => 'سنة الصنع',
-            'features'  => 'المميزات'
+            'image'                 => __('admin.image'),
+            'ar.name'               => __('admin.ar.product_name'),
+            'en.name'               => __('admin.en.product_name'),
+            'ar.desc'               => __('admin.ar.product_desc'),
+            'en.desc'               => __('admin.en.product_desc'),
+            'category_id'           => __('admin.category'),
+            'price'                 => __('admin.price'),
+            'discount_price'        => __('admin.discount_price'),
+            'car_type_id'           => __('admin.car_type'),
+            'car_model_ids'         => __('admin.car_model'),
+            'manufacture_country'   => __('admin.manufacture_country'),
+            'type'                  => __('admin.type'),
+            'manufacturing_year'    => __('admin.manufacturing_year'),
+            'ar.features'           => __('admin.ar.features'),
+            'en.features'           => __('admin.en.features'),
         ];
         
     }

@@ -14,12 +14,27 @@ class CityTableSeeder extends Seeder
     public function run()
     {
 
-        $cities = ['القاهرة', 'الجيزة', 'الاسكندرية', 'شبرا الخيمة', 'بور سعيد', 'السويس', 'المحلة الكبرى', 'الاقصر', 'الاقصر', 'المنصورة', 'بني سويف'];
-
-        foreach ($cities as $key => $city) {
+        $cities = [
+            'Cairo' => 'القاهرة',
+            'Giza'  => 'الجيزة',
+            'Beni-sueif' => 'بني سويف',
+            'Menoufia' => 'المنوفية',
+            'Alexandria' => 'الاسكندرية',
+            'Mansoura' => 'المنصورة',
+            'Luxor'  => 'الاقصر',
+            'Suez' => 'السويس',
+            'Port Said' => 'بور سعيد'
+        ];
+        foreach ($cities as $city_en => $city_ar) {
                     
             \App\Models\City::create([
-                'name' => $city,
+                "ar" => [
+                    "name" => $city_ar
+                ],
+                "en" => [
+                    "name" => $city_en
+                ],
+            
             ]);
         }
         

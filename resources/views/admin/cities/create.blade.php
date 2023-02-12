@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title' , 'أضف محافظة')
+@section('title' ,  __('admin.add_city'))
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -14,9 +14,9 @@
                         <div class="col-12">
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('admin.cities.index') }}">المحافظات</a>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.cities.index') }}"> {{  __('admin.cities') }} </a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="#">أضف محافظة</a>
+                                    <li class="breadcrumb-item"><a href="#">{{  __('admin.add_city') }}</a>
                                     </li>
                                 </ol>
                             </div>
@@ -31,24 +31,25 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h2 class="card-title">أضف محافظة</h2>
+                                    <h2 class="card-title">{{ __('admin.add_city') }}</h2>
                                 </div>
                                 <div class="card-body">
                                     <form class="form form-vertical needs-validation" action="{{ route('admin.cities.store') }}" method="POST">
                                         @csrf
                                         <div class="row">
-                                            <div class="col-md-6 col-12 mb-3">
-                                                <label for="name">إسم المحافظة</label>
-                                                    <input type="text" id="name" class="form-control" name="name" value="{{ old('name') }}" required/>
-                                                    @error('name')
+                                            @foreach (config('translatable.locales') as $locale)                                   
+                                                <div class="col-md-6 col-12 mb-3">
+                                                    <label for="{{$locale}}.name">{{ __('admin.'. $locale . '.city_name')}}</label>
+                                                    <input type="text" id="{{$locale}}.name" class="form-control" name="{{$locale}}[name]" value="{{old($locale . '.name')}}" required/>
+                                                    @error($locale . '.name')
                                                         <span class="text-danger">
                                                             <small class="errorTxt">{{ $message }}</small>
                                                         </span>
                                                     @enderror
-                                            </div>
-
+                                                </div>
+                                            @endforeach
                                             <div class="col-12">
-                                                <button type="submit" class="btn btn-primary mr-1">حفظ البيانات</button>
+                                                <button type="submit" class="btn btn-primary mr-1">{{ __('admin.save') }}</button>
                                             </div>
                                         </div>
                                     </form>

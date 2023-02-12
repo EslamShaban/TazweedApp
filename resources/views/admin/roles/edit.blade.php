@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title' , 'تعديل الصلاحية')
+@section('title' , __('admin.edit_role'))
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -14,9 +14,9 @@
                         <div class="col-12">
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('admin.roles.index') }}">الصلاحيات</a>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.roles.index') }}">{{ __('admin.roles') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="#">تعديل الصلاحية</a>
+                                    <li class="breadcrumb-item"><a href="#">{{ __('admin.edit_role') }}</a>
                                     </li>
                                 </ol>
                             </div>
@@ -31,7 +31,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h2 class="card-title">تعديل الصلاحية</h2>
+                                    <h2 class="card-title">{{ __('admin.edit_role') }}</h2>
                                 </div>
                                 <div class="card-body">
                                     <form class="form form-vertical needs-validation" action="{{ route('admin.roles.update' , $role->id) }}" method="POST">                                    
@@ -39,7 +39,7 @@
                                         @csrf
                                         <div class="row">
                                             <div class="col-12 mb-3">
-                                                <label for="name">إسم الصلاحية</label>
+                                                <label for="name">{{ __('admin.role_name') }}</label>
                                                     <input type="text" id="name" class="form-control" name="name"
                                                         value="{{ old('name' , $role->name) }}" required/>
 
@@ -54,49 +54,44 @@
                                                                                                     
                                                 <h6 class="py-1 mx-1 mb-0 font-medium-2">
                                                         <i data-feather="lock" class="font-medium-3 mr-25"></i>
-                                                        <span class="align-middle">الصلاحيات</span>
+                                                        <span class="align-middle">{{ __('admin.roles') }}</span>
                                                     </h6>
                                                 <table class="table table-striped table-borderless">
                                                     <thead class="thead-light">
                                                         <tr>
                                                             <tr>
-                                                                <th>الموديل</th>
-                                                                <th>إنشاء</th>
-                                                                <th>قراءة</th>
-                                                                <th>تحديث</th>
-                                                                <th>حذف</th>
+                                                                <th>{{ __('admin.model') }}</th>
+                                                                <th>{{ __('admin.create') }}</th>
+                                                                <th>{{ __('admin.read') }}</th>
+                                                                <th>{{ __('admin.update') }}</th>
+                                                                <th>{{ __('admin.delete') }}</th>
                                                             </tr>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @php
-                                                            $models = config('laratrust_seeder.models_arabic');
-                                                            $permissions_map = config('laratrust_seeder.permissions_map');
-                                                        @endphp
-                                                                                                                
-                                                        
-                                                            @foreach (config('laratrust_seeder.roles_structure.superadmin') as $model=>$permissions)
-                                                            <tr>
-                                                                <td>{{ $models[$model] }}</td>
 
-                                                                @foreach ($permissions_map as $key => $permission)
-                                                                    @if (in_array($key, explode(',' ,$permissions)))                                                                      
-                                                                        <td>  
-                                                                            <input type="checkbox" value="{{$model}}-{{$permission}}" name="permissions[]"  class="{{$model}}" {{ $role->hasPermission($model . '-' . $permission) ? 'checked':''}}>
-                                                                        </td>
-                                                                    @else
-                                                                        <td> <i class="fa-solid fa-minus"></i></td>
-                                                                    @endif
+                                                        @foreach (config('laratrust_seeder.roles_structure.superadmin') as $model=>$permissions)
+                                                        <tr>
+                                                            <td>{{ __('admin.' . $model) }}</td>
 
-                                                                @endforeach
-                                                            </tr>
+                                                            @foreach (config('laratrust_seeder.permissions_map') as $key => $permission)
+                                                                @if (in_array($key, explode(',' ,$permissions)))                                                                      
+                                                                    <td>  
+                                                                        <input type="checkbox" value="{{$model}}-{{$permission}}" name="permissions[]"  class="{{$model}}" {{ $role->hasPermission($model . '-' . $permission) ? 'checked':''}}>
+                                                                    </td>
+                                                                @else
+                                                                    <td> <i class="fa-solid fa-minus"></i></td>
+                                                                @endif
+
                                                             @endforeach
+                                                        </tr>
+                                                        @endforeach
                                                         
                                                     </tbody>
                                                 </table>
                                             </div>
                                             <div class="col-12">
-                                                <button type="submit" class="btn btn-primary mr-1">حفظ البيانات</button>
+                                                <button type="submit" class="btn btn-primary mr-1 mt-1">{{ __('admin.save') }}</button>
                                             </div>
                                         </div>
                                     </form>

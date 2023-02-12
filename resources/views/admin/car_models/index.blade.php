@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title', 'موديلات السيارات')
+@section('title', __('admin.car_models'))
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -14,7 +14,7 @@
                         <div class="col-12">
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">موديلات السيارات</a>
+                                    <li class="breadcrumb-item"><a href="#">{{ __('admin.car_models') }}</a>
                                     </li>
                                 </ol>
                             </div>
@@ -27,7 +27,7 @@
                             <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a Car Model">
                                 <a href="{{ route('admin.car_models.create') }}" class="btn btn-primary">
                                     <span><i class="fa fa-plus"></i></span>
-                                    <span> أضف موديل سيارة </span>
+                                    <span> {{ __('admin.add_car_model') }} </span>
                                 </a>
 
                             </div>
@@ -48,9 +48,9 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>موديل السيارة</th>
-                                                <th>تاريخ الإضافة</th>
-                                                <th>تحكم</th>
+                                                <th>{{ __('admin.car_model') }}</th>
+                                                <th>{{ __('admin.created_at') }}</th>
+                                                <th>{{ __('admin.action') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -64,7 +64,7 @@
                                                         @if(auth()->user()->hasPermission('car_models-update'))
                                                         <a href="{{route('admin.car_models.edit', $car_model->id)}}" class="edit-btn"><i class="fa fa-edit fa-sm"></i> </a>
                                                         @endif
-                                                        @if(auth()->user()->hasPermission('categories-delete'))
+                                                        @if(auth()->user()->hasPermission('car_models-delete'))
                                                             <a href="#" class="delete-btn deleteNotify" id="deleteNotify" onclick="deleteItem('#delete_item_{{$car_model->id}}')"><i class="fa fa-trash fa-sm"></i> </a>
                                                         @endif
                                                         <form action="{{route('admin.car_models.destroy', $car_model->id)}}" method="POST" id="delete_item_{{$car_model->id}}">

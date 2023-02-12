@@ -23,11 +23,16 @@ class CategoryRequest extends FormRequest
      */
 
     protected function onCreate(){
-
-        return [
-            'name'        => ['required', 'string', 'unique:categories,name'],
+    
+        $rules = [
             'image'       => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif']
         ];
+
+        foreach(config('translatable.locales') as $locale){
+            $rules+=[$locale . '.name' => ['required', 'string', 'unique:category_translations,name']];
+        }
+
+        return $rules;
 
      }
          
@@ -39,10 +44,15 @@ class CategoryRequest extends FormRequest
 
     protected function onUpdate(){
 
-        return [
-            'name'        => ['required', 'string', 'unique:categories,name,' . $this->category->id],
+        $rules = [
             'image'       => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif']
         ];
+
+        foreach(config('translatable.locales') as $locale){
+            $rules+=[$locale . '.name' => ['required', 'string', 'unique:category_translations,name,' . $this->category->id . ',category_id']];
+        }
+        
+        return $rules;
 
     }
     /**
@@ -60,8 +70,9 @@ class CategoryRequest extends FormRequest
      public function attributes()
     {
         return[
-            'name'        => 'إسم القسم',
-            'image'       => 'الصورة'
+            'ar.name'     => __('admin.ar.category_name'),
+            'en.name'     => __('admin.en.category_name'),
+            'image'       => __('admin.image')
         ];
         
     }

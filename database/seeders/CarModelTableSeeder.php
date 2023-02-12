@@ -14,15 +14,15 @@ class CarModelTableSeeder extends Seeder
     public function run()
     {
 
-                    
-        \App\Models\CarModel::create([
-            'model' => 'model 1',
-            'created_at' => now() ,
-        ]);
         
         \App\Models\CarModel::create([
-            'model' => 'model 2',
-            'created_at' => now() ,
+            "ar" => [
+                "model" => 'موديل السيارة'
+            ],
+            "en" => [
+                "model" => 'car model'
+            ],
+        
         ]);
     }
 }

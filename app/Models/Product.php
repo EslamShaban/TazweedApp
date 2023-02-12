@@ -4,34 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
 
-class Product extends Model
+class Product extends Model implements TranslatableContract
 {
-    use HasFactory;
+    use HasFactory, Translatable;
+
+    public $translatedAttributes = ['name', 'desc', 'features'];
 
     protected $fillable = [
-        'name',
-        'desc',
-        'manufacture_country',
         'type',
         'manufacturing_year',
         'price',
         'discount_price',
-        'features',
         'category_id',
-        'car_type_id'
+        'car_type_id',
+        'manufacture_country'
     ];
 
-        
-    protected function features(): Attribute
-    {
-        return new Attribute(
-            get: fn ($value) => json_decode($value, true),
-            set: fn ($value) => json_encode($value),
-        );
-    }
-    
         
     public function getImagePathAttribute(){
          

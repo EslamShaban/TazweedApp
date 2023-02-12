@@ -21,12 +21,14 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call(LaratrustSeeder::class);
+        $this->call(CountryTableSeeder::class);
         $this->call(CityTableSeeder::class);
         $this->call(UserTableSeeder::class);
         $this->call(CategoryTableSeeder::class);
         $this->call(ServiceTableSeeder::class);
         $this->call(CarTypeTableSeeder::class);
         $this->call(CarModelTableSeeder::class);
+        $this->call(AddressTypeTableSeeder::class);
 
     }
 }

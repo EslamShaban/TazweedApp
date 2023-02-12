@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
 
-class CarModel extends Model
+class CarModel extends Model implements TranslatableContract
 {
-    use HasFactory;
-        
-    protected $fillable = [
-        'model'
-    ];
+    use HasFactory, Translatable;
+
+    public $translatedAttributes = ['model'];
 }

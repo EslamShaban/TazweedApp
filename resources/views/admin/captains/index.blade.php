@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title', 'الكابتن')
+@section('title', __('admin.captains'))
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -14,7 +14,7 @@
                         <div class="col-12">
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">الكابتن</a>
+                                    <li class="breadcrumb-item"><a href="#"> {{__('admin.captains')}}</a>
                                     </li>
                                 </ol>
                             </div>
@@ -27,7 +27,7 @@
                             <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a Captain">
                                 <a href="{{ route('admin.captains.create') }}" class="btn btn-primary">
                                     <span><i class="fa fa-plus"></i></span>
-                                    <span> أضف كابتن </span>
+                                    <span> {{ __('admin.add_captain')}} </span>
                                 </a>
 
                             </div>
@@ -52,13 +52,13 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>الصورة</th>
-                                                <th>الإسم الاول</th>
-                                                <th>الإسم الاخير</th>
-                                                <th>المحافظة</th>
-                                                <th>البريد الإلكتروني</th>
-                                                <th>تاريخ الإضافة</th>
-                                                <th>تحكم</th>
+                                                <th>{{ __('admin.image') }}</th>
+                                                <th>{{ __('admin.f_name') }}</th>
+                                                <th>{{ __('admin.l_name') }}</th>
+                                                <th>{{ __('admin.city') }}</th>
+                                                <th>{{ __('admin.email') }}</th>
+                                                <th>{{ __('admin.created_at')}}</th>
+                                                <th>{{ __('admin.action')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>

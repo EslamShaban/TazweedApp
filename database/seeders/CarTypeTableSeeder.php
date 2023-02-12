@@ -14,12 +14,16 @@ class CarTypeTableSeeder extends Seeder
     public function run()
     {
 
-                    
+      
         \App\Models\CarType::create([
-            'type' => 'car type',
-            'created_at' => now() ,
-        ]);
+            "ar" => [
+                "type" => 'نوع السيارة'
+            ],
+            "en" => [
+                "type" => 'car type'
+            ],
         
+        ]);
 
     }
 }

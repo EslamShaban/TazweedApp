@@ -24,10 +24,15 @@ class ServiceRequest extends FormRequest
 
     protected function onCreate(){
 
-        return [
-            'name'        => ['required', 'string', 'unique:services,name'],
+        $rules = [
             'image'       => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif']
         ];
+
+        foreach(config('translatable.locales') as $locale){
+            $rules+=[$locale . '.name' => ['required', 'string', 'unique:service_translations,name']];
+        }
+
+        return $rules;
 
      }
          
@@ -38,11 +43,16 @@ class ServiceRequest extends FormRequest
      */
 
     protected function onUpdate(){
-
-        return [
-            'name'        => ['required', 'string', 'unique:services,name,' . $this->service->id],
+    
+        $rules = [
             'image'       => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif']
         ];
+
+        foreach(config('translatable.locales') as $locale){
+            $rules+=[$locale . '.name' => ['required', 'string', 'unique:service_translations,name,' . $this->service->id . ',service_id']];
+        }
+        
+        return $rules;
 
     }
     /**
@@ -60,8 +70,9 @@ class ServiceRequest extends FormRequest
      public function attributes()
     {
         return[
-            'name'        => 'إسم الخدمة',
-            'image'       => 'الصورة'
+            'ar.name'     => __('admin.ar.service_name'),
+            'en.name'     => __('admin.en.service_name'),
+            'image'       => __('admin.image')
         ];
         
     }

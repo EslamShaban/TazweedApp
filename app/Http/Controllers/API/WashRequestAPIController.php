@@ -9,6 +9,7 @@ use App\Http\Requests\API\WashRequest;
 use App\Repositories\WashRequestRepository;
 use App\Repositories\CaptainRequestRepository;
 use App\Http\Helpers\CalcDistance;
+use App\Models\User;
 
 class WashRequestAPIController extends Controller
 {
@@ -22,8 +23,8 @@ class WashRequestAPIController extends Controller
     
     public function make_request(WashRequest $request)
     {
-                    $captain = CalcDistance::get_nearest_captain($request->lat, $request->lng);
-            return response()->withSuccess('تم إرسال الطلب لاقرب كابتن', $captain);
+            //         $captain = CalcDistance::get_nearest_captain($request->lat, $request->lng);
+            // return response()->withSuccess('تم إرسال الطلب لاقرب كابتن', $captain);
 
 
         try {
@@ -39,7 +40,12 @@ class WashRequestAPIController extends Controller
 
             // calculate the distance and get the nearest_captain
 
-            $captain = CalcDistance::get_nearest_captain($request->lat, $request->lng);
+            $captains = User::where('account_type', 'captain')->get();
+            foreach($captains as $captain){
+            
+                $res = CalcDistance::calculate_trip_distance_time($request->lat, $request->lng, $captain->lat, $captain->lng);
+                dd($res);
+            }
 
             $this->captainRequestRepository->create([
                     'captain_id'        => $captain->id,

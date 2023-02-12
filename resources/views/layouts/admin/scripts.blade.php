@@ -2,13 +2,14 @@
     
     $("a[href='" + window.location.href + "']").parent().addClass('active');
 
-    
+    let locale = $('html').attr('lang');
+
     $('#dataTable').DataTable({
         "language": {
-            "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/ar.json"
+            "url": locale == 'ar' ? "https://cdn.datatables.net/plug-ins/1.11.3/i18n/ar.json" : "https://cdn.datatables.net/plug-ins/1.11.3/i18n/en.json"
         }
     });
-
+    
     var elements = CKEDITOR.document.find( '.editor' ),
         i = 0,
         element;
@@ -29,11 +30,11 @@
     function deleteItem(attr){
    
         Swal.fire({
-            title: 'هل تريد الحذف ؟',
+            title: "{{ __('admin.do_you_want_to_delete')}}",
             icon: 'question',
             showCancelButton: true,
-            confirmButtonText: 'حذف',
-            cancelButtonText: 'لا',
+            confirmButtonText: "{{ __('admin.delete')}}",
+            cancelButtonText: "{{ __('admin.no')}}",
             customClass: {
                 confirmButton: 'btn btn-danger',
                 cancelButton: 'btn btn-outline-danger ml-1'
@@ -43,7 +44,7 @@
             if (result.value) {
                 Swal.fire({
                     icon: 'success',
-                    title: 'تم الحذف بنجاح',
+                    title: "{{ __('admin.deleted_successfully')}}",
                     showConfirmButton: false,
                     // confirmButtonText: 'تم',
                     // customClass: {
@@ -55,7 +56,7 @@
                                 
                 Swal.fire({
                     icon: 'success',
-                    title: 'تم الإلغاء',
+                    title: "{{ __('admin.canceled')}}",
                     showConfirmButton: false,
                     timer:1000
                 });
@@ -76,6 +77,29 @@
     }
     function drop() {
         document.getElementById('uploadFile').parentNode.className = 'dragBox';
+    }
+
+        
+    function discocunt_type(val){
+        if(val == "amount"){
+            $("#amount").show();
+            $('#discount_amount').prop('name', 'discount_amount');
+            $("#percentage").hide();
+            $('#discount_percentage').prop('required',false);
+        }
+        if(val == "percentage"){
+        
+            $("#percentage").show();
+            $('#discount_percentage').prop('name', 'discount_percentage');
+            $("#amount").hide();
+            $('#discount_amount').prop('required',false);
+        }
+        if(val == ""){
+            $("#amount").hide();
+            $('#discount_amount').prop('required',false);
+            $("#percentage").hide();
+            $('#discount_percentage').prop('required',false);
+        }
     }
 
     //$("a[href='" + window.location.href + "']").closest('.expanded').addClass('is-expanded');

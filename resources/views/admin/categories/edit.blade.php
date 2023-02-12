@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title' , 'تعديل القسم')
+@section('title' , __('admin.edit_category'))
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -14,9 +14,9 @@
                         <div class="col-12">
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('admin.categories.index') }}">الأقسام</a>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.categories.index') }}">{{ __('admin.categories') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="#">تعديل القسم</a>
+                                    <li class="breadcrumb-item"><a href="#">{{ __('admin.edit_category') }}</a>
                                     </li>
                                 </ol>
                             </div>
@@ -31,26 +31,28 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h2 class="card-title">تعديل القسم</h2>
+                                    <h2 class="card-title">{{ __('admin.edit_category') }}</h2>
                                 </div>
                                 <div class="card-body">
                                     <form class="form form-vertical needs-validation" action="{{ route('admin.categories.update' , $category->id) }}" method="POST" enctype="multipart/form-data">                                    
                                         @method('PUT')
                                         @csrf
-                                        <div class="row">
-                                            <div class="col-md-12 mb-3">
-                                                <label for="name">إسم القسم</label>
-                                                    <input type="text" id="name" class="form-control" name="name"
-                                                        value="{{ old('name' , $category->name) }}" required/>
+                                        <div class="row">                                    
+                                            @foreach (config('translatable.locales') as $locale)
+                                                                                            
+                                                <div class="col-md-6 col-12 mb-3">
+                                                    <label for="{{$locale}}.name">{{ __('admin.'. $locale . '.category_name')}}</label>
+                                                    <input type="text" id="{{$locale}}.name" class="form-control" name="{{$locale}}[name]" value="{{$category->translate($locale)->name}}" required/>
 
-                                                    @error('name')
+                                                    @error($locale . '.name')
                                                         <span class="text-danger">
                                                             <small class="errorTxt">{{ $message }}</small>
                                                         </span>
                                                     @enderror
-                                            </div>
+                                                </div>
+                                            @endforeach
                                             <div class="col-md-12">           
-                                                <label for="image">الصورة</label>
+                                                <label for="image">{{__('admin.image')}}</label>
                                                 <div class="uploadOuter">
                                                     <span class="dragBox" >
                                                         <i class="fa fa-cloud-upload-alt fa-2x"></i>
@@ -63,7 +65,7 @@
                                             </div>
  
                                             <div class="col-12">
-                                                <button type="submit" class="btn btn-primary mr-1">حفظ البيانات</button>
+                                                <button type="submit" class="btn btn-primary mr-1 mt-1">{{ __('admin.save') }}</button>
                                             </div>
                                         </div>
                                     </form>
