@@ -137,9 +137,15 @@ class AuthAPIController extends Controller
 
             $user->attachRoles(['client']);
 
-            if($request->has('image')){
+            if($request->has('image_url')){
 
-                $this->UploadAsset(['asset'=>$request->image, 'path_to_save'=>'assets/uploads/users'], $user);
+                $user->asset()->create([
+                    'name'          => 'user-socail-image' ,
+                    'old_name'      => 'user-socail-image',
+                    'size'          => '1111',
+                    'url'           => $request->image_url,
+                    'mime_type'     => 'image'
+                ]);
             }
 
             $token  = JWTAuth ::fromUser( $user );

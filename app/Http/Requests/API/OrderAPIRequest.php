@@ -16,9 +16,11 @@ class OrderAPIRequest extends FormRequest
     public function rules()
     {
         return [
-            'cart_items'    => ['required', 'array'],
-            'cart_items.*.product_id'  => ['required', 'exists:products,id'],
-            'cart_items.*.qty'  => ['required']
+            'shipping_address_id'       => ['required'],
+            
+            'cart_items'                => ['required', 'array'],
+            'cart_items.*.product_id'   => ['required', 'exists:products,id'],
+            'cart_items.*.qty'          => ['required']
         ];
     }
 
