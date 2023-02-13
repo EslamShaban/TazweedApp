@@ -33,11 +33,13 @@ class SearchAPIController extends Controller
     {
         $car_types = $this->carTypeRepository->all();
         $car_models = $this->carModelRepository->all();
+        $manufacturing_year = range(now()->year-20,now()->year);
         $categories = $this->categoryRepository->all();
 
         $data = [
             'car_types' => CarTypeResource::collection($car_types),
             'car_models' => CarModelResource::collection($car_models),
+            'manufacturing_year' => $manufacturing_year,
             'categories' => CategoryResource::collection($categories)
         ];
 
