@@ -18,7 +18,7 @@ class Controller extends BaseController
         $path = $data['path_to_save'];
 
         $asset_name     = $asset->hashName();
-        $full_path_url  = asset($asset->storeAs($path, $asset_name, 'public_path'));
+        $full_path_url  = $asset->storeAs($path, $asset_name, 'public_path');
 
         return $model->asset()->create([
 
