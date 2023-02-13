@@ -39,4 +39,13 @@
         'shipping_address' => 'عنوان الشحن',
         'shipping_address_updated_successfully' => 'تم تحديث عنوان الشحن بنجاح',
         'shipping_address_deleted_successfuly' => 'تم حذف عنوان الشحن بنجاح',
+        'coupon_code' => 'كود الكوبون',
+        'total_price' => 'السعر الإجمالي مطلوب',
+        'product' => 'المنتج',
+        'coupon_not_exist' => 'الكوبون غير موجود',
+        'you_have_used_before' => 'لقد أستخدمت هذا الكوبون من قبل',
+        'coupon_exceeded_limit' => 'لقد وصلت للحد الاقصي لإستخدام الكوبون',
+        'coupon_expired' => 'الكوبون منتهي الصلاحية',
+        'coupon_minimum' => 'قيمة الطلب أقل من الحد الادني لإستخدام الكوبون',
+        'coupon_applied_successfully' => 'تم تطبيق الكوبون بنجاح'
     ];

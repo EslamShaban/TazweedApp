@@ -17,7 +17,7 @@ class OrderAPIRequest extends FormRequest
     {
         return [
             'shipping_address_id'       => ['required'],
-            
+            'coupon_code'               => ['nullable'],
             'cart_items'                => ['required', 'array'],
             'cart_items.*.product_id'   => ['required', 'exists:products,id'],
             'cart_items.*.qty'          => ['required']
@@ -29,9 +29,9 @@ class OrderAPIRequest extends FormRequest
     public function attributes()
     {
         return[
-
-            'cart_items'   => __('api.cart_items') 
-
+            'shipping_address_id' => __('api.shipping_address_id'),
+            'coupon_code'   => __('api.coupon_code'),
+            'cart_items'    => __('api.cart_items') 
         ];
         
     }
@@ -41,12 +41,20 @@ class OrderAPIRequest extends FormRequest
         
         $error = $validator->errors()->toArray();
 
-        if( isset($error['cart_items']) ) {
-            $msg = $error['cart_items'][0];
+        if( isset($error['shipping_address_id']) ) {
+            $msg = $error['shipping_address_id'][0];
+            $field = 'shipping_address_id';
             $code = 5001;
+        } else if( isset($error['coupon_code']) ) {
+            $msg = $error['coupon_code'][0];
+            $field = 'coupon_code';
+            $code = 5002;
+        } else if( isset($error['cart_items']) ) {
+            $msg = $error['cart_items'][0];
             $field = 'cart_items';
-        } else {
-            $error_codes = ["product_id"=>5002,"qty"=>5003];
+            $code = 5003;
+        }  else {
+            $error_codes = ["product_id"=>5004, "qty"=>5005];
             $msg = $validator->errors()->first();
             $code = $error_codes[explode('.', array_keys($validator->errors()->toArray())[0])[2]];
             $field = array_keys($validator->errors()->toArray())[0];

@@ -39,5 +39,13 @@
         'shipping_address' => 'Shipping Address',
         'shipping_address_updated_successfully' => 'Shipping Address Updated Successfully',
         'shipping_address_deleted_successfuly' => 'Shipping Address Deleted Successfuly',
-        
+        'coupon_code' => 'Coupon Code',
+        'total_price' => 'Total Price',
+        'product' => 'Product',
+        'coupon_not_exist' => 'Coupon not exist',
+        'you_have_used_before' => 'You have used this coupon before',
+        'coupon_exceeded_limit' => 'Coupon Exceeded Limit',
+        'coupon_expired' => 'Coupon is expired',
+        'coupon_minimum' => 'Order amount less than coupon minimum',
+        'coupon_applied_successfully' => 'Coupon Applied Successfully'
     ];

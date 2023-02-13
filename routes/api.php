@@ -9,6 +9,9 @@ use App\Http\Controllers\API\HomeAPIController;
 use App\Http\Controllers\API\ProductAPIController;
 use App\Http\Controllers\API\SearchAPIController;
 use App\Http\Controllers\API\ShippingAddressesAPIController;
+use App\Http\Controllers\API\CouponAPIController;
+use App\Http\Controllers\API\OrderAPIController;
+
 use App\Http\Controllers\API\WashRequestAPIController;
 
 /*
@@ -50,7 +53,8 @@ Route::middleware(['APIAuth','api', 'Lang'])->group(function(){
         Route::get('search_filters', [SearchAPIController::class, 'search_filters']);
         Route::get('search', [SearchAPIController::class, 'search']);
         Route::resource('shipping_addresses', ShippingAddressesAPIController::class);
-                
+        Route::post('check_coupon', [CouponAPIController::class, 'check_coupon']);
+        Route::post('make_order', [OrderAPIController::class, 'make_order']);
         Route::post('make_request', [WashRequestAPIController::class, 'make_request']);
 
     });

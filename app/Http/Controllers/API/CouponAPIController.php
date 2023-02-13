@@ -4,53 +4,45 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\ShippingAddressRepository;
-use App\Http\Resources\ShippingAddressResource;
-use App\Http\Requests\API\ShippingAddressAPIRequest;
+use App\Http\Requests\API\CouponAPIRequest;
+use App\Models\Coupon;
+use App\Models\CouponUsed;
 
 class CouponAPIController extends Controller
 {
         
-    private $userRepository, $couponRepository;
-    
-    public function __construct(UserRepository $user, CouponRepository $coupon)
-    {
-        
-        $this->userRepository   = $user;
-        $this->couponRepository = $coupon;
-
-    }
-
     public function check_coupon(CouponAPIRequest $request)
     {
                 
         $coupon  = Coupon::where('coupon_code', $request->coupon_code)->first();
+        $user = auth()->user();
+        $total_price = $request->total_price;
 
         if(!$coupon){
-            return response()->withError(__('api.coupon_not_exist'), 5003);
+            return response()->withError(__('api.coupon_not_exist'), 5004);
         }
         
-        $coupon_used_before = CouponUsed::where('user_id', auth()->user()->id)->where('coupon_id', $coupon->id)->first();
+        $coupon_used_before = CouponUsed::where('user_id', $user->id)->where('coupon_id', $coupon->id)->first();
 
         if($coupon_used_before){
-            return response()->withError(__('api.you_have_used_before'), 5002);
+            return response()->withError(__('api.you_have_used_before'), 5005);
         }
     
         if($coupon->product_id != null){
             if($coupon->product_id != $product_id){
-                return response()->withError(__('api.coupon_not_exist'), 5003);
+                return response()->withError(__('api.coupon_not_exist'), 5004);
             }
         }
                             
         if($coupon->user_id != null){
             if($coupon->user_id != $user->id){
-                return response()->withError(__('api.coupon_not_exist'), 5003);
+                return response()->withError(__('api.coupon_not_exist'), 5004);
             }
         }
 
         if($coupon->coupon_usage_limit !=0){
-            if($coupon->coupon_usage_limit <= $coupon->coupon_usage_coount){
-                return response()->withError(__('api.coupon_exceed_limit'), 5004);
+            if($coupon->coupon_usage_limit <= $coupon->coupon_usage_count){
+                return response()->withError(__('api.coupon_exceeded_limit'), 5006);
             }
         }
 
@@ -65,7 +57,7 @@ class CouponAPIController extends Controller
             if($coupon->discount_type == 'amount'){
 
                 if($total_price < $coupon->minimum)
-                    return response()->withError(__('api.coupon_minimum'), 5006);
+                    return response()->withError(__('api.coupon_minimum'), 5007);
                     
                 $total_price -= $coupon->discount_amount;
 
@@ -75,8 +67,12 @@ class CouponAPIController extends Controller
                                                                         
             }
 
+                    
+            return response()->withData(__('api.coupon_applied_successfully'), ['total_price' => number_format($total_price,2)]);
+
+
         }else{
-            return response()->withError(__('api.coupon_expired'), 5005);
+            return response()->withError(__('api.coupon_expired'), 5008);
         }          
  
         
