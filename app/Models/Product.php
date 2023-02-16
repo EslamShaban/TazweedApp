@@ -56,4 +56,9 @@ class Product extends Model implements TranslatableContract
     {
         return $this->belongsToMany(CarModel::class, 'product_car_models');
     }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'manufacture_country');
+    }
 }

@@ -56,6 +56,7 @@ Route::middleware(['APIAuth','api', 'Lang'])->group(function(){
         Route::post('check_coupon', [CouponAPIController::class, 'check_coupon']);
         Route::post('make_order', [OrderAPIController::class, 'make_order']);
         Route::post('make_request', [WashRequestAPIController::class, 'make_request']);
+        Route::post('captain_approve', [WashRequestAPIController::class, 'captain_approval']);
 
     });
 

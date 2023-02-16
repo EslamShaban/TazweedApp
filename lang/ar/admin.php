@@ -81,7 +81,7 @@
         'made_type'  => 'نوع الصنع',
         'choose_made_type'  => 'أختر نوع الصنع',
         'original' => 'أصلي',
-        'high_copy' => 'تقليد بجوده عالية',
+        'high-copy' => 'تقليد بجوده عالية',
         'copy' => 'تقليد',
         'add_product_features' => 'أضف مميزات للمنتج',
         'choose_product' => 'أختر المنتج',

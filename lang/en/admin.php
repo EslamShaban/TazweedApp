@@ -81,7 +81,7 @@
         'made_type'  => 'Made Type',
         'choose_made_type' => 'Choose Made Type',
         'original' => 'Original',
-        'high_copy' => 'High Copy',
+        'high-copy' => 'High Copy',
         'copy' => 'Copy',
         'add_product_features' => 'Add Product Features',
         'choose_product' => 'Choose Product',
