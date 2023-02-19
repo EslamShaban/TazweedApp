@@ -11,9 +11,15 @@ class WashRequest extends Model
 
     protected $fillable = [
         'client_id',
+        'captain_id',
         'location',
         'lat',
-        'lng',
-        'status'
+        'lng'
     ];
+
+        
+    public function asset()
+    {
+        return $this->morphMany(Asset::class, 'assetable');
+    }
 }

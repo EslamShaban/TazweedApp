@@ -16,11 +16,11 @@ class CarModel implements Filter
      */
     public static function apply(Builder $builder, $value)
     {
-        if($value[0] == null)
+        if($value == null)
             return $builder;
 
        return $builder->whereHas('car_models', function ($query) use ($value) {
-            $query->whereIn('car_models.id', $value);
+            $query->where('car_models.id', $value);
         });
     }
 }

@@ -19,6 +19,6 @@ class Name implements Filter
         if($value == null)
             return $builder;
 
-        return $builder->where('name', 'LIKE', "%{$value}%");
+        return $builder->whereTranslationLike('name', "%{$value}%");
     }
 }

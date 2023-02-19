@@ -47,5 +47,9 @@
         'coupon_exceeded_limit' => 'Coupon Exceeded Limit',
         'coupon_expired' => 'Coupon is expired',
         'coupon_minimum' => 'Order amount less than coupon minimum',
-        'coupon_applied_successfully' => 'Coupon Applied Successfully'
+        'coupon_applied_successfully' => 'Coupon Applied Successfully',
+        'success_coupon' => 'Success Coupon',
+        'ordered_successfully' => 'Ordered Successfully',
+        'request_accepted' => 'The request has been accepted successfully',
+        'request_status_changed' => 'The request status has been changed'
     ];

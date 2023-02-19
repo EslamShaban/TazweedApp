@@ -15,12 +15,13 @@ return new class extends Migration
     {
         Schema::create('wash_requests', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('client_id')->unsigned()->nullable();
+            $table->bigInteger('client_id')->unsigned();
+            $table->bigInteger('captain_id')->unsigned()->nullable();
             $table->string('location');
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
-            $table->enum('status', ['0', '1', '2', '3', '4'])->default('0');
             $table->foreign('client_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('captain_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

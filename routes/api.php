@@ -51,12 +51,26 @@ Route::middleware(['APIAuth','api', 'Lang'])->group(function(){
         Route::get('products/{id}/details', [ProductAPIController::class, 'product_details']);
         Route::get('offers', [ProductAPIController::class, 'get_all_offers']);
         Route::get('search_filters', [SearchAPIController::class, 'search_filters']);
-        Route::get('search', [SearchAPIController::class, 'search']);
+        Route::post('search', [SearchAPIController::class, 'search']);
         Route::resource('shipping_addresses', ShippingAddressesAPIController::class);
         Route::post('check_coupon', [CouponAPIController::class, 'check_coupon']);
         Route::post('make_order', [OrderAPIController::class, 'make_order']);
-        Route::post('make_request', [WashRequestAPIController::class, 'make_request']);
-        Route::post('captain_approve', [WashRequestAPIController::class, 'captain_approval']);
+        Route::prefix('client')->group(function()
+        {   
+            Route::prefix('requests')->group(function(){
+                Route::post('make_request', [WashRequestAPIController::class, 'make_request']);
+                Route::post('{request_id}/captain/{captain_id}/approve', [WashRequestAPIController::class, 'client_approval']);
+
+            });
+        });
+                
+        Route::prefix('captain')->group(function()
+        {   
+            Route::prefix('requests')->group(function(){
+                Route::post('{id}/approve', [WashRequestAPIController::class, 'captain_approval']);
+                Route::post('{id}/change_status', [WashRequestAPIController::class, 'change_status']);
+            });
+        });
 
     });
 

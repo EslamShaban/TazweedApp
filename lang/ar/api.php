@@ -47,5 +47,9 @@
         'coupon_exceeded_limit' => 'لقد وصلت للحد الاقصي لإستخدام الكوبون',
         'coupon_expired' => 'الكوبون منتهي الصلاحية',
         'coupon_minimum' => 'قيمة الطلب أقل من الحد الادني لإستخدام الكوبون',
-        'coupon_applied_successfully' => 'تم تطبيق الكوبون بنجاح'
+        'coupon_applied_successfully' => 'تم تطبيق الكوبون بنجاح',
+        'success_coupon' => 'كوبون صحيح',
+        'ordered_successfully' => 'تم الطلب بنجاح',
+        'request_accepted' => 'تم قبول الطلب بنجاح',
+        'request_status_changed' => 'تم تغيير حالة الطلب بنجاح'
     ];

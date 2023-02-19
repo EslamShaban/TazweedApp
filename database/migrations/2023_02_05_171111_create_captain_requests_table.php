@@ -20,6 +20,7 @@ return new class extends Migration
             $table->bigInteger('wash_request_id')->unsigned();
             $table->foreign('wash_request_id')->references('id')->on('wash_requests')->onDelete('cascade')->onUpdate('cascade');
             $table->string('arrival_time');
+            $table->string('distance');
             $table->enum('status', ['0', '1', '2', '3'])->default('0');
             $table->timestamps();
         });
