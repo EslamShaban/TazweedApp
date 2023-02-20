@@ -104,7 +104,7 @@
         'amount'        => 'القيمة',
         'percentage'    => 'النسبة المئوية',
         'minimum'       => 'الحد الادني لإستخدام الكوبون',
-        'coupon_usage_limit' => 'الحد الاقصي للكوبون',
+        'coupon_usage_limit' => 'حد إستخدام للكوبون',
 
         'orders' => 'الطلبات',
         'order_details' => 'تفاصيل الطلب',

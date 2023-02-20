@@ -89,6 +89,17 @@
                                                     </span>
                                                 @enderror
                                             </div> 
+                                                                                        
+                                            <div class="col-md-6 col-12 mb-3">
+                                                <label for="coupon_usage_limit">{{ __('admin.coupon_usage_limit') }}</label>
+                                                <input type="number" id="coupon_usage_limit" class="form-control" name="coupon_usage_limit" value="{{ $coupon->coupon_usage_limit }}"/>
+                                                @error('coupon_usage_limit')
+                                                    <span class="text-danger">
+                                                        <small class="errorTxt">{{ $message }}</small>
+                                                    </span>
+                                                @enderror
+                                            </div> 
+
                                             <div class="col-md-6 col-12 mb-3">
                                                 <label for="minimum">{{ __('admin.minimum') }}</label>
                                                 <input type="number" id="percentage" class="form-control" name="minimum" value="{{ $coupon->minimum }}"/>
