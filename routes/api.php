@@ -60,6 +60,7 @@ Route::middleware(['APIAuth','api', 'Lang'])->group(function(){
             Route::prefix('requests')->group(function(){
                 Route::post('make_request', [WashRequestAPIController::class, 'make_request']);
                 Route::post('{request_id}/captain/{captain_id}/approve', [WashRequestAPIController::class, 'client_approval']);
+                Route::post('{request_id}/review', [WashRequestAPIController::class, 'review']);
 
             });
         });

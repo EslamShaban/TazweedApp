@@ -51,5 +51,9 @@
         'success_coupon' => 'كوبون صحيح',
         'ordered_successfully' => 'تم الطلب بنجاح',
         'request_accepted' => 'تم قبول الطلب بنجاح',
-        'request_status_changed' => 'تم تغيير حالة الطلب بنجاح'
+        'request_status_changed' => 'تم تغيير حالة الطلب بنجاح',
+        'rate' => 'التقييم',
+        'review' => 'وصف التجربه',
+        'reviewed_successfully' => 'تم التقييم بنجاح',
+
     ];

@@ -11,6 +11,7 @@ use App\Repositories\CaptainRequestRepository;
 use App\Http\Requests\API\WashAPIRequest;
 use App\Http\Requests\API\CaptainApproveRequest;
 use App\Http\Requests\API\ChangeStatusAPIRequest;
+use App\Http\Requests\API\ReviewAPIRequest;
 use Kreait\Firebase\Contract\Database;
 use App\Models\User;
 use App\Models\WashRequest;
@@ -203,6 +204,25 @@ class WashRequestAPIController extends Controller
 
                 
         return response()->withSuccess(__('api.request_status_changed'), 200);
+
+    }
+
+        
+    public function review(ReviewAPIRequest $request, $washrequest_id)
+    {
+    
+        $washrequest = $this->washRequestRepository->find($washrequest_id);
+                
+        if(! $washrequest)
+            return response()->withError(__('api.request_not_exist'), 5003, 'washrequest_id');
+
+        $washrequest->reviews()->create([
+            'review'        => $request->review,
+            'rate'          => $request->rate,
+            'reviewer_id'   => auth()->user()->id
+        ]);
+
+        return response()->withSuccess(__('api.reviewed_successfully'), 200);
 
     }
 

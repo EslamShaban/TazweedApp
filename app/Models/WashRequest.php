@@ -22,4 +22,9 @@ class WashRequest extends Model
     {
         return $this->morphMany(Asset::class, 'assetable');
     }
+        
+    public function reviews()
+    {
+        return $this->morphMany(Review::class, 'reviewable');
+    }
 }

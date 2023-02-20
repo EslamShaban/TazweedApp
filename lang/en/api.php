@@ -51,5 +51,8 @@
         'success_coupon' => 'Success Coupon',
         'ordered_successfully' => 'Ordered Successfully',
         'request_accepted' => 'The request has been accepted successfully',
-        'request_status_changed' => 'The request status has been changed'
+        'request_status_changed' => 'The request status has been changed',
+        'rate' => 'Rate',
+        'review' => 'Review',
+        'reviewed_successfully' => 'Reviewed Successfully',
     ];
