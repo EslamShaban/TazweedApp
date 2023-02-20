@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\CarModelController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\AddressTypeController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\OrderController;
 
 Route::get('language/{locale}', function ($locale) {
 
@@ -67,6 +68,10 @@ Route::group(
 
         //coupons
         Route::resource('coupons', CouponController::class)->name('*','coupons');
+
+        //orders
+        Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+        Route::get('orders/{id}', [OrderController::class, 'show'])->name('orders.show');
 });
 
 // Auth admins

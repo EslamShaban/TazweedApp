@@ -106,6 +106,17 @@
         'minimum'       => 'Minimum',
         'coupon_usage_limit' => 'Coupon Usage Limit',
 
+        'orders' => 'Orders',
+        'order_details' => 'Order Details',
+        'order_code' => 'Order Code',
+        'client_name' => 'Client Name',
+        'total_price' => 'Total Price',
+        'unit_price' => 'Unit Price',
+        'quantity' => 'Quantity',
+        'sub_total'  => 'Sub Total',
+        'gst'       => 'GST',
+        'grand_total' => 'Grand Total',
+
         'created_at'    => 'Created at',
         'action'        => 'Action',
         'save'          => 'Save',

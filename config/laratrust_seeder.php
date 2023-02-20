@@ -25,7 +25,7 @@ return [
             'products'      => 'c,r,u,d',
             'address_types' => 'c,r,u,d',
             'coupons'       => 'c,r,u,d',
-
+            'orders'        => 'r',
         ],
         'admin' => [],
         'client' => [],

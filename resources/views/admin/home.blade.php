@@ -204,6 +204,22 @@
                             </div>
                         </div>
                         <!-- Coupons -->
+                                                
+                        <!-- Orders -->
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header flex-column align-items-start pb-0">
+                                    <div class="avatar bg-light-primary p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i data-feather="tag" class="font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                    <h2 class="font-weight-bolder mt-1 mb-1" style="font-size:18px">{{__('admin.orders')}}</h2>
+                                    <p class="card-text"><span class="badge badge-pill badge-light-primary mr-1">{{ \App\Models\Order::count() }}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Orders -->
                     </div>
 
                 </section>
