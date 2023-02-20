@@ -120,6 +120,18 @@ class WashRequestAPIController extends Controller
 
     }
 
+    public function captain_rejected($washrequest_id)
+    {
+        /*
+        * remove the request from captain requests
+        */
+
+        $captain = auth()->user();
+                
+        $this->database->getReference('captain_requests/'. $captain->id . '/' . $washrequest_id)->remove();
+
+        return response()->withSuccess(__('api.request_rejected'), 200);
+    }
         
     public function client_approval($washrequest_id, $captain_id)
     {
