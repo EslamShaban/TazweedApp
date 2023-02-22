@@ -182,21 +182,22 @@
             $(document).on("click" , ".add-feature", function(){
                 $(".features").append(
                     `
-                                                                
-                    @foreach (config('translatable.locales') as $locale)                                   
-
-                        <div class="col-md-11 col-12 parent-feature">
-
-                            <div class="sub-main-feature mt-1">
-                                <lable>{{ __('admin.'. $locale . '.product_feature')}}</label>
-                                <input type="text" id="features" class="form-control" name="{{$locale}}[features][]"
-                                        value="{{ old('features') }}" required/>
-                            </div>
-                            <div class="remove-input-feature delete-btn" style="cursor:pointer">
-                                <span> <i class="fa fa-trash fa-sm"></i> </span>
-                            </div>
+                    <div class="parent-feature">
+                        <div class="row">                                       
+                            @foreach (config('translatable.locales') as $locale)                                   
+                                <div class="col-md-6 col-12">
+                                    <div class="sub-main-feature mt-1">
+                                        <label>{{ __('admin.'. $locale . '.product_feature')}}</label>
+                                        <input type="text" id="features" class="form-control" name="{{$locale}}[features][]"
+                                                value="{{ old('features') }}" required/>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>                                                      
+                        <div class="remove-input-feature delete-btn" style="cursor:pointer">
+                            <span> <i class="fa fa-trash fa-sm"></i> </span>
                         </div>
-                    @endforeach
+                    </div>
                     `
                 )
 

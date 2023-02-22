@@ -142,6 +142,7 @@
             'car_model'         => 'Car Model In Arabic',
             'product_name'      => 'Product Name In Arabic',
             'product_desc'      => 'Product Description In Arabic',
+            'product_feature'   => 'Product Feature In Arabic',
             'address_type'      => 'Address Type In Arabic',
             'coupon_title'      => 'Coupon Title In Arabic',
 
@@ -155,6 +156,7 @@
             'car_model'         => 'Car Model In English',
             'product_name'      => 'Product Name In English',
             'product_desc'      => 'Product Description In English',
+            'product_feature'   => 'Product Feature In English',
             'address_type'      => 'Address Type In English',
             'coupon_title'      => 'Coupon Title In English',
 

@@ -196,12 +196,16 @@ a {
 
 .parent-feature {
 	position: relative;
+	border: 1px solid #DDD;
+	margin: 10px 0;
+	padding: 10px 10px 40px;
+	border-radius: 5px;
 }
 
 .remove-input-feature {
 	position: absolute;
-	top: 4px;
-	left: -26px;
+	top: 95px;
+	right: 2px;
 }
 
 #output {

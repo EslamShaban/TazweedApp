@@ -155,25 +155,31 @@
                                                     <span><i class="fa fa-plus"></i></span>
                                                     <span>{{ __('admin.add_product_features') }}</span>
                                                 </button>
-                                                                                                                
-                                                <input type="hidden" class="form-control" name="features" value=""/>
+                                                                                                                            
+                                                <input type="hidden" name="ar[features]" value="" />                                                                                                        
+                                                <input type="hidden" name="en[features]" value="" />                                                                                                        
 
                                                 @if ($product->features)
-                                                    @foreach (config('translatable.locales') as $locale)      
 
-                                                        @foreach ($product->translate($locale)->features as $feature)
-                                                                                    
-                                                            <div class="col-md-11 col-12 parent-feature">
-                                                                <div class="sub-main-feature mt-1">
-                                                                    <input type="text" id="features" class="form-control" name="features[]"
-                                                                            value="{{ $feature }}" required/>
-                                                                </div>
-                                                                <div class="remove-input-feature delete-btn" style="cursor:pointer">
-                                                                    <span> <i class="fa fa-trash fa-sm"></i> </span>
-                                                                </div>
+                                                    @foreach ($product->features as $key=>$feature)
+                                                        <div class="parent-feature">
+                                                            <div class="row">  
+                                                                @foreach (config('translatable.locales') as $locale)                  
+                                                                    <div class="col-md-6 col-12">
+                                                                        <div class="sub-main-feature mt-1">
+                                                                            <label>{{ __('admin.'. $locale . '.product_feature')}}</label>
+                                                                            <input type="text" id="features" class="form-control" name="{{$locale}}[features][]"
+                                                                                    value="{{ $product->translate($locale)->features[$key] }}" required/>
+                                                                        </div>
+                                                                    </div>
+                                                                @endforeach
                                                             </div>
-                                                        @endforeach 
-                                                    @endforeach  
+                                                            <div class="remove-input-feature delete-btn" style="cursor:pointer">
+                                                                <span> <i class="fa fa-trash fa-sm"></i> </span>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach 
+
                                                 @endif
 
                                             </div>
@@ -203,16 +209,22 @@
             $(document).on("click" , ".add-feature", function(){
                 $(".features").append(
                     `
-                        <div class="col-md-11 col-12 parent-feature">
-
-                            <div class="sub-main-feature mt-1">
-                                <input type="text" id="features" class="form-control" name="features[]"
-                                        value="{{ old('features') }}" required/>
-                            </div>
-                            <div class="remove-input-feature delete-btn" style="cursor:pointer">
-                                <span> <i class="fa fa-trash fa-sm"></i> </span>
-                            </div>
+                    <div class="parent-feature">
+                        <div class="row">                                       
+                            @foreach (config('translatable.locales') as $locale)                                   
+                                <div class="col-md-6 col-12">
+                                    <div class="sub-main-feature mt-1">
+                                        <label>{{ __('admin.'. $locale . '.product_feature')}}</label>
+                                        <input type="text" id="features" class="form-control" name="{{$locale}}[features][]"
+                                                value="{{ old('features') }}" required/>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>                                                      
+                        <div class="remove-input-feature delete-btn" style="cursor:pointer">
+                            <span> <i class="fa fa-trash fa-sm"></i> </span>
                         </div>
+                    </div>
                     `
                 )
 
