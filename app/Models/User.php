@@ -84,7 +84,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function scopeAvailableCaptains($q) 
     {
-        return $q->where('account_type', 'captain')->where('status', '1')->where('available', '1');
+        return $q->where('account_type', 'captain')->where('status', 1)->where('available', 1);
     }
 
     public function asset()

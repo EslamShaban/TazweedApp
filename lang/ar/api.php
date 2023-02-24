@@ -55,5 +55,6 @@
         'rate' => 'التقييم',
         'review' => 'وصف التجربه',
         'reviewed_successfully' => 'تم التقييم بنجاح',
+        'status_changed_successfully' => 'تم تغيير الحالة بنجاح'
 
     ];

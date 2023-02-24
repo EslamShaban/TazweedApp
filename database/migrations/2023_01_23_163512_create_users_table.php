@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('account_type')->nullable();
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
-            $table->enum('status', ['0', '1'])->default(0);
-            $table->enum('available', ['0', '1'])->default(1);
+            $table->boolean('status')->default(0);
+            $table->boolean('available')->default(1);
             $table->string('fcm')->nullable();
             $table->bigInteger('city_id')->unsigned()->nullable();
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade')->onUpdate('cascade');

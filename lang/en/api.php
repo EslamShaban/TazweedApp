@@ -55,4 +55,6 @@
         'rate' => 'Rate',
         'review' => 'Review',
         'reviewed_successfully' => 'Reviewed Successfully',
+        'status_changed_successfully' => 'Status changed successfully'
+
     ];

@@ -11,7 +11,7 @@ use App\Http\Controllers\API\SearchAPIController;
 use App\Http\Controllers\API\ShippingAddressesAPIController;
 use App\Http\Controllers\API\CouponAPIController;
 use App\Http\Controllers\API\OrderAPIController;
-
+use App\Http\Controllers\API\CaptainAPIController;
 use App\Http\Controllers\API\WashRequestAPIController;
 
 /*
@@ -67,6 +67,7 @@ Route::middleware(['APIAuth','api', 'Lang'])->group(function(){
                 
         Route::prefix('captain')->group(function()
         {   
+            Route::get('toggle_status', [CaptainAPIController::class, 'toggle_status']);
             Route::prefix('requests')->group(function(){
                 Route::post('{id}/approve', [WashRequestAPIController::class, 'captain_approval']);
                 Route::post('{id}/reject', [WashRequestAPIController::class, 'captain_rejected']);
