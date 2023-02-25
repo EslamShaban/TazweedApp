@@ -67,7 +67,9 @@ Route::middleware(['APIAuth','api', 'Lang'])->group(function(){
                 
         Route::prefix('captain')->group(function()
         {   
+            Route::post('update_location', [CaptainAPIController::class, 'update_location']);
             Route::get('toggle_status', [CaptainAPIController::class, 'toggle_status']);
+
             Route::prefix('requests')->group(function(){
                 Route::post('{id}/approve', [WashRequestAPIController::class, 'captain_approval']);
                 Route::post('{id}/reject', [WashRequestAPIController::class, 'captain_rejected']);

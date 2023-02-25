@@ -55,6 +55,9 @@
         'rate' => 'Rate',
         'review' => 'Review',
         'reviewed_successfully' => 'Reviewed Successfully',
-        'status_changed_successfully' => 'Status changed successfully'
-
+        'status_changed_successfully' => 'Status changed successfully',
+        'location_update_successfully' => 'Location update successfully',
+        'location'  => 'Location',
+        'lat'       => 'lat',
+        'lng'       => 'lng',
     ];

@@ -55,6 +55,9 @@
         'rate' => 'التقييم',
         'review' => 'وصف التجربه',
         'reviewed_successfully' => 'تم التقييم بنجاح',
-        'status_changed_successfully' => 'تم تغيير الحالة بنجاح'
-
+        'status_changed_successfully' => 'تم تغيير الحالة بنجاح',
+        'location_update_successfully' => 'تم تحديث الموقع بنجاح',
+        'location'  => 'الموقع',
+        'lat'       => 'خطوط العرض',
+        'lng'       => 'خطوط الطول' ,
     ];

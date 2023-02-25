@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 
-class WashAPIRequest extends FormRequest
+class UpdateLocationAPIRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -16,7 +16,6 @@ class WashAPIRequest extends FormRequest
     public function rules()
     {
         return [
-            'location'      => ['required', 'string'],
             'lat'           => ['required'],
             'lng'           => ['required']
         ];
@@ -28,9 +27,8 @@ class WashAPIRequest extends FormRequest
     {
         return[
 
-            'location'  => __('api.location'),
             'lat'       => __('api.lat'),
-            'lng'       => __('api.lng')    
+            'lng'       => __('api.lng')  
         ];
         
     }
@@ -40,18 +38,14 @@ class WashAPIRequest extends FormRequest
         
         $error = $validator->errors()->toArray();
 
-        if ( isset($error['location']) ) {
-            $msg = $error['location'][0];
-            $field = 'location';
-            $code = 5001;
-        } elseif ( isset($error['lat']) ) {
+        if ( isset($error['lat']) ) {
             $msg = $error['lat'][0];
             $field = 'lat';
-            $code = 5002;
+            $code = 5001;
         } elseif ( isset($error['lng']) ) {
             $msg = $error['lng'][0];
             $field = 'lng';
-            $code = 5003;
+            $code = 5002;
         } else {
             $msg = __('api.error');
             $code = 5000;
