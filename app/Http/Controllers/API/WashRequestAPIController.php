@@ -7,7 +7,6 @@ use App\Http\Helpers\CalcDistance;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Repositories\WashRequestRepository;
-use App\Repositories\CaptainRequestRepository;
 use App\Http\Requests\API\WashAPIRequest;
 use App\Http\Requests\API\CaptainApproveRequest;
 use App\Http\Requests\API\ChangeStatusAPIRequest;
@@ -18,13 +17,12 @@ use App\Models\WashRequest;
 
 class WashRequestAPIController extends Controller
 {
-    private $database, $washRequestRepository, $captainRequestRepository;
+    private $database, $washRequestRepository;
 
-    public function __construct(Database $database, WashRequestRepository $washRequest, CaptainRequestRepository $captainRequest)
+    public function __construct(Database $database, WashRequestRepository $washRequest)
     {
         $this->database = $database;
         $this->washRequestRepository = $washRequest;
-        $this->captainRequestRepository = $captainRequest;
     }
     
     public function make_request(WashAPIRequest $request)
@@ -41,33 +39,40 @@ class WashRequestAPIController extends Controller
                             'lng'       => $request->lng
                         ]);
 
-            $captains = User::AvailableCaptains()->get();
-
-            foreach($captains as $captain){
+            $snapShot = $this->database->getReference('captains')->getSnapshot();
             
-                $res = CalcDistance::calculate_trip_distance_time($request->lat, $request->lng, $captain->lat, $captain->lng);
+            $captain_ids  = $snapShot->hasChildren() 
+                            ? $this->database->getReference('captains')->getChildKeys() 
+                            : array();
+            
+            foreach($captain_ids as $captain_id){
+
+                $captain = $this->database->getReference('captains/' . $captain_id)->getValue();
+                
+                if(!($captain['status'] && $captain['available'])){
+                    continue;
+                }
+                
+                $res = CalcDistance::calculate_trip_distance_time($request->lat, $request->lng, $captain['lat'], $captain['lng']);
 
                 if($res['distance'] <= 5){
      
                     $postData = [
-                        //'request_id'    => $washRequest->id,
-                        //'captain_id'    => $captain->id,
                         'client_name'   => auth()->user()->f_name . ' ' . auth()->user()->l_name ,
                         'location'      => $washRequest->location,
                         'lat'           => $washRequest->lat,
                         'lng'           => $washRequest->lng,
-                        'distance'      => $res['distance'] . ' km'
+                        'distance'      => $res['distance']
                     ];
 
-                    //$this->database->getReference('captain_requests')->push($postData).set(2);
-                    $this->database->getReference('captain_requests/'.$captain->id)->update([$washRequest->id => $postData]);
+                    $this->database->getReference('captain_requests/'.$captain_id)->update([$washRequest->id => $postData]);
 
                 }
             }
                 
             DB::commit();
 
-            return response()->withSuccess(__('api.success'), 200);
+            return response()->withData(__('api.success'), ['request_id' => $washRequest->id]);
 
 
         } catch (\Throwable $th) {
@@ -101,7 +106,6 @@ class WashRequestAPIController extends Controller
         }        
 
         $captainData = [
-            //'request_id'    => $washrequest_id,
             'captain_id'    => $captain->id,
             'captain_image' => $captain->image_path,
             'captain_name'  => $captain->f_name . ' ' . $captain->l_name,
@@ -166,12 +170,18 @@ class WashRequestAPIController extends Controller
 
         WashRequest::where('id', $washrequest_id)->update(['captain_id' => $captain_id]);
 
+        //update captain to unavailable
+
+        $captain_available = [
+            'captains/'. $captain_id . '/available'   => 0
+        ];
+
+        $this->database->getReference()->update($captain_available);
+
         $requestStatusData = [
             'captain_id'    => $captain_id,
             'status'        => 1
         ];
-
-        // $this->database->getReference('request_status')->push($requestStatusData);
                 
         $this->database->getReference('request_status')->update([$washrequest_id=>$requestStatusData]);
         

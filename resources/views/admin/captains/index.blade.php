@@ -37,9 +37,9 @@
             </div>
             <div class="content-body">
                                 
-                <div class="col-lg-12 col-12" style="height:80vh">
+                {{-- <div class="col-lg-12 col-12" style="height:80vh">
                     <div id="map" style="height: 100%;width: 100%;">
-                </div>
+                </div> --}}
                 <!-- Basic table -->
                 <section id="basic-datatable">
 

@@ -27,4 +27,14 @@ class WashRequest extends Model
     {
         return $this->morphMany(Review::class, 'reviewable');
     }
+
+    public function client()
+    {
+        return $this->belongsTo(User::class, 'client_id');
+    }
+
+    public function captain()
+    {
+        return $this->belongsTo(User::class, 'captain_id');
+    }
 }

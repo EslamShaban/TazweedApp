@@ -34,13 +34,19 @@ class CaptainAPIController extends Controller
 
     public function toggle_status()
     {
-        $user = auth()->user();
+        $captain = auth()->user();
         
-        $user->status = ! $user->status;
+        $captain->status = ! $captain->status;
 
-        $user->save();
+        $captain->save();
 
-        return response()->withData(__('api.status_changed_successfully'), ['status' => (int)$user->status]);
+        $captain_status = [
+            'captains/'. $captain->id . '/status'   => (int)$captain->status
+        ];
+
+        $this->database->getReference()->update($captain_status);
+
+        return response()->withData(__('api.status_changed_successfully'), ['status' => (int)$captain->status]);
     }
 
 }

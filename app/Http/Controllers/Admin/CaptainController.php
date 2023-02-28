@@ -9,12 +9,13 @@ use App\Http\Requests\Admin\CaptainRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Car;
+use Kreait\Firebase\Contract\Database;
 
 class CaptainController extends Controller
 {
-    private $userRepository;
+    private $database, $userRepository;
     
-    public function __construct(UserRepository $captain)
+    public function __construct(Database $database, UserRepository $captain)
     {
         $this->middleware('permission:captains-read')->only(['index']);
         $this->middleware('permission:captains-create')->only(['create', 'store']);
@@ -22,6 +23,7 @@ class CaptainController extends Controller
         $this->middleware('permission:captains-delete')->only(['destroy']);
 
         $this->userRepository = $captain;
+        $this->database = $database;
 
     }
 
@@ -81,6 +83,18 @@ class CaptainController extends Controller
                 $this->UploadAsset(['asset'=>$request->image, 'path_to_save'=>'assets/uploads/users'], $captain);
             }
             
+            // add the captain to firebase collection
+
+            $captain_data = [
+                'lat' => $request->lat,
+                'lng' => $request->lng,
+                'available' => 1,
+                'status' => 0
+            ];
+                            
+            $this->database->getReference('captains/'.$captain->id)->update($captain_data);
+
+
             DB::commit();
 
             return redirect(aurl('captains'))->with('success', 'تم إضافة الحقل بنجاح');
@@ -173,6 +187,9 @@ class CaptainController extends Controller
             $this->DeleteAsset($captain);
             $this->userRepository->delete($captain->id);
             
+            // remove the captain from firebase collection
+            $this->database->getReference('captains/'. $captain->id)->remove();
+
             DB::commit();
             
             return redirect(aurl('captains'))->with('success', 'تم حذف الحقل بنجاح');
