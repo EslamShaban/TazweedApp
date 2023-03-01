@@ -39,20 +39,27 @@ class WashRequestAPIController extends Controller
                             'lng'       => $request->lng
                         ]);
 
+            $request_captains_count = 0;
+
+            // get captains from firebase collection
             $snapShot = $this->database->getReference('captains')->getSnapshot();
-            
             $captain_ids  = $snapShot->hasChildren() 
                             ? $this->database->getReference('captains')->getChildKeys() 
                             : array();
             
             foreach($captain_ids as $captain_id){
 
+                // get captain data to check on [ status & available ]
                 $captain = $this->database->getReference('captains/' . $captain_id)->getValue();
+
+                // check if this captain has request or not (I will not send him a request if he already has one)
+                $snapShot = $this->database->getReference('captain_requests/' . $captain_id)->getSnapshot();
+                $captainHasRequests  = $snapShot->hasChildren() ? true : false;
                 
-                if(!($captain['status'] && $captain['available'])){
+                if(!($captain['status'] && $captain['available'] && (! $captainHasRequests))){ 
                     continue;
                 }
-                
+
                 $res = CalcDistance::calculate_trip_distance_time($request->lat, $request->lng, $captain['lat'], $captain['lng']);
 
                 if($res['distance'] <= 5){
@@ -67,10 +74,14 @@ class WashRequestAPIController extends Controller
 
                     $this->database->getReference('captain_requests/'.$captain_id)->update([$washRequest->id => $postData]);
 
+                    $request_captains_count++;
                 }
             }
                 
             DB::commit();
+
+            if($request_captains_count == 0)
+                return response()->withError(__('api.no_captains_found_try_later'), 5004);
 
             return response()->withData(__('api.success'), ['request_id' => $washRequest->id]);
 
@@ -217,7 +228,27 @@ class WashRequestAPIController extends Controller
 
     }
 
+    public function clear_request($request_id)
+    {
         
+        $captains = $this->database->getReference('captain_requests')->getChildKeys();
+
+        foreach ($captains as $key => $captain) {
+                        
+            $captain_requests = $this->database->getReference('captain_requests/'. $captain)->getChildKeys();
+
+            if(in_array($request_id, $captain_requests)){
+                        
+                $this->database->getReference('captain_requests/'. $captain . '/' . $request_id)->remove();
+            }
+
+        }
+                
+        $this->database->getReference('request_captains_approval/'. $request_id)->remove();
+
+        return response()->withSuccess(__('api.request_cleared_successfully'), 200);
+    }
+
     public function review(ReviewAPIRequest $request, $washrequest_id)
     {
     
