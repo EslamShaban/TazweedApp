@@ -69,7 +69,8 @@ class WashRequestAPIController extends Controller
                         'location'      => $washRequest->location,
                         'lat'           => $washRequest->lat,
                         'lng'           => $washRequest->lng,
-                        'distance'      => $res['distance']
+                        'distance'      => $res['distance'],
+                        'status'        => 'created'
                     ];
 
                     $this->database->getReference('captain_requests/'.$captain_id)->update([$washRequest->id => $postData]);
@@ -126,7 +127,11 @@ class WashRequestAPIController extends Controller
             'washing_count' => 20
         ];
 
-        //$this->database->getReference('request_captains_approval')->push($captainData);
+        $update_request_status = [
+            'captain_requests/'. $captain->id . '/' . $washrequest_id . '/status'   => 'waiting'
+        ];
+
+        $this->database->getReference()->update($update_request_status);
                             
         $this->database->getReference('request_captains_approval/'. $washrequest_id)->update([$captain->id=>$captainData]);
 
@@ -166,7 +171,7 @@ class WashRequestAPIController extends Controller
                         
             $captain_requests = $this->database->getReference('captain_requests/'. $captain)->getChildKeys();
 
-            if(in_array($washrequest_id, $captain_requests)){
+            if($captain != $captain_id && in_array($washrequest_id, $captain_requests)){
                         
                 $this->database->getReference('captain_requests/'. $captain . '/' . $washrequest_id)->remove();
             }
@@ -176,8 +181,6 @@ class WashRequestAPIController extends Controller
         $this->database->getReference('request_captains_approval/'. $washrequest_id)->remove();
 
         //update wash request, set captain id with the captain that the client approved him
-
-        //$this->washRequestRepository->update(['captain_id' => $captain_id], $washrequest_id);
 
         WashRequest::where('id', $washrequest_id)->update(['captain_id' => $captain_id]);
 
@@ -189,12 +192,19 @@ class WashRequestAPIController extends Controller
 
         $this->database->getReference()->update($captain_available);
 
-        $requestStatusData = [
-            'captain_id'    => $captain_id,
-            'status'        => 1
-        ];
                 
-        $this->database->getReference('request_status')->update([$washrequest_id=>$requestStatusData]);
+        $update_request_status = [
+            'captain_requests/'. $captain_id . '/' . $washrequest_id . '/status'   => 'approved'
+        ];
+
+        $this->database->getReference()->update($update_request_status);
+
+        // $requestStatusData = [
+        //     'captain_id'    => $captain_id,
+        //     'status'        => 1
+        // ];
+                
+        // $this->database->getReference('request_status')->update([$washrequest_id=>$requestStatusData]);
         
         return response()->withSuccess(__('api.request_accepted'), 200);
 
@@ -207,11 +217,14 @@ class WashRequestAPIController extends Controller
 
         $washRequest = $this->washRequestRepository->find($washrequest_id);
             
-        $requestStatusData = [
-            'request_status/'. $washrequest_id . '/status'   => intval($request->status)
+        // $requestStatusData = [
+        //     'request_status/'. $washrequest_id . '/status'   => intval($request->status)
+        // ];
+
+        $update_request_status = [
+            'captain_requests/'. $captain->id . '/' . $washrequest_id . '/status'   => $request->status
         ];
 
-                    
         if($request->has('images')){
             foreach($request->images as $image){
 
@@ -221,7 +234,7 @@ class WashRequestAPIController extends Controller
 
         }
                 
-        $this->database->getReference()->update($requestStatusData);
+        $this->database->getReference()->update($update_request_status);
 
                 
         return response()->withSuccess(__('api.request_status_changed'), 200);
