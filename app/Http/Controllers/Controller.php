@@ -12,7 +12,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function UploadAsset($data, $model){
+    public function UploadAsset($data, $model, $info){
         
         $asset = $data['asset'];
         $path = $data['path_to_save'];
@@ -26,7 +26,8 @@ class Controller extends BaseController
             'old_name'      => $asset->getClientOriginalName(),
             'size'          => $asset->getSize(),
             'url'           => $full_path_url,
-            'mime_type'     => $asset->getMimeType()
+            'mime_type'     => $asset->getMimeType(),
+            'info'          => json_encode($info)
 
         ]);
     }

@@ -182,4 +182,8 @@ return [
             ],
         ],
     ],
+
+        
+    'server_key' => env('SERVER_KEY', 'AAAA7FAtVo8:APA91bEdMnyd2_siQjgc5hWEE7NE6okrVTACH9Srm0gdgrm7K2lAhEobqgQ0OduSLlkF81kzh4M9OKIjMndlPJE1MajUSb9C7_m3Kg0owDXueEtHNSdOyA46bdDHc1QI56CeZAB7NB1B'),
+
 ];

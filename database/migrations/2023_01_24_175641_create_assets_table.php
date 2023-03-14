@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('url');
             $table->string('mime_type');
             $table->morphs('assetable');
+            $table->text('info')->nullable();
             $table->timestamps();
         });
     }

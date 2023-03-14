@@ -14,6 +14,7 @@ use App\Http\Requests\API\ReviewAPIRequest;
 use Kreait\Firebase\Contract\Database;
 use App\Models\User;
 use App\Models\WashRequest;
+use App\Http\Helpers\Notification as FcmNotification;
 
 class WashRequestAPIController extends Controller
 {
@@ -62,7 +63,7 @@ class WashRequestAPIController extends Controller
 
                 $res = CalcDistance::calculate_trip_distance_time($request->lat, $request->lng, $captain['lat'], $captain['lng']);
 
-                if($res['distance'] <= 5){
+                // if($res['distance'] <= 5){
      
                     $postData = [
                         'client_name'   => auth()->user()->f_name . ' ' . auth()->user()->l_name ,
@@ -75,8 +76,17 @@ class WashRequestAPIController extends Controller
 
                     $this->database->getReference('captain_requests/'.$captain_id)->update([$washRequest->id => $postData]);
 
+                    $captain = User::find($captain_id);
+
+                    $data = [
+                        'type' => 'wash_request',
+                        'request_id' => $washRequest->id
+                    ];
+
+                    FcmNotification::sendFCMNotification('Tazweed App', 'You have a new request', $captain->fcm, $data);
+
                     $request_captains_count++;
-                }
+                // }
             }
                 
             DB::commit();
@@ -199,12 +209,12 @@ class WashRequestAPIController extends Controller
 
         $this->database->getReference()->update($update_request_status);
 
-        // $requestStatusData = [
-        //     'captain_id'    => $captain_id,
-        //     'status'        => 1
-        // ];
+        $requestStatusData = [
+            'captain_id'    => $captain_id,
+            'status'        => 'approved'
+        ];
                 
-        // $this->database->getReference('request_status')->update([$washrequest_id=>$requestStatusData]);
+        $this->database->getReference('request_status')->update([$washrequest_id=>$requestStatusData]);
         
         return response()->withSuccess(__('api.request_accepted'), 200);
 
@@ -216,25 +226,32 @@ class WashRequestAPIController extends Controller
         $captain = auth()->user();
 
         $washRequest = $this->washRequestRepository->find($washrequest_id);
-            
-        // $requestStatusData = [
-        //     'request_status/'. $washrequest_id . '/status'   => intval($request->status)
-        // ];
 
+        if(! $washRequest){
+            return response()->withError(__('api.request_not_found'), 5003);
+        }
+            
         $update_request_status = [
-            'captain_requests/'. $captain->id . '/' . $washrequest_id . '/status'   => $request->status
+            'request_status/'. $washrequest_id . '/status'   =>  $request->status
         ];
 
+        // $update_request_status = [
+        //     'captain_requests/'. $captain->id . '/' . $washrequest_id . '/status'   => $request->status
+        // ];
+
         if($request->has('images')){
+            
+            $info =   array('status' => $request->status == 'washing' ? 'before' : 'after');
+
             foreach($request->images as $image){
 
-                $this->UploadAsset(['asset'=>$image, 'path_to_save'=>'assets/uploads/wash_requests'], $washRequest);
+                $this->UploadAsset(['asset'=>$image, 'path_to_save'=>'assets/uploads/wash_requests'], $washRequest, $info);
 
             }
 
         }
                 
-        $this->database->getReference()->update($update_request_status);
+        //$this->database->getReference()->update($update_request_status);
 
                 
         return response()->withSuccess(__('api.request_status_changed'), 200);

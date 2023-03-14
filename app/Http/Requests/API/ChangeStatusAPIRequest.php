@@ -16,11 +16,11 @@ class ChangeStatusAPIRequest extends FormRequest
     public function rules()
     {
         return [
-            'status'       => ['required', 'in:1,2,3,4'],
-            'images.0'     => ['required_if:status,3,4', 'image', 'mimes:jpg,jpeg,png,gif'],
-            'images.1'     => ['required_if:status,3,4', 'image', 'mimes:jpg,jpeg,png,gif'],
-            'images.2'     => ['required_if:status,3,4', 'image', 'mimes:jpg,jpeg,png,gif'],
-            'images.3'     => ['required_if:status,3,4', 'image', 'mimes:jpg,jpeg,png,gif'],
+            'status'       => ['required', 'in:approved,arrived,washing,finishing'],
+            'images.0'     => ['required_if:status,washing,finishing', 'image', 'mimes:jpg,jpeg,png,gif'],
+            'images.1'     => ['required_if:status,washing,finishing', 'image', 'mimes:jpg,jpeg,png,gif'],
+            'images.2'     => ['required_if:status,washing,finishing', 'image', 'mimes:jpg,jpeg,png,gif'],
+            'images.3'     => ['required_if:status,washing,finishing', 'image', 'mimes:jpg,jpeg,png,gif'],
 
         ];
     }
