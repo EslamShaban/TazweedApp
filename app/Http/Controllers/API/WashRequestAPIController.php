@@ -251,7 +251,7 @@ class WashRequestAPIController extends Controller
 
         }
                 
-        //$this->database->getReference()->update($update_request_status);
+        $this->database->getReference()->update($update_request_status);
 
                 
         return response()->withSuccess(__('api.request_status_changed'), 200);
