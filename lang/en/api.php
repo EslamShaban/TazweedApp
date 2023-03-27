@@ -60,5 +60,6 @@
         'location'  => 'Location',
         'lat'       => 'lat',
         'lng'       => 'lng',
-        'no_captains_found_try_later' => 'No captains found, try later'
+        'no_captains_found_try_later' => 'No captains found, try later',
+        'questions' => 'Questions',
     ];

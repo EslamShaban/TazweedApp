@@ -95,6 +95,11 @@
             @if(auth()->user()->hasPermission('orders-read'))
                 <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.orders.index') }}"><i data-feather="tag"></i><span class="menu-title text-truncate" data-i18n="user">{{__('admin.orders')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Order::count()}})</span></a></li>
             @endif
+
+            {{-- questions --}}
+            @if(auth()->user()->hasPermission('questions-read'))
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.questions.index') }}"><i data-feather="tag"></i><span class="menu-title text-truncate" data-i18n="user">{{__('admin.questions')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Question::count()}})</span></a></li>
+            @endif
         </ul>
     </div>
 </div>

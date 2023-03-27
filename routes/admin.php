@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\AddressTypeController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\QuestionController;
 
 Route::get('language/{locale}', function ($locale) {
 
@@ -72,6 +73,10 @@ Route::group(
         //orders
         Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
         Route::get('orders/{id}', [OrderController::class, 'show'])->name('orders.show');
+
+        //questions
+        Route::resource('questions', QuestionController::class)->name('*','questions');
+
 });
 
 // Auth admins

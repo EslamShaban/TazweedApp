@@ -102,6 +102,27 @@
         }
     }
 
+        
+    function question_type(val){
+        if(val == "category"){
+            $("#category").show();
+            $('#category_questionable_id').prop('disabled', false);
+            $("#service").hide();
+            $('#service_questionable_id').prop('disabled', true);
+        }
+        if(val == "service"){
+        
+            $("#service").show();
+            $('#service_questionable_id').prop('disabled', false);
+            $("#category").hide();
+            $('#category_questionable_id').prop('disabled', true);
+        }
+        if(val == ""){
+            $("#category").hide();
+            $("#service").hide();
+        }
+    }
+
     //$("a[href='" + window.location.href + "']").closest('.expanded').addClass('is-expanded');
 
 </script>

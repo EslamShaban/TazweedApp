@@ -52,6 +52,7 @@
         'choose_category' => 'Choose Category',
 
         'services'      => 'Services',
+        'service'       => 'Service',
         'add_service'   => 'Add Service',
         'edit_service'  => 'Edit Service',
         'service_name'  => 'Service Name',
@@ -117,6 +118,12 @@
         'gst'       => 'GST',
         'grand_total' => 'Grand Total',
 
+        'questions'  => 'Questions',
+        'question'   => 'Question',
+        'add_question' => 'Add Question',
+        'edit_question' => 'Edit Question',
+        'question_type' => 'Question related to : ',
+        
         'created_at'    => 'Created at',
         'action'        => 'Action',
         'save'          => 'Save',
@@ -145,6 +152,7 @@
             'product_feature'   => 'Product Feature In Arabic',
             'address_type'      => 'Address Type In Arabic',
             'coupon_title'      => 'Coupon Title In Arabic',
+            'question'          => 'Question In Arabic',
 
         ],
         'en'    =>  [
@@ -159,6 +167,7 @@
             'product_feature'   => 'Product Feature In English',
             'address_type'      => 'Address Type In English',
             'coupon_title'      => 'Coupon Title In English',
+            'question'          => 'Question In English',
 
         ],
     ];

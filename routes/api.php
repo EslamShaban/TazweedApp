@@ -13,6 +13,7 @@ use App\Http\Controllers\API\CouponAPIController;
 use App\Http\Controllers\API\OrderAPIController;
 use App\Http\Controllers\API\CaptainAPIController;
 use App\Http\Controllers\API\WashRequestAPIController;
+use App\Http\Controllers\API\QuestionAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,7 +78,9 @@ Route::middleware(['APIAuth','api', 'Lang'])->group(function(){
                 Route::post('{id}/change_status', [WashRequestAPIController::class, 'change_status']);
             });
         });
-
+        
+        Route::get('questions', [QuestionAPIController::class, 'get_questions']);
+        Route::post('questions_answer', [QuestionAPIController::class, 'questions_answer']);
     });
 
 });
