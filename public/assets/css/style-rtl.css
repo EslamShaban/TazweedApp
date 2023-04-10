@@ -220,3 +220,104 @@ form {
 select {
 	width: 300px;
 }
+
+.user-card {
+	background-color: #FFF;
+	padding: 15px;
+	border-radius: 5px;
+	box-shadow: 0 4px 24px 0 rgba(34, 41, 47, 0.1);
+}
+
+/* .request-location {
+	border: 2px solid #ddd;
+	border-radius: 10px;
+	box-shadow: 0 4px 24px 0 rgba(34, 41, 47, 0.1);
+} */
+
+.request-style {
+	background-color: #FFF;
+	margin-top: 20px;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 24px 0 rgba(34, 41, 47, 0.1);
+}
+
+#loading .spinner {
+	display: flex;
+	justify-content: center;
+}
+
+#loading svg {
+	width: 50%;
+	max-width: 5rem;
+	animation: rotate 3.6s linear infinite;
+}
+
+#loading circle {
+	fill: none;
+	stroke: #4340f5;
+	stroke-width: 5px;
+	stroke-dasharray: 300;
+	animation: outline 2s cubic-bezier(0.77, 0, 0.18, 1) infinite;
+}
+
+@keyframes outline {
+	0% {
+		stroke-dashoffset: 0;
+	}
+
+	50% {
+		stroke-dashoffset: 300;
+	}
+
+	100% {
+		stroke-dashoffset: 600;
+	}
+}
+
+@keyframes rotate {
+	from {
+		transform: rotate(0turn);
+	}
+
+	to {
+		transform: rotate(-1turn);
+	}
+}
+
+/* datatable*/
+.dt-buttons {
+	display: block;
+	width: 300px;
+	text-align: center;
+	margin-bottom: 10px;
+	border: 1px solid #415094;
+	border-radius: 15px;
+	padding: 0 10px;
+	margin: auto;
+	margin-top: 10px;
+}
+
+.dt-buttons .dt-button {
+	border: none;
+	padding: 8px 10px;
+	background-color: #FFF;
+	border-left: 1px solid #415094;
+}
+
+.dt-buttons .dt-button:hover {
+	background-color: #415094;
+	color: #FFF;
+}
+
+.dt-buttons .dt-button:nth-child(1) {
+	border-right: 1px solid #415094;
+}
+
+.dataTables_length {
+	display: inline-block;
+}
+
+.dataTables_filter {
+	float: left;
+}

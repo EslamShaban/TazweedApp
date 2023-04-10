@@ -12,7 +12,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function UploadAsset($data, $model, $info){
+    public function UploadAsset($data, $model, $info = null){
         
         $asset = $data['asset'];
         $path = $data['path_to_save'];

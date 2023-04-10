@@ -14,6 +14,7 @@ use App\Http\Controllers\API\OrderAPIController;
 use App\Http\Controllers\API\CaptainAPIController;
 use App\Http\Controllers\API\WashRequestAPIController;
 use App\Http\Controllers\API\QuestionAPIController;
+use App\Http\Controllers\API\SettingAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,9 +79,13 @@ Route::middleware(['APIAuth','api', 'Lang'])->group(function(){
                 Route::post('{id}/change_status', [WashRequestAPIController::class, 'change_status']);
             });
         });
-        
+                
+        Route::get('my_washrequests', [UserAPIController::class, 'my_washrequests']);
+
         Route::get('questions', [QuestionAPIController::class, 'get_questions']);
         Route::post('questions_answer', [QuestionAPIController::class, 'questions_answer']);
+
+        Route::get('settings', [SettingAPIController::class, 'settings']);
     });
 
 });

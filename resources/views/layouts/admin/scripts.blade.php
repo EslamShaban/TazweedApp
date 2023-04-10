@@ -7,7 +7,42 @@
     $('#dataTable').DataTable({
         "language": {
             "url": locale == 'ar' ? "https://cdn.datatables.net/plug-ins/1.11.3/i18n/ar.json" : "https://cdn.datatables.net/plug-ins/1.11.3/i18n/en.json"
-        }
+        },
+        dom: 'Blfrtip',
+        buttons: [
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: ':visible:not(:last-child)'
+                }
+            },
+            {
+                extend: 'csvHtml5',
+                exportOptions: {
+                    columns: ':visible:not(:last-child)'
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible:not(:last-child)'
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: ':visible:not(:last-child)',
+                    font: 'Arial, Helvetica, sans-serif',
+                }
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible:not(:last-child)'
+                }
+            }        
+
+        ]
     });
     
     var elements = CKEDITOR.document.find( '.editor' ),
@@ -122,6 +157,7 @@
             $("#service").hide();
         }
     }
+
 
     //$("a[href='" + window.location.href + "']").closest('.expanded').addClass('is-expanded');
 

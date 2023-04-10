@@ -18,8 +18,6 @@ return new class extends Migration
             $table->morphs('reviewable');
             $table->text('review');
             $table->double('rate');
-            $table->bigInteger('reviewer_id')->unsigned();
-            $table->foreign('reviewer_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

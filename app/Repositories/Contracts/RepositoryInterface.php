@@ -20,7 +20,7 @@ interface RepositoryInterface {
 
     public function first($columns = array('*'));
 
-    public function firstOrCreate();
+    public function firstOrCreate($data = array());
 
     public function where(array $fields, $columns = array('*'));
 

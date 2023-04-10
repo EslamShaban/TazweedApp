@@ -109,9 +109,4 @@
     </div>
     <!-- END: Content-->
 
-    @push('js')
-    <script src="{{ asset('dashboard/assets/js/custom/validation/AdminForm.js') }}"></script>
-    <script src="{{ asset('dashboard/app-assets/js/custom/preview-image.js') }}"></script>
-
-    @endpush
 @endsection

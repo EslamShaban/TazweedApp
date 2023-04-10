@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laratrust\Traits\LaratrustUserTrait;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Support\Facades\DB;
+
 class User extends Authenticatable implements JWTSubject
 {
     use LaratrustUserTrait;
@@ -106,6 +108,23 @@ class User extends Authenticatable implements JWTSubject
     public function shipping_addresses()
     {
         return $this->hasMany(ShippingAddress::class);
+    }
+
+    public function captain_wash_requests()
+    {
+        return $this->hasMany(WashRequest::class, 'captain_id');
+    }
+
+    //captain avg_rate
+    public function avg_rate()
+    {
+       return DB::table('wash_requests')
+                ->join('reviews', 'wash_requests.id', '=', 'reviews.reviewable_id')
+                ->where('wash_requests.captain_id', '=', $this->id)
+                ->where('reviews.reviewable_type', '=', 'App\Models\WashRequest')
+                ->select('reviews.rate')
+                ->pluck('rate')
+                ->avg();
     }
 }
 

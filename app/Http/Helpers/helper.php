@@ -38,10 +38,12 @@ if(! function_exists('arabicDate')){
     
         $day = app()->getLocale() == "ar" ? $days[date('D', $time)] : date('D', $time);
         $month = app()->getLocale() == "ar" ? $months[date('M', $time)] : date('M', $time);
-        $date = $day . ' ' . date('d', $time)  . ' - ' . $month;
-        $numbers_ar = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
-        $numbers_en = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        $year = date('Y', $time);
+        $date = $day . ' ' . date('d', $time)  . ' ' . $month . ' ' . $year;
+        // $numbers_ar = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
+        // $numbers_en = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     
-        return app()->getLocale() == "ar" ? str_replace($numbers_en, $numbers_ar, $date) : $date;
+        // return app()->getLocale() == "ar" ? str_replace($numbers_en, $numbers_ar, $date) : $date;
+        return $date;
     }
 }

@@ -27,6 +27,9 @@ return [
             'coupons'       => 'c,r,u,d',
             'orders'        => 'r',
             'questions'     => 'c,r,u,d',
+            'wash_requests' => 'r',
+            'settings'      => 'r,u',
+            'reports'       => 'r'
         ],
         'admin' => [],
         'client' => [],

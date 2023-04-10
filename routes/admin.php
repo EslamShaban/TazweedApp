@@ -16,6 +16,9 @@ use App\Http\Controllers\Admin\AddressTypeController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\QuestionController;
+use App\Http\Controllers\Admin\WashRequestController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\ReportController;
 
 Route::get('language/{locale}', function ($locale) {
 
@@ -76,6 +79,22 @@ Route::group(
 
         //questions
         Route::resource('questions', QuestionController::class)->name('*','questions');
+
+        //wash requests
+        Route::get('wash_requests', [WashRequestController::class, 'index'])->name('wash_requests.index');
+        Route::get('wash_requests/{id}', [WashRequestController::class, 'show'])->name('wash_requests.show');
+
+        //settings
+        Route::put('settings/update', [SettingController::class, 'update'])->name('settings.update');
+        Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
+
+        //reports
+
+        Route::get('reports',[ReportController::class,'index'])->name('reports.index');
+        Route::get('reports/bw_dates_report',[ReportController::class,'bw_dates_report'])->name('reports.bw_dates_report');
+        Route::get('reports/captain_reports',[ReportController::class,'captain_reports'])->name('reports.captain_reports');
+        Route::get('reports/captain_requests_statistics',[ReportController::class,'captain_requests_statistics'])->name('reports.captain_requests_statistics');
+        Route::get('reports/bw_dates_orders_report',[ReportController::class,'bw_dates_orders_report'])->name('reports.bw_dates_orders_report');
 
 });
 

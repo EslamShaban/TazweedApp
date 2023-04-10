@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('location');
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
+            $table->enum('status', ['created', 'waiting', 'approved', 'arrived', 'washing', 'finishing'])->default('created');
+            $table->double('tip')->default(0);
+            $table->double('delivery_price')->default(0);
             $table->foreign('client_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('captain_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

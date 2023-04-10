@@ -73,9 +73,9 @@ abstract class BaseRepository implements RepositoryInterface {
     /**
      * @return mixed
      */
-    public function firstOrCreate() {
+    public function firstOrCreate($data = array()) {
         
-        return $this->model->firstOrCreate();
+        return $this->model->firstOrCreate($data);
     }
     
     /**

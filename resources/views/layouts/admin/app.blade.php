@@ -129,11 +129,14 @@
     <script src="{{ asset('app-assets/vendors/js/tables/datatable/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('app-assets/vendors/js/tables/datatable/buttons.print.min.js') }}"></script>
     <script src="{{ asset('app-assets/vendors/js/tables/datatable/dataTables.rowGroup.min.js') }}"></script>
+     <script src="{{ asset('app-assets/js/scripts/components/components-collapse.js') }}"></script>
     <!-- END: DataTable JS-->
     <script src="{{asset('app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 
     <script src="{{asset('app-assets/js/scripts/forms/form-select2.js')}}"></script>
 
+    <script src="//cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    
     @if (session()->has('success'))
         <script>
             const Toast = Swal.mixin({

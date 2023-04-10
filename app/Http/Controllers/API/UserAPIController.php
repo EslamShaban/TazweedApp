@@ -11,12 +11,13 @@ use App\Repositories\UserRepository;
 use App\Http\Resources\UserResource;
 use App\Repositories\CityRepository;
 use App\Http\Resources\CityResource;
+use App\Http\Resources\WashRequestResource;
 use App\Http\Requests\API\UpdateProfileAPIRequest;
 use App\Http\Requests\API\ChangePasswordAPIRequest;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuthExceptions\JWTException;
 use Tymon\JWTAuth\Contracts\JWTSubject as JWTSubject;
-
+use App\Models\WashRequest;
 class UserAPIController extends Controller
 {
 
@@ -94,5 +95,20 @@ class UserAPIController extends Controller
 
         return response()->withSuccess(__('api.password_changed_successfully'), 200);
 
+    }
+
+    public function my_washrequests()
+    {
+        if(auth()->user()->account_type == 'captain'){
+        
+            $wash_requests = WashRequest::where('captain_id', auth()->user()->id)->get();
+
+        }else {
+                        
+            $wash_requests = WashRequest::where('client_id', auth()->user()->id)->get();
+
+        }
+
+        return response()->withData(__('api.my_washrequests'), ['washrequests' => WashRequestResource::collection($wash_requests)]);
     }
 }

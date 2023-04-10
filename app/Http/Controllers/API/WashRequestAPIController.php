@@ -14,6 +14,8 @@ use App\Http\Requests\API\ReviewAPIRequest;
 use Kreait\Firebase\Contract\Database;
 use App\Models\User;
 use App\Models\WashRequest;
+use App\Models\CaptainRequest;
+use App\Models\Setting;
 use App\Http\Helpers\Notification as FcmNotification;
 
 class WashRequestAPIController extends Controller
@@ -37,8 +39,9 @@ class WashRequestAPIController extends Controller
                             'client_id' => auth()->user()->id,
                             'location'  => $request->location,
                             'lat'       => $request->lat,
-                            'lng'       => $request->lng
-                        ]);
+                            'lng'       => $request->lng,
+                            'status'    => 'created'
+            ]);
 
             $request_captains_count = 0;
 
@@ -74,6 +77,13 @@ class WashRequestAPIController extends Controller
                         'status'        => 'created'
                     ];
 
+                    CaptainRequest::create([
+                        'captain_id' => $captain_id,
+                        'wash_request_id' => $washRequest->id,
+                        'arrival_time'  => $res['duration'],
+                        'distance' => $res['distance']
+                    ]);
+
                     $this->database->getReference('captain_requests/'.$captain_id)->update([$washRequest->id => $postData]);
 
                     $captain = User::find($captain_id);
@@ -83,7 +93,7 @@ class WashRequestAPIController extends Controller
                         'request_id' => $washRequest->id
                     ];
 
-                    FcmNotification::sendFCMNotification('Tazweed App', 'You have a new request', $captain->fcm, $data);
+                    FcmNotification::sendFCMNotification('GearShift App', 'You have a new request', $captain->fcm, $data);
 
                     $request_captains_count++;
                 // }
@@ -127,14 +137,19 @@ class WashRequestAPIController extends Controller
                 return response()->withError('you cant approve two requests', 5002);
         }        
 
+        //change status of captain request => This point is only important in reports, to give reports about requests that captain approved or reject
+        $captain_request = CaptainRequest::where('wash_request_id', $washrequest_id)->where('captain_id', $captain->id)->first();
+        $captain_request->status = 'approve';
+        $captain_request->save();
+
         $captainData = [
             'captain_id'    => $captain->id,
             'captain_image' => $captain->image_path,
             'captain_name'  => $captain->f_name . ' ' . $captain->l_name,
             'captain_phone' => $captain->phone,
-            'car_plate_number' => '127|kjl', //$captain->car->plate_number
-            'arrival_time' => '5m',
-            'washing_count' => 20
+            'car_plate_number' => $captain->car->plate_number ?? '127|kjl',
+            'arrival_time' => $captain_request->arrival_time,
+            'washing_count' => $captain->captain_wash_requests()->count()
         ];
 
         $update_request_status = [
@@ -145,6 +160,7 @@ class WashRequestAPIController extends Controller
                             
         $this->database->getReference('request_captains_approval/'. $washrequest_id)->update([$captain->id=>$captainData]);
 
+        WashRequest::where('id', $washrequest_id)->update(['status' => 'waiting']);
                     
         return response()->withSuccess(__('api.request_accepted'), 200);
 
@@ -160,6 +176,9 @@ class WashRequestAPIController extends Controller
         $captain = auth()->user();
                 
         $this->database->getReference('captain_requests/'. $captain->id . '/' . $washrequest_id)->remove();
+
+        //change status of captain request => This point is only important in reports, to give reports about requests that captain approved or reject
+        CaptainRequest::where('wash_request_id', $washrequest_id)->where('captain_id', $captain->id)->update(['status' => 'reject']);
 
         return response()->withSuccess(__('api.request_rejected'), 200);
     }
@@ -190,9 +209,11 @@ class WashRequestAPIController extends Controller
                 
         $this->database->getReference('request_captains_approval/'. $washrequest_id)->remove();
 
-        //update wash request, set captain id with the captain that the client approved him
+        $captain_request = CaptainRequest::where('wash_request_id', $washrequest_id)->where('captain_id', $captain_id)->first();
+        $delivery_price = Setting::first()->delivery_price * $captain_request->distance;
 
-        WashRequest::where('id', $washrequest_id)->update(['captain_id' => $captain_id]);
+        //update wash request, set captain id with the captain that the client approved him
+        WashRequest::where('id', $washrequest_id)->update(['captain_id' => $captain_id, 'status' => 'approved', 'delivery_price' => $delivery_price]);
 
         //update captain to unavailable
 
@@ -253,6 +274,8 @@ class WashRequestAPIController extends Controller
                 
         $this->database->getReference()->update($update_request_status);
 
+        WashRequest::where('id', $washrequest_id)->update(['status' => $request->status]);
+
                 
         return response()->withSuccess(__('api.request_status_changed'), 200);
 
@@ -289,9 +312,11 @@ class WashRequestAPIController extends Controller
 
         $washrequest->reviews()->create([
             'review'        => $request->review,
-            'rate'          => $request->rate,
-            'reviewer_id'   => auth()->user()->id
+            'rate'          => $request->rate
         ]);
+
+        $washrequest->tip = $request->tip ?? 0;
+        $washrequest->save();
 
         return response()->withSuccess(__('api.reviewed_successfully'), 200);
 
