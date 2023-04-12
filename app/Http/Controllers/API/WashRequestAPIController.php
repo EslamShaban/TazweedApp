@@ -210,10 +210,9 @@ class WashRequestAPIController extends Controller
         $this->database->getReference('request_captains_approval/'. $washrequest_id)->remove();
 
         $captain_request = CaptainRequest::where('wash_request_id', $washrequest_id)->where('captain_id', $captain_id)->first();
-        $delivery_price = Setting::first()->delivery_price * $captain_request->distance;
 
         //update wash request, set captain id with the captain that the client approved him
-        WashRequest::where('id', $washrequest_id)->update(['captain_id' => $captain_id, 'status' => 'approved', 'delivery_price' => $delivery_price]);
+        WashRequest::where('id', $washrequest_id)->update(['captain_id' => $captain_id, 'status' => 'approved']);
 
         //update captain to unavailable
 
@@ -274,9 +273,14 @@ class WashRequestAPIController extends Controller
                 
         $this->database->getReference()->update($update_request_status);
 
-        WashRequest::where('id', $washrequest_id)->update(['status' => $request->status]);
+        //WashRequest::where('id', $washrequest_id)->update(['status' => $request->status]);
 
-                
+        $wash_request = WashRequest::where('id', $washrequest_id)->first();
+        $wash_request->status = $request->status;
+        $wash_request->start_time = $request->status == 'washing' ? \Carbon\Carbon::now()->format('H:i:s') : $wash_request->start_time;
+        $wash_request->end_time = $request->status == 'finishing' ? \Carbon\Carbon::now()->format('H:i:s') : $wash_request->end_time;
+        $wash_request->save();
+        
         return response()->withSuccess(__('api.request_status_changed'), 200);
 
     }
