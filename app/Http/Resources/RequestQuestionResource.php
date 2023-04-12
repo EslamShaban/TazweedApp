@@ -15,9 +15,9 @@ class RequestQuestionResource extends JsonResource
     public function toArray($request)
     {
         if($this->questionable_type == 'category'){
-            $type = \App\Model\Category::where('id', $this->questionable_id)->first();
+            $type = \App\Models\Category::where('id', $this->questionable_id)->first();
         }else{
-            $type = \App\Model\Service::where('id', $this->questionable_id)->first();
+            $type = \App\Models\Service::where('id', $this->questionable_id)->first();
         }
         return [
             'id'        => $this->id,
