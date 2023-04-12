@@ -11,6 +11,7 @@ use App\Http\Requests\API\WashAPIRequest;
 use App\Http\Requests\API\CaptainApproveRequest;
 use App\Http\Requests\API\ChangeStatusAPIRequest;
 use App\Http\Requests\API\ReviewAPIRequest;
+use App\Http\Requests\API\UploadCaptainImageAPIRequest;
 use Kreait\Firebase\Contract\Database;
 use App\Models\User;
 use App\Models\WashRequest;
@@ -285,6 +286,28 @@ class WashRequestAPIController extends Controller
 
     }
 
+    public function upload_captain_image(UploadCaptainImageAPIRequest $request, $washrequest_id)
+    {
+        $captain = auth()->user();
+
+        $washRequest = $this->washRequestRepository->find($washrequest_id);
+
+        if(! $washRequest){
+            return response()->withError(__('api.request_not_found'), 5003);
+        }
+
+        if($request->has('image')){
+            
+            $info = array('type' => 'captain_image');
+
+            $this->UploadAsset(['asset'=>$request->image, 'path_to_save'=>'assets/uploads/wash_requests/captain'], $washRequest, $info);
+
+        }
+                
+        return response()->withSuccess(__('api.image_uploaded_successfully'), 200);
+
+    }
+    
     public function clear_request($request_id)
     {
         

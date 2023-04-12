@@ -77,6 +77,7 @@ Route::middleware(['APIAuth','api', 'Lang'])->group(function(){
                 Route::post('{id}/approve', [WashRequestAPIController::class, 'captain_approval']);
                 Route::post('{id}/reject', [WashRequestAPIController::class, 'captain_rejected']);
                 Route::post('{id}/change_status', [WashRequestAPIController::class, 'change_status']);
+                Route::post('{id}/upload_captain_image', [WashRequestAPIController::class, 'upload_captain_image']);
             });
         });
                 
