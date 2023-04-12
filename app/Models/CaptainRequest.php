@@ -12,6 +12,8 @@ class CaptainRequest extends Model
     protected $fillable = [
         'captain_id',
         'wash_request_id',
+        'arrival_time', 
+        'distance',
         'status'
     ];
 }
