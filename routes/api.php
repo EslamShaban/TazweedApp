@@ -51,6 +51,7 @@ Route::middleware(['APIAuth','api', 'Lang'])->group(function(){
         Route::get('home', [HomeAPIController::class, 'home']);
         Route::get('products', [ProductAPIController::class, 'get_all_products']);
         Route::get('products/{id}/details', [ProductAPIController::class, 'product_details']);
+        Route::get('category/{id}/products', [ProductAPIController::class, 'category_products']);
         Route::get('offers', [ProductAPIController::class, 'get_all_offers']);
         Route::get('search_filters', [SearchAPIController::class, 'search_filters']);
         Route::post('search', [SearchAPIController::class, 'search']);

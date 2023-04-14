@@ -24,4 +24,9 @@ class Category extends Model implements TranslatableContract
     {
         return $this->morphOne(Asset::class, 'assetable');
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

@@ -8,6 +8,7 @@ use App\Repositories\ProductRepository;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductDetailsResource;
 use App\Models\Product;
+use App\Models\Category;
 
 class ProductAPIController extends Controller
 {
@@ -46,6 +47,18 @@ class ProductAPIController extends Controller
         $offers = Product::Offers()->latest()->get();
 
         return response()->withData(__('api.all_offers'), ['offers' => ProductResource::collection($offers)]);
+    }
+
+    public function category_products($id)
+    {
+        $category = Category::find($id);
+                
+        if(!$category){
+            return response()->withError(__('api.category_not_found'), 5001, 'category_id');
+        }
+
+        return response()->withData(__('api.category_products'), ['products' => ProductResource::collection($category->products)]);
+
     }
 
 }
