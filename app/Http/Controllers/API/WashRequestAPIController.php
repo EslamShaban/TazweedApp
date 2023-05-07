@@ -18,6 +18,7 @@ use App\Models\WashRequest;
 use App\Models\CaptainRequest;
 use App\Models\Setting;
 use App\Http\Helpers\Notification as FcmNotification;
+use App\Http\Resources\WashRequestResource;
 
 class WashRequestAPIController extends Controller
 {
@@ -346,6 +347,18 @@ class WashRequestAPIController extends Controller
         $washrequest->save();
 
         return response()->withSuccess(__('api.reviewed_successfully'), 200);
+
+    }
+
+    public function get_washrequest_by_id($request_id)
+    {
+        $wash_request = WashRequest::find($request_id);
+        
+        if($wash_request){
+            return response()->withError(__('api.request_not_exist'), 5001, 'washrequest_id');
+        }
+
+        return response()->withData(__('api.washrequest_details'), new WashRequestResource($wash_request));
 
     }
 

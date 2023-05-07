@@ -83,6 +83,7 @@ Route::middleware(['APIAuth','api', 'Lang'])->group(function(){
         });
                 
         Route::get('my_washrequests', [UserAPIController::class, 'my_washrequests']);
+        Route::get('washrequest/{id}', [WashRequestAPIController::class, 'get_washrequest_by_id']);
 
         Route::get('questions', [QuestionAPIController::class, 'get_questions']);
         Route::post('questions_answer', [QuestionAPIController::class, 'questions_answer']);
