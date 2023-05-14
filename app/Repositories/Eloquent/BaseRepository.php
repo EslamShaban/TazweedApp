@@ -208,10 +208,11 @@ abstract class BaseRepository implements RepositoryInterface {
     }
 
     /**
-     * 
+     * @param array $columns
+     * @return mixed
      */
-    public function latest() {
-        return $this->model->latest();
+    public function latest($columns = array('*')) {
+        return $this->model->latest()->get($columns);
     }
 
      /**

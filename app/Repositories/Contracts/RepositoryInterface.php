@@ -32,7 +32,7 @@ interface RepositoryInterface {
 
     public function getUserBaseRole(array $roles, $columns = array('*'));
 
-    public function latest();
+    public function latest($columns = array('*'));
 
 
 }
