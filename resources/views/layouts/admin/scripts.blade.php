@@ -158,6 +158,21 @@
         }
     }
 
+        
+    function show_discount_price_input(checkbox){
+        const discountPriceDiv = document.getElementById('discount_price_div');
+        const discountPriceInput = document.getElementById('discount_price');
+
+        if (checkbox.checked) {
+            discountPriceDiv.style.display = 'block';
+            discountPriceInput.required = true;
+
+        } else {
+            discountPriceDiv.style.display = 'none';
+            discountPriceInput.required = false;
+
+        }
+    }
 
     //$("a[href='" + window.location.href + "']").closest('.expanded').addClass('is-expanded');
 

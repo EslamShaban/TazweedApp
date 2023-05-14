@@ -115,6 +115,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(WashRequest::class, 'captain_id');
     }
 
+    public function client_wash_requests()
+    {
+        return $this->hasMany(WashRequest::class, 'client_id');
+    }
+
     //captain avg_rate
     public function avg_rate()
     {

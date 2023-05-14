@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Repositories\UserRepository;
 use App\Repositories\RoleRepository;
 use App\Http\Requests\Admin\AdminRequest;
+use App\Http\Requests\Admin\UpdateProfileRequest;
 use App\Models\User;
 use App\Models\Role;
 
@@ -149,4 +150,47 @@ class AdminController extends Controller
         }
     }
 
+        
+    public function profile()
+    {
+        $admin = auth()->user();
+        return view('admin.admins.profile' , compact('admin'));
+    }
+
+    public function updateProfile(UpdateProfileRequest $request)
+    {
+        $admin = User::find(auth()->user()->id);
+                
+        try {
+
+            DB::beginTransaction();
+
+            $data = $request->except('_token', '_method', 'password');
+
+            if(request()->has('password') && $request->password != null){
+                $data['password'] = bcrypt($request->password);
+            }
+
+            $this->userRepository->update($data, $admin->id);
+
+            if($request->has('image')){
+
+                $this->DeleteAsset($admin);
+                $this->UploadAsset(['asset'=>$request->image, 'path_to_save'=>'assets/uploads/users'], $admin);
+            }
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'تم تعديل الحقل بنجاح');
+
+        } catch (\Throwable $th) {
+           
+            DB::rollBack();
+    
+            throw $th;
+        
+            return redirect()->back()->with('error', 'حدث خطأ ما');
+        
+        }
+    }
 }

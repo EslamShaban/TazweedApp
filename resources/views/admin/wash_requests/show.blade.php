@@ -35,9 +35,9 @@
                                     </div>
                                                                 
                                     <div class="user-data">
-                                        <p><span style="font-weight:bold"> {{ __('admin.client_name') }} :</span> {{ $wash_request->client->f_name . ' ' . $wash_request->client->l_name}}</p>
-                                        <p><span style="font-weight:bold"> {{ __('admin.client_email') }} :</span> {{ $wash_request->client->email }} </p>
-                                        <p><span style="font-weight:bold">عدد الطلبات :</span>22</p>
+                                        <p><span style="font-weight:bold"> {{ __('admin.client_name') }} : </span> {{ $wash_request->client->f_name . ' ' . $wash_request->client->l_name}}</p>
+                                        <p><span style="font-weight:bold"> {{ __('admin.client_email') }} : </span> {{ $wash_request->client->email }} </p>
+                                        <p><span style="font-weight:bold"> {{__('admin.wash_request_count') }} : </span>{{$wash_request->client->client_wash_requests()->count()}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -48,13 +48,13 @@
                                 <hr>
                                 <div class="flex" style="display: flex">
                                     <div class="image" style="margin-left:10px">
-                                        <img src="{{ $wash_request->client->image_path }}"  height="50" width="50" >
+                                        <img src="{{ $wash_request->captain->image_path }}"  height="50" width="50" >
                                     </div>
                                                                 
                                     <div class="user-data">
-                                        <p><span style="font-weight:bold"> {{ __('admin.captain_name') }} :</span>{{ $wash_request->captain->f_name . ' ' . $wash_request->captain->l_name}}</p>
-                                        <p><span style="font-weight:bold"> {{ __('admin.captain_email') }} :</span>{{ $wash_request->captain->email }}</p>
-                                        <p><span style="font-weight:bold">عدد الغسلات :</span>22</p>
+                                        <p><span style="font-weight:bold"> {{ __('admin.captain_name') }} : </span>{{ $wash_request->captain->f_name . ' ' . $wash_request->captain->l_name}}</p>
+                                        <p><span style="font-weight:bold"> {{ __('admin.captain_email') }} : </span>{{ $wash_request->captain->email }}</p>
+                                        <p><span style="font-weight:bold"> {{__('admin.wash_request_count') }} : </span>{{$wash_request->captain->captain_wash_requests()->count()}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -71,27 +71,22 @@
                     <h4 style="text-align: center">{{ __('admin.service_cost') }}</h4>
                     <div class="price" style="display: flex;justify-content: space-around;">
                         <p>{{ __('admin.service_price') }}</p>
-                        <p>{{ \App\Models\Setting::first()->service_price  . ' ' . __('admin.eg_pound')}}</p>
-                    </div>
-                    <hr>
-                    <div class="price" style="display: flex;justify-content: space-around;">
-                        <p>{{ __('admin.delivery_price') }}</p>
-                        <p>{{ \App\Models\Setting::first()->delivery_price  . ' ' . __('admin.eg_pound')}}</p>
+                        <p>{{ \App\Models\Setting::first()->service_price  . ' ' . __('admin.currency')}}</p>
                     </div>
                     <hr>
                     <div class="price" style="display: flex;justify-content: space-around;">
                         <p>{{ __('admin.tax') }}</p>
-                        <p>{{ \App\Models\Setting::first()->tax  . ' ' . __('admin.eg_pound')}}</p>
+                        <p>{{ \App\Models\Setting::first()->tax  . ' ' . __('admin.currency')}}</p>
                     </div>
                     <hr>
                     <div class="price" style="display: flex;justify-content: space-around;">
                         <p>{{ __('admin.tip') }}</p>
-                        <p>{{ \App\Models\Setting::first()->tax  . ' ' . __('admin.eg_pound')}}</p>
+                        <p>{{ $wash_request->tip  . ' ' . __('admin.currency')}}</p>
                     </div>
                     <hr>
                     <div class="price" style="display: flex;justify-content: space-around;">
                         <p>{{ __('admin.total') }}</p>
-                        <p>{{ \App\Models\Setting::first()->tax  . ' ' . __('admin.eg_pound')}}</p>
+                        <p>{{ $wash_request->total_price()  . ' ' . __('admin.currency')}}</p>
                     </div>
                 </div>
                 <div class="request-images request-style" >
@@ -100,13 +95,19 @@
                         <div class="before">
                             <h4 style="text-align: center; margin-bottom:20px"> {{ __('admin.images_before_washing') }} </h4>
                             @foreach ($wash_request->images('before') as $image)
-                                <img src="{{ $image }}"  style="width: 100px;height: 100px;border-radius: 5px;box-shadow: 0 4px 24px 0 rgba(34, 41, 47, 0.1);margin-bottom:5px">
+                            	<img class="request-img" src="{{ $image }}" onclick="showPopup(this.src)">
+                                <div class="popup" onclick="hidePopup()">
+                                    <img id="popupImg">
+                                </div>
                             @endforeach
                         </div>
                         <div class="after">
                             <h4 style="text-align: center; margin-bottom:20px"> {{ __('admin.images_after_washing') }} </h4>
                             @foreach ($wash_request->images('after') as $image)
-                                <img src="{{ $image }}"  style="width: 100px;height: 100px;border-radius: 5px;box-shadow: 0 4px 24px 0 rgba(34, 41, 47, 0.1);margin-bottom:5px">
+                                <img class="request-img" src="{{ $image }}" onclick="showPopup(this.src)">
+                                <div class="popup" onclick="hidePopup()">
+                                    <img id="popupImg">
+                                </div>
                             @endforeach
                         </div>
                     </div>

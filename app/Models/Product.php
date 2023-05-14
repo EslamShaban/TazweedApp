@@ -17,6 +17,7 @@ class Product extends Model implements TranslatableContract
         'type',
         'manufacturing_year',
         'price',
+        'is_offer',
         'discount_price',
         'category_id',
         'car_type_id',
@@ -33,7 +34,7 @@ class Product extends Model implements TranslatableContract
         
     public function scopeOffers($q) 
     {
-        return $q->where('discount_price', '>', 0);
+        return $q->where('is_offer', 1);
     }
 
     public function asset()

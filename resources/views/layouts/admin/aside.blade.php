@@ -3,7 +3,7 @@
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto">
-                <a class="navbar-brand" href="../../../html/rtl/vertical-menu-template/index.html">
+                <a class="navbar-brand" href="{{ route('admin.index') }}">
                     <span class="brand-logo text-center">
                         {{-- <svg id="svgexport-6_-_2022-07-22T211411.842" data-name="svgexport-6 - 2022-07-22T211411.842" xmlns="http://www.w3.org/2000/svg" width="55" height="55" viewBox="0 0 130.914 131.229">
                             <g id="Group_6192" data-name="Group 6192" transform="translate(0 0)">

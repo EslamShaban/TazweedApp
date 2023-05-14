@@ -88,16 +88,21 @@
 
                                             <div class="col-md-6 col-12 mb-3">
                                                 <label for="price">{{ __('admin.price') }}</label>
-                                                <input type="number" id="price" class="form-control" name="price" value="{{ $product->price }}" required/>
+                                                <input type="number" step="any" id="price" class="form-control" name="price" value="{{ $product->price }}" required/>                                
+                                                <div class="custom-control custom-control-primary custom-switch mt-1">
+                                                    <input type="hidden" name="is_offer" value="0" />
+                                                    <input type="checkbox" name="is_offer" class="custom-control-input" id="customSwitch3" value="1"  @if($product->is_offer) checked @endif   onchange="show_discount_price_input(this)"/>
+                                                    <label class="custom-control-label" for="customSwitch3">{{ __('admin.offer')}}</label>
+                                                </div>
                                                 @error('price')
                                                     <span class="text-danger">
                                                         <small class="errorTxt">{{ $message }}</small>
                                                     </span>
                                                 @enderror
                                             </div>                          
-                                            <div class="col-md-6 col-12 mb-3">
+                                            <div class="col-md-6 col-12 mb-3"  @if(!$product->is_offer) {{ "style=display:none" }} @endif id="discount_price_div">
                                                 <label for="discount_price">{{ __('admin.discount_price') }}</label>
-                                                <input type="number" id="discount_price" class="form-control" name="discount_price" value="{{ $product->discount_price }}" />
+                                                <input type="number" step="any" id="discount_price" class="form-control" name="discount_price" value="{{ $product->discount_price }}" />
                                                 @error('discount_price')
                                                     <span class="text-danger">
                                                         <small class="errorTxt">{{ $message }}</small>

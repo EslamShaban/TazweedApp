@@ -35,7 +35,7 @@
                                     <div class="col-6">
                                         <div class="mb-1">
                                             <label for="captain_id">{{ __('admin.captains') }}</label>                                                                                                
-                                            <select name="captain_id" class="form-control">
+                                            <select name="captain_id" class="select2 form-control">
                                                 <option value="">{{ __('admin.captains')}}</option>
                                                 @foreach (\App\Models\User::where('account_type', 'captain')->get() as $captain)
                                                     <option value="{{$captain->id}}" @selected($captain->id == request('captain_id'))>{{ $captain->f_name . ' ' . $captain->l_name }}</option>

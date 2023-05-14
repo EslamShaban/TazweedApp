@@ -33,7 +33,7 @@ class HomeAPIController extends Controller
     {
         
         $categories = $this->categoryRepository->all();
-        $products = $this->productRepository->where(['discount_price'=> null]);
+        $products = $this->productRepository->where(['is_offer'=> 0]);
         $offers = Product::Offers()->latest()->take(3)->get();
         $services = $this->serviceRepository->all();
         

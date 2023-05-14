@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('type', ['original','high-copy', 'copy']);
             $table->string('manufacturing_year');
             $table->double('price')->default(0);
+            $table->boolean('is_offer')->default(0);
             $table->double('discount_price')->nullable()->default(0);
             $table->bigInteger('category_id')->unsigned()->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');

@@ -59,4 +59,15 @@ class WashRequest extends Model
         $question = $this->questions()->where('question_id', $question_id)->first();
         return $question ? $question->pivot->answer : __('admin.not_found');
     }
+
+    public function total_price()
+    {
+        $setting = Setting::first();
+        $service_price = $setting->service_price ;
+        $tax = $setting->tax ;
+        $tip = $this->tip;
+
+        return $service_price + $tax + $tip;
+
+    }
 }

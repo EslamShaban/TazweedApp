@@ -45,6 +45,9 @@ Route::group(
 
         //admins
         Route::resource('admins', AdminController::class)->name('*','admins');
+        Route::get('profile', [AdminController::class, 'profile'])->name('profile');
+        Route::post('update-profile', [AdminController::class,'updateProfile'])->name('update_profile');
+
         
         //clients
         Route::resource('clients', ClientController::class)->name('*','clients');

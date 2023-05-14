@@ -39,7 +39,7 @@ class OrderAPIController extends Controller
 
                 $product = Product::find($item['product_id']);
 
-                $product_price =  $product->discount_price == null ? $product->price : $product->discount_price ;
+                $product_price =  $product->is_offer == 0 ? $product->price : $product->discount_price ;
 
                 $item_total_price = $product_price * $item['qty'];
                                         

@@ -72,7 +72,6 @@
     @endif
       
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/forms/select/select2.min.css')}}">
-
   </head>
   <!-- END: Head-->
   <body class="vertical-layout vertical-menu-modern  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="">
@@ -190,6 +189,19 @@
             }
         })
     </script>
+    	<script>
+		function showPopup(imgSrc) {
+			var popupImg = document.getElementById("popupImg");
+			popupImg.src = imgSrc;
+			var popup = document.querySelector(".popup");
+			popup.style.display = "block";
+		}
+
+		function hidePopup() {
+			var popup = document.querySelector(".popup");
+			popup.style.display = "none";
+		}
+	</script>
     @include('layouts.admin.scripts')
   </body>
 </html>
