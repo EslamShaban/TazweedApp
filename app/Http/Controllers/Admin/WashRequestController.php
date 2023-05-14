@@ -26,7 +26,7 @@ class WashRequestController extends Controller
      */
     public function index()
     {
-        $wash_requests = $this->washRequestRepository->all();
+        $wash_requests = $this->washRequestRepository->latest();
 
         return view('admin.wash_requests.index', compact('wash_requests'));
     }

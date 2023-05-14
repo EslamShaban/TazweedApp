@@ -207,6 +207,13 @@ abstract class BaseRepository implements RepositoryInterface {
 
     }
 
+    /**
+     * 
+     */
+    public function latest() {
+        return $this->model->latest();
+    }
+
      /**
      * @param array $roles
      * @param array $columns

@@ -20,7 +20,7 @@ class OrderController extends Controller
 
     public function index()
     {
-        $orders = $this->orderRepository->all();
+        $orders = $this->orderRepository->latest();
 
         return view('admin.orders.index', compact('orders'));
     }
