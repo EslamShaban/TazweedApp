@@ -12,6 +12,9 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\CarTypeController;
 use App\Http\Controllers\Admin\CarModelController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\AttributeValueController;
 use App\Http\Controllers\Admin\AddressTypeController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\OrderController;
@@ -36,10 +39,10 @@ Route::group(
 
         //home
         Route::get('/', [HomeController::class,'index'])->name('index');
-        
+
         //roles
         Route::resource('roles', RoleController::class)->name('*','roles');
-        
+
         //cities
         Route::resource('cities', CityController::class)->name('*','cities');
 
@@ -48,7 +51,7 @@ Route::group(
         Route::get('profile', [AdminController::class, 'profile'])->name('profile');
         Route::post('update-profile', [AdminController::class,'updateProfile'])->name('update_profile');
 
-        
+
         //clients
         Route::resource('clients', ClientController::class)->name('*','clients');
 
@@ -66,10 +69,25 @@ Route::group(
 
         //car models
         Route::resource('car_models', CarModelController::class)->name('*','car_models');
-                
+
         //products
         Route::resource('products', ProductController::class)->name('*','products');
-                
+
+        Route::get('product_attributes', [ProductController::class, 'products_attributes'])->name('product_attributes');
+        Route::post('product_attributes', [ProductController::class, 'store_product_attributes'])->name('store_product_attributes');
+        Route::get('delete_product_variant/{id}', [ProductController::class, 'delete_product_variant'])->name('delete_product_variant');
+        Route::get('product_variants/{id}', [ProductController::class, 'product_variants'])->name('product_variants');
+        Route::post('product_variants', [ProductController::class, 'store_product_variants'])->name('store_product_variants');
+
+        //attributes
+        Route::resource('attributes', AttributeController::class)->name('*','attributes');
+
+        //brands
+        Route::resource('brands', BrandController::class)->name('*','brands');
+
+        //attribute_values
+        Route::resource('attribute_values', AttributeValueController::class)->name('*','attribute_values');
+
         //address types
         Route::resource('address_types', AddressTypeController::class)->name('*','address_types');
 

@@ -18,12 +18,12 @@ class ProductRequest extends FormRequest
 
     /**
      *  validation rules that apply to the Create request
-     * 
-     *  @return 
+     *
+     *  @return
      */
 
     protected function onCreate(){
-                
+
         $rules = [
             'image'                 => ['required', 'image', 'mimes:jpg,jpeg,png,gif'],
             'category_id'           => ['required', 'exists:categories,id'],
@@ -36,6 +36,9 @@ class ProductRequest extends FormRequest
             'type'                  => ['required', 'in:original,high-copy,copy'],
             'manufacturing_year'    => ['required'],
             'manufacture_country'   => ['required', 'exists:countries,id'],
+            'quantity'              => ['required|numeric|min:0'],
+            'brand_id'              => ['required|integer'],
+            'sku'                   => ['string'],
 
         ];
 
@@ -48,10 +51,10 @@ class ProductRequest extends FormRequest
         return $rules;
 
      }
-         
+
      /**
      *  validation rules that apply to the Update request
-     * 
+     *
      *  @return array
      */
 
@@ -69,6 +72,9 @@ class ProductRequest extends FormRequest
             'type'                  => ['required', 'in:original,high-copy,copy'],
             'manufacturing_year'    => ['required'],
             'manufacture_country'   => ['required', 'exists:countries,id'],
+            'quantity'              => ['required|numeric|min:0'],
+            'brand_id'              => ['required|integer'],
+            'sku'                   => ['string'],
         ];
 
         foreach(config('translatable.locales') as $locale){
@@ -87,7 +93,7 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
-        return request()->isMethod('put') || request()->isMethod('patch') ? 
+        return request()->isMethod('put') || request()->isMethod('patch') ?
         $this->onUpdate() : $this->onCreate();
 
     }
@@ -110,7 +116,10 @@ class ProductRequest extends FormRequest
             'manufacturing_year'    => __('admin.manufacturing_year'),
             'ar.features'           => __('admin.ar.features'),
             'en.features'           => __('admin.en.features'),
+            'quantity'              => __('admin.quantity'),
+            'brand_id'              => __('admin.brand'),
+            'sku'                   => __('admin.sku'),
         ];
-        
+
     }
 }

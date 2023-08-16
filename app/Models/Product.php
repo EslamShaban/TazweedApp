@@ -21,18 +21,24 @@ class Product extends Model implements TranslatableContract
         'discount_price',
         'category_id',
         'car_type_id',
-        'manufacture_country'
+        'manufacture_country',
+        'brand_id',
+        'type',
+        'sku',
+        'quantity',
+        'pro_features',
+
     ];
 
-        
+
     public function getImagePathAttribute(){
-         
+
         return asset($this->asset->url);
-        
+
     }
 
-        
-    public function scopeOffers($q) 
+
+    public function scopeOffers($q)
     {
         return $q->where('is_offer', 1);
     }
@@ -47,12 +53,17 @@ class Product extends Model implements TranslatableContract
         return $this->belongsTo(Category::class);
     }
 
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
     public function car_type()
     {
         return $this->belongsTo(CarType::class);
     }
 
-        
+
     public function car_models()
     {
         return $this->belongsToMany(CarModel::class, 'product_car_models');

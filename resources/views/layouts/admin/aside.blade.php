@@ -31,7 +31,7 @@
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('admin.index') }}"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboards">{{ __('admin.dashboard') }}</span></a>
-                                
+
             {{-- roles --}}
             @if(auth()->user()->hasPermission('roles-read'))
                 <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.roles.index') }}"><i data-feather="lock"></i><span class="menu-title text-truncate" data-i18n="user">{{ __('admin.roles') }}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{ \App\Models\Role::Roles()->count() }})</span></a></li>
@@ -62,6 +62,21 @@
                 <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.categories.index') }}"><i data-feather="list"></i><span class="menu-title text-truncate" data-i18n="user">{{__('admin.categories')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Category::count()}})</span></a></li>
             @endif
 
+            {{-- brands --}}
+            {{-- @if(auth()->user()->hasPermission('brands-read')) --}}
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.brands.index') }}"><i data-feather="list"></i><span class="menu-title text-truncate" data-i18n="user">{{__('admin.brands')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Brand::count()}})</span></a></li>
+            {{-- @endif --}}
+
+            {{-- attributes --}}
+            {{-- @if(auth()->user()->hasPermission('attributes-read')) --}}
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.attributes.index') }}"><i data-feather="list"></i><span class="menu-title text-truncate" data-i18n="user">{{__('admin.attributes')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Attribute::count()}})</span></a></li>
+            {{-- @endif --}}
+
+            {{-- attribute_values --}}
+            {{-- @if(auth()->user()->hasPermission('attribute_values-read')) --}}
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.attribute_values.index') }}"><i data-feather="list"></i><span class="menu-title text-truncate" data-i18n="user">{{__('admin.attribute_values')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\AttributeValue::count()}})</span></a></li>
+            {{-- @endif --}}
+
             {{-- services --}}
             @if(auth()->user()->hasPermission('services-read'))
                 <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.services.index') }}"><i data-feather="crop"></i><span class="menu-title text-truncate" data-i18n="user">{{__('admin.services')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Service::count()}})</span></a></li>
@@ -71,7 +86,7 @@
             @if(auth()->user()->hasPermission('car_types-read'))
                 <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.car_types.index') }}"><i class="fas fa-car"></i><span class="menu-title text-truncate" data-i18n="cars">{{ __('admin.car_types') }}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\CarType::count()}})</span></a></li>
             @endif
-            
+
             {{-- car models --}}
             @if(auth()->user()->hasPermission('car_models-read'))
                 <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.car_models.index') }}"><i class="fas fa-car"></i><span class="menu-title text-truncate" data-i18n="user">{{ __('admin.car_models')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\CarModel::count()}})</span></a></li>
@@ -81,7 +96,7 @@
             @if(auth()->user()->hasPermission('products-read'))
                 <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.products.index') }}"><i data-feather="tag"></i><span class="menu-title text-truncate" data-i18n="user">{{__('admin.products')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Product::count()}})</span></a></li>
             @endif
-     
+
             {{-- address types --}}
             @if(auth()->user()->hasPermission('address_types-read'))
                 <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.address_types.index') }}"><i data-feather="tag"></i><span class="menu-title text-truncate" data-i18n="user">{{__('admin.address_types')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\AddressType::count()}})</span></a></li>
@@ -112,7 +127,7 @@
                 <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.settings.index') }}"><i data-feather="tag"></i><span class="menu-title text-truncate" data-i18n="user">{{__('admin.settings')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Setting::count()}})</span></a></li>
             @endif
 
-            {{--  reports  --}}            
+            {{--  reports  --}}
             @if(auth()->user()->hasPermission('reports-read'))
 
                 <li class=" nav-item ">
@@ -123,7 +138,7 @@
                         </li>
                         <li>
                             <a class="d-flex align-items-center" href="{{ route('admin.reports.captain_reports') }}"><i data-feather="file"></i><span class="menu-item text-truncate" data-i18n="List">{{ __('admin.captain_reports') }}</span></a>
-                        </li>                 
+                        </li>
                         <li>
                             <a class="d-flex align-items-center" href="{{ route('admin.reports.captain_requests_statistics') }}"><i data-feather="file"></i><span class="menu-item text-truncate" data-i18n="List">{{ __('admin.captain_requests_statistics') }}</span></a>
                         </li>
