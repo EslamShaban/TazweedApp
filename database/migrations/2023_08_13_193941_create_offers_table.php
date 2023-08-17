@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('start_at')->nullable();
-            $table->dateTime('end_at')->nullable();
+            $table->dateTime('start_date')->nullable();
+            $table->dateTime('end_date')->nullable();
             $table->string('discount_type')->nullable();
             $table->double('discount_amount')->default(0);
             $table->timestamps();

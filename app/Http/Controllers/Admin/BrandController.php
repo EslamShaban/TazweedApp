@@ -142,7 +142,6 @@ class BrandController extends Controller
 
             DB::beginTransaction();
 
-            $this->DeleteAsset($brand);
             $this->brandRepository->delete($brand->id);
 
             DB::commit();

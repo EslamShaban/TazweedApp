@@ -145,7 +145,6 @@ class AttributeValueController extends Controller
 
             DB::beginTransaction();
 
-            $this->DeleteAsset($attributeValue);
             $this->attributeValueRepository->delete($attributeValue->id);
 
             DB::commit();

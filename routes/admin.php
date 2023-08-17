@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\CarModelController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\AttributeValueController;
 use App\Http\Controllers\Admin\AddressTypeController;
 use App\Http\Controllers\Admin\CouponController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\WashRequestController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Models\Offer;
 
 Route::get('language/{locale}', function ($locale) {
 
@@ -60,6 +62,14 @@ Route::group(
 
         //categories
         Route::resource('categories', CategoryController::class)->name('*','categories');
+
+        //offers
+        Route::resource('offers', OfferController::class)->name('*','offers')->except([
+            'show'
+        ]);
+
+        Route::get('/offers/all-products', [OfferController::class, 'getAllProducts'])->name('offers.getAllProducts');
+        Route::get('/offers/all-categories', [OfferController::class, 'getAllCategories'])->name('offers.getAllCategories');
 
         //services
         Route::resource('services', ServiceController::class)->name('*','services');

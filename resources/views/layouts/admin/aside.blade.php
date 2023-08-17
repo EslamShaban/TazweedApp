@@ -67,6 +67,11 @@
                 <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.brands.index') }}"><i data-feather="list"></i><span class="menu-title text-truncate" data-i18n="user">{{__('admin.brands')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Brand::count()}})</span></a></li>
             {{-- @endif --}}
 
+            {{-- offers --}}
+            {{-- @if(auth()->user()->hasPermission('offers-read')) --}}
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.offers.index') }}"><i data-feather="list"></i><span class="menu-title text-truncate" data-i18n="user">{{__('admin.offers')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Offer::count()}})</span></a></li>
+            {{-- @endif --}}
+
             {{-- attributes --}}
             {{-- @if(auth()->user()->hasPermission('attributes-read')) --}}
                 <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('admin.attributes.index') }}"><i data-feather="list"></i><span class="menu-title text-truncate" data-i18n="user">{{__('admin.attributes')}}</span><span class="badge badge-light-primary badge-pill ml-auto mr-1">({{\App\Models\Attribute::count()}})</span></a></li>

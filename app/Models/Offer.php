@@ -13,9 +13,15 @@ class Offer extends Model implements TranslatableContract
 
     public $translatedAttributes = ['name'];
     protected $fillable = [
-        'start_at',
-        'end_at',
+        'start_date',
+        'end_date',
         'discount_type',
         'discount_amount',
     ];
+
+
+    public function offerDetails()
+    {
+        return $this->hasMany(OfferDetails::class,'offer_id');
+    }
 }
