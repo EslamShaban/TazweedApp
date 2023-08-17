@@ -36,8 +36,8 @@
                                 <div class="card-body">
                                     <form class="form form-vertical needs-validation" action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
-                                        <div class="row"> 
-                                            <div class="col-md-12">           
+                                        <div class="row">
+                                            <div class="col-md-12">
                                                 <label for="image">{{__('admin.image')}}</label>
                                                 <div class="uploadOuter">
                                                     <span class="dragBox" >
@@ -46,8 +46,8 @@
                                                     </span>
                                                 </div>
                                                 <div id="preview"></div>
-                                            </div>                                    
-                                            @foreach (config('translatable.locales') as $locale)                                   
+                                            </div>
+                                            @foreach (config('translatable.locales') as $locale)
                                                 <div class="col-md-6 col-12 mb-3">
                                                     <label for="{{$locale}}.name">{{ __('admin.'. $locale . '.product_name')}}</label>
                                                     <input type="text" id="{{$locale}}.name" class="form-control" name="{{$locale}}[name]" value="{{old($locale . '.name')}}" required/>
@@ -57,9 +57,9 @@
                                                         </span>
                                                     @enderror
                                                 </div>
-                                            @endforeach   
-                                                                                                                             
-                                            @foreach (config('translatable.locales') as $locale)                                   
+                                            @endforeach
+
+                                            @foreach (config('translatable.locales') as $locale)
                                                 <div class="col-md-6 col-12 mb-3">
                                                     <label for="{{$locale}}.desc">{{ __('admin.'. $locale . '.product_desc')}}</label>
                                                     <textarea  id="{{$locale}}.desc" class="form-control" name="{{$locale}}[desc]" required>{{old($locale . '.desc')}}</textarea>
@@ -69,7 +69,7 @@
                                                         </span>
                                                     @enderror
                                                 </div>
-                                            @endforeach   
+                                            @endforeach
                                             <div class="col-md-6 col-12 mb-3">
                                                 <label for="category_id">{{ __('admin.category') }}</label>
                                                 <select name="category_id" class="form-control" required>
@@ -80,9 +80,26 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-6 col-12 mb-3">
+                                                <label for="brand_id">{{ __('admin.brand') }}</label>
+                                                <select name="brand_id" class="form-control" required>
+                                                    <option value="">{{ __('admin.choose_brand') }}</option>
+                                                    @foreach ($brands as $brand)
+                                                        <option value="{{ $brand->id }}" @selected($brand->id == old('brand_id'))>{{ $brand->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 col-12 mb-3">
+                                                <label for="quantity">{{ __('admin.quantity') }}</label>
+                                                <input type="number" step="any" min="0" id="quantity" class="form-control" name="quantity" value="{{ old('quantity') }}" required/>
+                                            </div>
+                                            <div class="col-md-6 col-12 mb-3">
+                                                <label for="sku">{{ __('admin.sku') }}</label>
+                                                <input type="text"  id="sku" class="form-control" name="sku" value="{{ old('sku') }}" required/>
+                                            </div>
+                                            <div class="col-md-6 col-12 mb-3">
                                                 <label for="price">{{ __('admin.price') }}</label>
                                                 <input type="number" step="any" id="price" class="form-control" name="price" value="{{ old('price') }}" required/>
-                                                                                                                            
+
                                                 <div class="custom-control custom-control-primary custom-switch mt-1">
                                                     <input type="hidden" name="is_offer" value="0" />
                                                     <input type="checkbox" name="is_offer" class="custom-control-input" id="customSwitch3" value="1" @if(old('is_offer')) checked @endif  onchange="show_discount_price_input(this)"/>
@@ -93,7 +110,7 @@
                                                         <small class="errorTxt">{{ $message }}</small>
                                                     </span>
                                                 @enderror
-                                            </div>                          
+                                            </div>
                                             <div class="col-md-6 col-12 mb-3" style="@if(!old('is_offer')) display: none @endif" id="discount_price_div">
                                                 <label for="discount_price">{{ __('admin.discount_price') }}</label>
                                                 <input type="number" step="any" id="discount_price" class="form-control" name="discount_price" value="{{ old('discount_price') }}" />
@@ -102,7 +119,7 @@
                                                         <small class="errorTxt">{{ $message }}</small>
                                                     </span>
                                                 @enderror
-                                            </div>                                     
+                                            </div>
 
                                             <div class="col-md-6 col-12 mb-3">
                                                 <label for="car_type_id">{{ __('admin.car_type') }}</label>
@@ -114,7 +131,7 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-6 col-12 mb-3">
-                                                <label for="car_model_ids[]">{{ __('admin.car_models') }}</label>                                 
+                                                <label for="car_model_ids[]">{{ __('admin.car_models') }}</label>
                                                 <select name="car_model_ids[]" class="select2 form-control" multiple required>
                                                     <option value="" disabled>{{ __('admin.choose_car_models') }}</option>
                                                     @foreach ($car_models as $car_model)
@@ -122,9 +139,9 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                                                                           
+
                                             <div class="col-md-6 col-12 mb-3">
-                                                <label for="manufacture_country">{{ __('admin.manufacture_country') }}</label>                                         
+                                                <label for="manufacture_country">{{ __('admin.manufacture_country') }}</label>
                                                 <select name="manufacture_country" class="select2 form-control" required>
                                                     <option value="">{{ __('admin.choose_manufacture_country') }}</option>
                                                     @foreach (\App\Models\Country::all() as $country)
@@ -137,7 +154,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                             
+
                                             <div class="col-md-6 col-12 mb-3">
                                                 <label for="type">{{ __('admin.made_type') }}</label>
                                                 <select name="type" class="form-control" required>
@@ -154,9 +171,9 @@
                                                     @for ($i = now()->year-20; $i <= now()->year; $i++)
                                                         <option value="{{$i}}">{{ $i}}</option>
                                                     @endfor
-                                                    
+
                                                 </select>
-                                            </div>                                     
+                                            </div>
                                             <div class="features col-12 mb-3">
                                                 <button type="button" class="btn btn-secondary add-feature">
                                                     <span><i class="fa fa-plus"></i></span>
@@ -189,8 +206,8 @@
                 $(".features").append(
                     `
                     <div class="parent-feature">
-                        <div class="row">                                       
-                            @foreach (config('translatable.locales') as $locale)                                   
+                        <div class="row">
+                            @foreach (config('translatable.locales') as $locale)
                                 <div class="col-md-6 col-12">
                                     <div class="sub-main-feature mt-1">
                                         <label>{{ __('admin.'. $locale . '.product_feature')}}</label>
@@ -199,7 +216,7 @@
                                     </div>
                                 </div>
                             @endforeach
-                        </div>                                                      
+                        </div>
                         <div class="remove-input-feature delete-btn" style="cursor:pointer">
                             <span> <i class="fa fa-trash fa-sm"></i> </span>
                         </div>
@@ -209,7 +226,7 @@
 
             });
 
-                    
+
             $(document).on('click' , ".remove-input-feature" , function(){
                 $(this).parent(".parent-feature").remove();
             });

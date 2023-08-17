@@ -48,7 +48,7 @@
                                                 $i = 0;
                                             @endphp
 
-                                            <table>
+                                            <table class="col-12">
                                                 @if (isset($product_data[0]->id))
                                                     <tr style="text-align: center;">
                                                         <td> Name </td>
@@ -63,7 +63,7 @@
                                                     </tr>
                                                 @endif
                                                 @forelse($product_data as $single_product)
-                                                    <tr>
+                                                    <tr class="mb-3">
                                                         <td> <input id="sku" type="text"
                                                                 value="{{ $single_product->name }}" disabled> </td>
                                                         <td> <input id="sku" type="text"
@@ -89,7 +89,7 @@
                                                             @endif
                                                         </td>
                                                         <td colspan="2"> <a
-                                                                href="{{ route('delete_product_variant', $single_product->id) }}"
+                                                                href="{{ route('admin.delete_product_variant', $single_product->id) }}"
                                                                 alt="delete" title="delete">X</a> </td>
 
                                                     </tr>
@@ -115,7 +115,7 @@
                                         @endforelse
                                         </table>
 
-                                        <div class="col-12">
+                                        <div class="col-12 mt-2">
                                             <button type="submit"
                                                 class="btn btn-primary mr-1">{{ __('admin.save') }}</button>
                                         </div>

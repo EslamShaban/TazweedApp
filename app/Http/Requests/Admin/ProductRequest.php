@@ -36,8 +36,8 @@ class ProductRequest extends FormRequest
             'type'                  => ['required', 'in:original,high-copy,copy'],
             'manufacturing_year'    => ['required'],
             'manufacture_country'   => ['required', 'exists:countries,id'],
-            'quantity'              => ['required|numeric|min:0'],
-            'brand_id'              => ['required|integer'],
+            'quantity'              => ['required','numeric','min:0'],
+            'brand_id'              => ['required','integer'],
             'sku'                   => ['string'],
 
         ];
@@ -72,8 +72,8 @@ class ProductRequest extends FormRequest
             'type'                  => ['required', 'in:original,high-copy,copy'],
             'manufacturing_year'    => ['required'],
             'manufacture_country'   => ['required', 'exists:countries,id'],
-            'quantity'              => ['required|numeric|min:0'],
-            'brand_id'              => ['required|integer'],
+            'quantity'              => ['required','numeric','min:0'],
+            'brand_id'              => ['required','integer'],
             'sku'                   => ['string'],
         ];
 

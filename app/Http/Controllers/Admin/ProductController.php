@@ -9,6 +9,7 @@ use App\Repositories\ProductRepository;
 use App\Http\Requests\Admin\ProductRequest;
 use App\Models\Attribute;
 use App\Models\AttributeValue;
+use App\Models\Brand;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\CarType;
@@ -51,9 +52,10 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $brands = Brand::all();
         $car_types = CarType::all();
         $car_models = CarModel::all();
-        return view('admin.products.create', compact('categories', 'car_types', 'car_models'));
+        return view('admin.products.create', compact('categories', 'brands', 'car_types', 'car_models'));
     }
 
     /**
@@ -238,10 +240,11 @@ class ProductController extends Controller
     {
         $product = $this->productRepository->find($id);
         $categories = Category::all();
+        $brands = Brand::all();
         $car_types = CarType::all();
         $car_models = CarModel::all();
 
-        return view('admin.products.edit', compact('product', 'categories', 'car_types', 'car_models'));
+        return view('admin.products.edit', compact('product', 'brands', 'categories', 'car_types', 'car_models'));
     }
 
     /**
@@ -272,8 +275,8 @@ class ProductController extends Controller
 
             DB::commit();
 
-            return redirect(aurl('products'))->with('success', 'تم تعديل الحقل بنجاح');
-
+            // return redirect(aurl('products'))->with('success', 'تم تعديل الحقل بنجاح');
+            return redirect(route('admin.product_attributes').'?product_id='.$product->id);
         } catch (\Throwable $th) {
 
             DB::rollBack();

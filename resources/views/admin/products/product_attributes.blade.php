@@ -39,7 +39,6 @@
                                         action="{{ route('admin.store_product_attributes') }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
-                                        <div class="row">
                                             <input type="hidden" value="{{ $product_id }}" name="product_id">
 
                                             @php
@@ -57,7 +56,7 @@
                                                                 <option>{{ trans('messages.select_ingredients') }}</option>
                                                                 @forelse ($attribute->attributevalue as $value)
                                                                     <option value="{{ $value->id }}">
-                                                                        {{ $value->getTranslation('name', 'en') }}
+                                                                        {{ $value->name }}
                                                                     </option>
                                                                 @empty
                                                                 @endforelse
@@ -75,7 +74,6 @@
                                                 <button type="submit"
                                                     class="btn btn-primary mr-1">{{ __('admin.save') }}</button>
                                             </div>
-                                        </div>
                                     </form>
                                 </div>
                             </div>
