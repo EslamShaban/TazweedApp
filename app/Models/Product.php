@@ -37,6 +37,10 @@ class Product extends Model implements TranslatableContract
 
     }
 
+    public function productVariants()
+    {
+        return $this->hasMany(ProductVariant::class);
+    }
 
     public function scopeOffers($q)
     {

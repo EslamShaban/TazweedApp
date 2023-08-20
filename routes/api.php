@@ -39,11 +39,11 @@ Route::middleware(['APIAuth','api', 'Lang'])->group(function(){
         Route::post('logout', [AuthAPIController::class, 'logout'])->middleware('JwtApiAuth');
 
     });
-        
+
     Route::get('cities', [CityAPIController::class, 'get_cities']);
 
     Route::middleware(['JwtApiAuth'])->group(function () {
-                     
+
         Route::get('my_profile', [UserAPIController::class, 'my_profile']);
         Route::post('update_profile', [UserAPIController::class, 'update_profile']);
         Route::post('change_password', [UserAPIController::class, 'change_password']);
@@ -53,13 +53,16 @@ Route::middleware(['APIAuth','api', 'Lang'])->group(function(){
         Route::get('products/{id}/details', [ProductAPIController::class, 'product_details']);
         Route::get('category/{id}/products', [ProductAPIController::class, 'category_products']);
         Route::get('offers', [ProductAPIController::class, 'get_all_offers']);
+        Route::get('multi_offers', [ProductAPIController::class, 'get_multi_offers']);
+        Route::get('brands', [ProductAPIController::class, 'get_all_brands']);
+        Route::get('all_attributes', [ProductAPIController::class, 'get_all_attributes']);
         Route::get('search_filters', [SearchAPIController::class, 'search_filters']);
         Route::post('search', [SearchAPIController::class, 'search']);
         Route::resource('shipping_addresses', ShippingAddressesAPIController::class);
         Route::post('check_coupon', [CouponAPIController::class, 'check_coupon']);
         Route::post('make_order', [OrderAPIController::class, 'make_order']);
         Route::prefix('client')->group(function()
-        {   
+        {
             Route::prefix('requests')->group(function(){
                 Route::post('make_request', [WashRequestAPIController::class, 'make_request']);
                 Route::post('{request_id}/captain/{captain_id}/approve', [WashRequestAPIController::class, 'client_approval']);
@@ -68,9 +71,9 @@ Route::middleware(['APIAuth','api', 'Lang'])->group(function(){
 
             });
         });
-                
+
         Route::prefix('captain')->group(function()
-        {   
+        {
             Route::post('update_location', [CaptainAPIController::class, 'update_location']);
             Route::get('toggle_status', [CaptainAPIController::class, 'toggle_status']);
 
@@ -81,7 +84,7 @@ Route::middleware(['APIAuth','api', 'Lang'])->group(function(){
                 Route::post('{id}/upload_captain_image', [WashRequestAPIController::class, 'upload_captain_image']);
             });
         });
-                
+
         Route::get('my_washrequests', [UserAPIController::class, 'my_washrequests']);
         Route::get('washrequest/{id}', [WashRequestAPIController::class, 'get_washrequest_by_id']);
 
